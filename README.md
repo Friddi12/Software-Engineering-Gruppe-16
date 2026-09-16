@@ -6,7 +6,7 @@
   ## Team:
  Vi er 5 studenter fra Høgskolen i Østfold med erfaring fra to forskjellige linjer: Informatikk og Informasjonssystemer.
 
-#Installasjon og Kjøring
+# Installasjon og Kjøring
  ## STEG 1
 Lorem Ipsum
  ## STEG 2
