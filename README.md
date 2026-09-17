@@ -15,7 +15,6 @@ Vi er 5 studenter fra Høgskolen i Østfold med erfaring fra to forskjellige lin
 ## STEG 1
 
 Lorem Ipsum
-hei du der
 
 ## STEG 2
 
