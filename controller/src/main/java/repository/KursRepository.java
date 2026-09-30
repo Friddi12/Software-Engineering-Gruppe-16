@@ -9,4 +9,6 @@ public interface KursRepository {
     void addKurs(Kurs kurs);
     void removeKurs(Kurs kurs);
     void addDeltaker(String navn, String ePost);
+    boolean login(String brukernavn, String passord);
+
 }

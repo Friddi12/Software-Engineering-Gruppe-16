@@ -1,12 +1,13 @@
 import io.javalin.Javalin;
 
 import controllers.*;
+import repository.DatabaseRepository;
 import repository.*;
 
 
 public class App {
     public static void main(String[] args) {
-        KursRepository kursRepository = new Database();
+        KursRepository kursRepository = new DatabaseRepository();
         KursController kursController = new KursController(kursRepository);
 
         Javalin app = Javalin.create(config -> {
