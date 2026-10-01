@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState } from "react"
 import KursKort from "../components/KursKort.jsx"
 import kurs  from "../mockData/Courses.jsx"
@@ -23,5 +24,14 @@ export default function Searchpage() {
                 {filtrering.length === 0 && <p>Ingen kurs funnet.</p>}
             </div>
         </main>
+=======
+
+
+export default function Searchpage(){
+
+    return(
+        <h1>THIS IS THE SEARCH PAGE</h1>
+
+>>>>>>> React
     )
 }
