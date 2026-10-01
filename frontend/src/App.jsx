@@ -5,12 +5,7 @@ import Searchpage from './pages/Searchpage.jsx'
 import { Route, Routes } from 'react-router-dom'
 
 import Header from './components/Header.jsx'
-<<<<<<< HEAD
-import { Route, Routes } from 'react-router-dom'
-=======
-import Searchpage from './pages/searchpage.jsx'
 import Hero from './components/Hero.jsx'
->>>>>>> React
 
 function App() {
 
@@ -20,12 +15,6 @@ function App() {
       <Hero />
       <h1>UNDER ARBEID</h1>
       <img src="mainlogolys.jpg" alt="" />
-<<<<<<< HEAD
-      <Routes>
-        <Route path="/" element={<Searchpage />} />
-      </Routes>
-    </main>  
-=======
     </>
     )
   }
@@ -39,7 +28,6 @@ function App() {
         <Route path="/Searchpage" element={<Searchpage />} />
       </Routes>
     </main>
->>>>>>> React
   )
 
   

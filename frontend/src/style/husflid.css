@@ -16,12 +16,11 @@ header{
     }
 }
 
-<<<<<<< HEAD
 .kursliste{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap:1rem;
-=======
+}
 nav{
     display: flex;
     flex-direction: row;
@@ -68,5 +67,4 @@ nav{
     background-position: center;
     background-size: cover;
 
->>>>>>> React
 }
