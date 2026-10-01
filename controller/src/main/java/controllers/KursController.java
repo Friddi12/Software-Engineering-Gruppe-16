@@ -15,6 +15,7 @@ public class KursController {
         String navn = ctx.queryParam("navn");
         String kategoriParam = ctx.queryParam("kategori");
         Kategori kategori = null;
+        String sted = ctx.queryParam("sted");
 
         try {
             // Sjekk om det er sendt med en kategori (ikke null og ikke tom)
@@ -23,7 +24,7 @@ public class KursController {
                 kategori = Kategori.valueOf(kategoriParam.trim().toUpperCase());
             }
 
-            ctx.json(kursRepository.searchKurs(navn, kategori));
+            ctx.json(kursRepository.searchKurs(navn, kategori, sted));
         } catch (IllegalArgumentException e) {
             ctx.status(400).result("Ugyldig kategori: " + kategoriParam);
         }
@@ -38,7 +39,7 @@ public class KursController {
             // Javalin mapper JSON fra React direkte til et DTO/Objekt
             KursDTO dto = ctx.bodyAsClass(KursDTO.class);
 
-            Kurs kurs = new Kurs(dto.getNavn(),dto.getStartTid(), dto.getSluttTid(), dto.getBeskrivelse(), dto.getKategori());
+            Kurs kurs = new Kurs(dto.getNavn(),dto.getStartTid(), dto.getSluttTid(), dto.getBeskrivelse(), dto.getKategori(), dto.getSted());
 
             kursRepository.addKurs(kurs);
             ctx.status(201).json(kurs); // 201 Created
@@ -50,8 +51,8 @@ public class KursController {
     // DELETE /api/kurs/{id}
     public void remove(Context ctx) {
         try {
-            int id = Integer.parseInt(ctx.pathParam("id")); //?
-            kursRepository.removeKurs(id);
+            int id = Integer.parseInt(ctx.pathParam("id"));
+            kursRepository.removeKurs(id); //?
             ctx.status(204); // 204 No Content (vellykket sletting uten returdata)
         } catch (NumberFormatException e) {
             ctx.status(400).result("Invalid ID format");

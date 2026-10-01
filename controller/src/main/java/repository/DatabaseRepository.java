@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class DatabaseRepository implements KursRepository {
     @Override
-    public ArrayList<Kurs> searchKurs(String navn, Kategori kategori) {
+    public ArrayList<Kurs> searchKurs(String navn, Kategori kategori, String sted) {
         return null;
     }
 
@@ -17,7 +17,7 @@ public class DatabaseRepository implements KursRepository {
     }
 
     @Override
-    public void removeKurs(Kurs kurs) {
+    public void removeKurs(int id) {
 
     }
 

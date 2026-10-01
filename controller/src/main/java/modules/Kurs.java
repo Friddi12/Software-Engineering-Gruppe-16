@@ -7,26 +7,27 @@ import java.util.ArrayList;
 public class Kurs {
     private String navn;
     private int id;
-    private LocalDateTime startDato;
-    private LocalDateTime sluttDato;
+    private LocalDateTime startTid;
+    private LocalDateTime sluttTid;
     private ArrayList<Deltaker> deltakerListe = new ArrayList<>();
     private String beskrivelse;
     private Kategori kategori;
+    private String sted;
     private static final DateTimeFormatter correctFormat = DateTimeFormatter.ofPattern("HH:mm dd.MM.yyyy");
 
 
-    public Kurs (String navn, LocalDateTime startDato, LocalDateTime sluttDato,String beskrivelse, Kategori kategori) {
+    public Kurs (String navn, LocalDateTime startTid, LocalDateTime sluttTid,String beskrivelse, Kategori kategori, String sted) {
         setNavn(navn);
-        setStartDato(startDato);
-        setSluttDato(sluttDato);
+        setStartTid(startTid);
+        setSluttTid(sluttTid);
         setBeskrivelse(beskrivelse);
         setKategori(kategori);
+        setSted(sted);
     }
 
-    public Kurs (int id, String navn, LocalDateTime startDato, LocalDateTime sluttDato, Deltaker deltaker, String beskrivelse, Kategori kategori){
-        this(navn, startDato, sluttDato, beskrivelse, kategori);
+    public Kurs (int id, String navn, LocalDateTime startTid, LocalDateTime sluttTid, String beskrivelse, Kategori kategori, String sted){
+        this(navn, startTid, sluttTid, beskrivelse, kategori, sted);
         setId(id);
-        addDeltaker(deltaker);
     }
 
     public String getNavn() {return navn;}
@@ -35,11 +36,11 @@ public class Kurs {
     public int getId() {return id;}
     public void setId(int id) {this.id = id;}
 
-    public LocalDateTime getStartDato() {return startDato;}
-    public void setStartDato(LocalDateTime startDato) {this.startDato = startDato;}
+    public LocalDateTime getStartTid() {return startTid;}
+    public void setStartTid(LocalDateTime startDato) {this.startTid = startDato;}
 
-    public LocalDateTime getSluttDato() {return sluttDato;}
-    public void setSluttDato(LocalDateTime sluttDato) {this.sluttDato = sluttDato;}
+    public LocalDateTime getSluttTid() {return sluttTid;}
+    public void setSluttTid(LocalDateTime sluttTid) {this.sluttTid = sluttTid;}
 
     public ArrayList<Deltaker> getDeltakerListe() {return new ArrayList<>(deltakerListe);}
     public void addDeltaker(Deltaker deltaker){deltakerListe.add(deltaker);}
@@ -49,4 +50,7 @@ public class Kurs {
 
     public Kategori getKategori() {return kategori;}
     public void setKategori(Kategori kategori) {this.kategori = kategori;}
+
+    public String getSted() {return sted;}
+    public void setSted(String sted) {this.sted = sted;}
 }

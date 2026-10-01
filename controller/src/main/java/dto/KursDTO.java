@@ -10,16 +10,18 @@ public class KursDTO {
     private LocalDateTime sluttTid;
     private String beskrivelse;
     private Kategori kategori;
+    private String sted;
 
     // Nødvendig for at Jackson/Javalin skal kunne opprette DTO-en fra JSON:
     public KursDTO() {}
 
-    public KursDTO(String navn, LocalDateTime startTid, LocalDateTime sluttTid, String beskrivelse, Kategori kategori) {
+    public KursDTO(String navn, LocalDateTime startTid, LocalDateTime sluttTid, String beskrivelse, Kategori kategori, String sted) {
         setNavn(navn);
         setStartTid(startTid);
         setSluttTid(sluttTid);
         setBeskrivelse(beskrivelse);
         setKategori(kategori);
+        setSted(sted);
     }
 
     public String getNavn() { return navn; }
@@ -36,4 +38,7 @@ public class KursDTO {
 
     public Kategori getKategori() { return kategori; }
     public void setKategori(Kategori kategori) { this.kategori = kategori; }
+
+    public String getSted() {return sted;}
+    public void setSted(String sted) {this.sted = sted;}
 }
