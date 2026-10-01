@@ -1,12 +1,65 @@
+:root{
+    width: 100%;
+}
 
 
 header{
     padding: 1rem;
-    width: 100%;
-    height: 7rem;
+    height: 5rem;
     display: flex;
     flex-direction: row;
+    align-items: center;
+
+    background-color: rgb(161, 181, 203);
     img{
         max-width: 200px;
     }
+}
+
+nav{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    padding-left: 1rem;
+
+    a{
+        color: black;
+        border: 3px solid black;
+        text-decoration: none;
+        background-color: rgb(211, 215, 214);
+        height: 70%;
+
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+}
+
+.searchbutton{
+    all: unset;
+
+    padding: 0.5rem;
+    img{
+        width: 35px;
+    }
+}
+
+#herosection{
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    height: 300px;
+
+    background-image: url('./stockbg1.jpg');
+    background-position: center;
+    background-size: cover;
+
 }
