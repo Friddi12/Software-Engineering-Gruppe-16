@@ -7,7 +7,7 @@ import repository.*;
 
 public class App {
     public static void main(String[] args) {
-        KursRepository kursRepository = new DatabaseRepository();
+        KursRepository kursRepository = new MidlertidigKursRepository();
         KursController kursController = new KursController(kursRepository);
 
         Javalin app = Javalin.create(config -> {
