@@ -62,4 +62,19 @@ nav{
     background-position: center;
     background-size: cover;
 
+    p{
+        margin-bottom: 100px;
+
+    }
+
+    a{
+        text-decoration: none;
+        color: black;
+        border: 3px solid black;
+        background-color: white;
+        width: fit-content;
+        padding: 0.5rem;
+        align-self: flex-end;
+    }
+
 }
