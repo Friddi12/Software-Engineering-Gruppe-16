@@ -1,7 +1,6 @@
 package repository;
 
-import modules.Kategori;
-import modules.Kurs;
+import modules.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
