@@ -8,7 +8,6 @@ export default function KursKort({kurs}){
             <p>Dato: {kurs.date}</p>
             <p>Pris: {kurs.price} kr</p>
             <p>Ledige plasser: {kurs.plasser}</p>
-            <Link to={`/kurs/${kurs.id}`}>Se mer</Link>
         </article>
     )
 }
