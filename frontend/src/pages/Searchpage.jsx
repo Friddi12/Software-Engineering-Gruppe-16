@@ -17,11 +17,13 @@ export default function Searchpage() {
             value = {query}
             onChange={(e)=>setQuery(e.target.value)}
             />
+            <article>
             <div className="kursliste">
                 {filtrering.map((k) => (
                 <KursKort key={k.id} kurs={k} /> ))}
                 {filtrering.length === 0 && <p>Ingen kurs funnet.</p>}
             </div>
+            </article>
         </main>)
 
 }
