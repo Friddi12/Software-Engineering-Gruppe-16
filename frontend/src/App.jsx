@@ -5,7 +5,6 @@ import Searchpage from './pages/Searchpage.jsx'
 import { Route, Routes } from 'react-router-dom' //Importerer react-router for sømløs navigering mellom sider
 //Importerer komponenter i bruk på denne siden
 import Header from './components/Header.jsx' 
-import Searchpage from './pages/searchpage.jsx'
 import Homepage from './pages/Homepage.jsx'
 
 function App() {

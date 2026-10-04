@@ -12,18 +12,21 @@ export default function Searchpage() {
 
     return(
         <main>
+            <section className="searchgruppe">
             <input type="search"
             placeholder="Søk etter kurs.." 
             value = {query}
             onChange={(e)=>setQuery(e.target.value)}
             />
-            <article>
+            <button type="submit">Søk</button>
+            </section>
+            <section className="searchresultat">
             <div className="kursliste">
                 {filtrering.map((k) => (
                 <KursKort key={k.id} kurs={k} /> ))}
                 {filtrering.length === 0 && <p>Ingen kurs funnet.</p>}
             </div>
-            </article>
+            </section>
         </main>)
 
 }
