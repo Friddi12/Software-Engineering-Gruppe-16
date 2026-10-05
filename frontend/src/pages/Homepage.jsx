@@ -8,6 +8,7 @@ export default function Homepage(){
     <>
       <Hero />
       <Carousel />
+      <p>INFORMASJON/LINKS TIL LOKALE LAG KOMMER!</p>
       <h1>UNDER ARBEID</h1>
       <img src="mainlogolys.jpg" alt="" />
     </>
