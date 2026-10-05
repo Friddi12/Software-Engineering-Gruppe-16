@@ -9,6 +9,7 @@ import Hero from './components/Hero.jsx'
 import Searchpage from './pages/searchpage.jsx'
 import Homepage from './pages/Homepage.jsx'
 import Localhub from './pages/Localhub.jsx'
+import Localpage from './pages/Localpage.jsx'
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/Searchpage" element={<Searchpage />} />
         <Route path="/Localhub" element={<Localhub />} />
+        <Route path="/Localhub/:slug" element={<Localpage />} />
       </Routes> 
     </main>
   )

@@ -1,21 +1,24 @@
 
+import { LocalData } from "../mockData/LocalData"
+
+import { Link } from 'react-router-dom'
 
 export default function(){
 
     return(
-        <section>
-        <h2>THIS IS A PAGE OF LOCAL TEAMS</h2>
-
-        <ul>
-            <li>Fredrikstad</li>
-            <li>Halden</li>
-            <li>Hobøl</li>
-            <li>Indre Østfold</li>
-            <li>Moss</li>
-            <li>Rygge</li>
-            <li>Råde</li>
-            <li>Sarpsborg</li>
-        </ul>
+    <section>
+        <article>
+            <h2>THIS IS A PAGE OF LOCAL TEAMS</h2>  
+                <ul>
+                    {LocalData.map((local) => (
+                        <li key={local.slug}>
+                            <h3>{local.name}</h3>
+                            <Link to={`/Localhub/${local.slug}`}>Besøk</Link>
+                        </li>
+                    ))}
+                </ul>
+        </article>
+        
     </section>
     )
 }
