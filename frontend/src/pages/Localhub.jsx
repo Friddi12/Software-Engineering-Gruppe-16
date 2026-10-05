@@ -7,17 +7,15 @@ export default function(){
 
     return(
     <section>
-        <article>
-            <h2>THIS IS A PAGE OF LOCAL TEAMS</h2>  
-                <ul>
+            <h2>Lokale Husflidslag i Østfold</h2>  
+                <ul id="local-container">
                     {LocalData.map((local) => (
-                        <li key={local.slug}>
+                        <li key={local.slug} className="local-card">
                             <h3>{local.name}</h3>
                             <Link to={`/Localhub/${local.slug}`}>Besøk</Link>
                         </li>
                     ))}
                 </ul>
-        </article>
         
     </section>
     )

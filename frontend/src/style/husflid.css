@@ -125,10 +125,6 @@ nav{
 
 }
 
-.course-card{
-
-
-}
 
 /* Midlertidige animasjoner til karusellen */
 .marquee {
@@ -149,4 +145,26 @@ nav{
 }
 /* Slutt på animasjoner */
 
+/* Start på lokalhub og sider */
 
+#local-container{
+    list-style: none;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    margin: 1rem;
+    padding: 1rem;
+    
+
+}
+
+.local-card{
+    margin: 2rem;
+    padding: 1rem;
+
+    min-width: 260px;
+
+    border: black solid 2px;
+}
