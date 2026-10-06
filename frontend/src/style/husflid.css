@@ -16,11 +16,19 @@ header{
     }
 }
 
-.kursliste{
+
+    /* Rutenett med kurskort: to kolonner når det er plass, ellers én */
+.kursliste {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap:1rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 26rem), 1fr));
+    gap: 2rem;
+
+    /* Fjerner standard punktmerking og innrykk fra <ul> */
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
+
 nav{
     display: flex;
     flex-direction: row;
@@ -193,3 +201,125 @@ nav{
 }
 
 /*searchpage */
+.searchgruppe{
+    padding: 1.5rem;
+    background-color: #d6e6f3;
+    
+}
+
+.søkeForm {
+    display: flex;
+    max-width: 32rem;
+}
+
+.søkInput{
+    flex:1;
+    width: 100%;
+    padding: 0.6rem 0.9rem;
+    font-size: 1rem;
+    min-width: 0;
+    background-color: white;
+    border: 2px solid #4a6d8c;
+    border-right: none;
+    border-radius: 0.5rem 0 0 0.5rem;
+    color: #1a1a1a;
+    
+}
+
+.søkeknapp{
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    background-color: #4a6d8c; /* mørk nok til at hvit tekst er lesbar */
+    border: 2px solid #4a6d8c;
+    border-radius: 0 0.5rem 0.5rem 0;
+    cursor: pointer;
+}
+
+.søkeknapp:hover {
+    background-color: #3a566f;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+/* Kurskort
+*/
+
+.kurskort{
+    position: relative;
+    isolation: isolate;
+    display: flex;
+
+    min-height: 20rem;
+    height: 100%;
+    border-radius: 0.75rem;
+    overflow: hidden;
+
+
+    background-color: #cfd8df;
+    background-size: cover;
+    background-position: center;
+}
+
+.kurskort::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-color: rgba(255, 255, 255, 0.55);
+}
+
+/* Panelet med tekst, innrykket fra kanten slik at bildet synes rundt */
+.kurskortPanel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    margin: 1.5rem;
+    padding: 1rem;
+
+    background-color: rgba(255, 255, 255, 0.45);
+    color: #1a1a1a;
+}
+
+.kurskortTitle {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.kurskortLag {
+    margin: 0;
+}
+
+.kurskortInfo p {
+    margin: 0;
+}
+
+.kurskortLabel {
+    margin-bottom: 0.25rem;
+}
+
+/* margin-top: auto skyver bunnteksten helt ned, uansett hvor lang beskrivelsen er */
+.kurskortFooter {
+    margin-top: auto;
+}
+
+.kurskortFooter p {
+    margin: 0 0 0.25rem;
+}
+
+/* Strekker lenken over hele kortet slik at hele kortet er klikkbart */
+.kurskortLink::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+}

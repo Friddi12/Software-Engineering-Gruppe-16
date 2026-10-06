@@ -12,20 +12,21 @@ export default function Searchpage() {
     )
 
     return(
-        <main>
+        <div>
             <section className="searchgruppe">
                 <h2>Finn kurs</h2>
-                {/*lar skjermleser få tilgang til søkefelt  */}
-                <label htmlFor="kurssøk" className="visually-hidden"> Søk etter kurs eller lag</label>
-                <input 
-                id="kurssøk"
-                classname="søkInput"
-                type="search"
-                placeholder="Søk etter kurs.." 
-                value = {query}
-                onChange={(e)=>setQuery(e.target.value)}
-                />
-                <button type="submit">Søk</button>
+                <form className="søkeForm" onSubmit={(e) => e.preventDefault()}>
+                    <label htmlFor="kurssøk" className="visually-hidden"> Søk etter kurs </label>
+                    <input 
+                    id="kurssøk"
+                    className="søkInput"
+                    type="search"
+                    placeholder="Søk etter kurs.." 
+                    value = {query}
+                    onChange={(e)=>setQuery(e.target.value)}
+                    />
+                    <button className="søkeknapp" type="submit">Søk</button>
+                </form>
             </section>
         
             <section className="searchresultat">
@@ -35,6 +36,6 @@ export default function Searchpage() {
                 {filtrering.length === 0 && <p>Ingen kurs funnet.</p>}
             </div>
             </section>
-        </main>)
+        </div>)
 
 }
