@@ -24,7 +24,7 @@ function App() {
     <main>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home />} /> 
         <Route path="/Searchpage" element={<Searchpage />} />
         <Route path="/Localhub" element={<Localhub />} />
         <Route path="/Localhub/:slug" element={<Localpage />} />
@@ -32,7 +32,7 @@ function App() {
     </main>
   )
 
-  
+  //burde ha homepage istedenfor home?
 }
 
 export default App
