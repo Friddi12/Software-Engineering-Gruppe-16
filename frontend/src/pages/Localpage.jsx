@@ -6,8 +6,10 @@ export default function Localpage(){
     const local = LocalData.find((item) => item.slug === slug)
 
     return(
-        <section>
+        <section id='local-page'>
             <h2>{local.name}</h2>
+            <img src={local.image} alt={local.name} />
+            <p>{local.info}</p>
         </section>
     )
 
