@@ -4,8 +4,9 @@ import kurs  from "../mockData/Courses.jsx"
 
 
 export default function Searchpage() {
-    const [query, setQuery] = useState("")
+    const [query, setQuery] = useState("") //det bruker har skrevet 
 
+    // skal filtrere kurs basert på søkespørsmål
     const filtrering = kurs.filter((k) => 
         k.title
     )
@@ -13,7 +14,13 @@ export default function Searchpage() {
     return(
         <main>
             <section className="searchgruppe">
-                <input type="search"
+                <h2>Finn kurs</h2>
+                {/*lar skjermleser få tilgang til søkefelt  */}
+                <label htmlFor="kurssøk" className="visually-hidden"> Søk etter kurs eller lag</label>
+                <input 
+                id="kurssøk"
+                classname="søkInput"
+                type="search"
                 placeholder="Søk etter kurs.." 
                 value = {query}
                 onChange={(e)=>setQuery(e.target.value)}
