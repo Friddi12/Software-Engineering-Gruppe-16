@@ -13,13 +13,14 @@ export default function Searchpage() {
     return(
         <main>
             <section className="searchgruppe">
-            <input type="search"
-            placeholder="Søk etter kurs.." 
-            value = {query}
-            onChange={(e)=>setQuery(e.target.value)}
-            />
-            <button type="submit">Søk</button>
+                <input type="search"
+                placeholder="Søk etter kurs.." 
+                value = {query}
+                onChange={(e)=>setQuery(e.target.value)}
+                />
+                <button type="submit">Søk</button>
             </section>
+        
             <section className="searchresultat">
             <div className="kursliste">
                 {filtrering.map((k) => (
