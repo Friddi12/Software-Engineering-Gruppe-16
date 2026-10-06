@@ -61,8 +61,9 @@ nav{
     flex-direction: column;
     
 
-    width: 100%;
+    width: 98%;
     height: 300px;
+    margin: 0.2rem auto;
 
     background-image: url('./stockbg1.jpg');
     background-position: center;
@@ -94,53 +95,76 @@ nav{
 
 }
 
+/* Karusell CSS */
+#caro-wraper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
 .carousel{
   position: relative;
   overflow: hidden;
-  width: 100%;
-  padding: 1rem 0;
+
+  width: 99%;
+  padding: 1rem 0; 
+  
   background-color: #f4f4f4;
+  border: black solid 2px;
 }
 
 .carousel-track{
-  display: flex;
-  gap: 1.5rem;
+    display: flex;
+    gap: 1.5rem;
 
-  width: max-content;
+    width: max-content;
 
-  list-style: none;
-  padding: 0;
-  margin: 0;
+    list-style: none;
+    padding: 0;
 
 }
 
+
+/* Midlertidige animasjoner til karusellen */
 .marquee {
-  animation: scroll 60s linear infinite;
+    animation: scroll 60s linear infinite;
 }
 
 .marquee:hover {
-  animation-play-state: paused;
+    animation-play-state: paused;
 }
 
 @keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+/* Slutt på animasjoner */
+
+/* Start på lokalhub og sider */
+
+#local-container{
+    list-style: none;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    margin: 1rem;
+    padding: 1rem;
+    
+
 }
 
-.carousel-card{
-  min-width: 300px;
-  height: 200px;
-  border-radius: 8px;
-  border: 2px solid #333;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 1.2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.local-card{
+    margin: 2rem;
+    padding: 1rem;
 
+    min-width: 260px;
+
+    border: black solid 2px;
 }

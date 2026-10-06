@@ -4,7 +4,7 @@ export default function Nav(){
 
     return(
         <nav>
-            <Link>Finn Et Lag</Link>
+            <Link to="/Localhub">Finn Et Lag</Link>
             <Link to="/Searchpage">Se Alle Kurs</Link>
             <Link>Om Oss</Link>
             <Link>Kontakt Oss</Link>
