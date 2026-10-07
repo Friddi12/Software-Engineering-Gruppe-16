@@ -16,7 +16,7 @@ public class Kurs {
     private static final DateTimeFormatter correctFormat = DateTimeFormatter.ofPattern("HH:mm dd.MM.yyyy");
 
 
-    public Kurs (String navn, LocalDateTime startTid, LocalDateTime sluttTid,String beskrivelse, Kategori kategori, String sted) {
+    public Kurs (String navn, LocalDateTime startTid, LocalDateTime sluttTid, String beskrivelse, Kategori kategori, String sted) {
         setNavn(navn);
         setStartTid(startTid);
         setSluttTid(sluttTid);
