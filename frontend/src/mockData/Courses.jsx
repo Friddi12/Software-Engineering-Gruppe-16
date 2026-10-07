@@ -25,3 +25,7 @@ export const kurs = [
 ]
 
 export default kurs
+
+export function getKursID(id){
+    return kurs.find((k) => k.id === Number(id))
+}

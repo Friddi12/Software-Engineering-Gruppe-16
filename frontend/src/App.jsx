@@ -10,6 +10,7 @@ import Searchpage from './pages/Searchpage.jsx'
 import Homepage from './pages/Homepage.jsx'
 import Localhub from './pages/Localhub.jsx'
 import Localpage from './pages/Localpage.jsx'
+import CoursePage from './pages/Coursepage.jsx'
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} /> 
         <Route path="/Searchpage" element={<Searchpage />} />
+        <Route path='/Course/:id/' element={<CoursePage />} />
         <Route path="/Localhub" element={<Localhub />} />
         <Route path="/Localhub/:slug" element={<Localpage />} />
       </Routes> 
