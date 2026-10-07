@@ -6,7 +6,7 @@ export default function Carousel(){
 
     return(
         <div id="caro-wraper">
-            <h3>Nyeseste Kurs</h3>
+            <h3>Nyeste Kurs</h3>
             <section className="carousel">
                 <ul className="carousel-track marquee">
                     {kurs.map((item) => (
