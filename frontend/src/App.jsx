@@ -27,7 +27,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} /> 
         <Route path="/Searchpage" element={<Searchpage />} />
-        <Route path='/Course/:id/' element={<CoursePage />} />
+         <Route path='/Course/:id/' element={<CoursePage />} />
         <Route path="/Localhub" element={<Localhub />} />
         <Route path="/Localhub/:slug" element={<Localpage />} />
       </Routes> 
