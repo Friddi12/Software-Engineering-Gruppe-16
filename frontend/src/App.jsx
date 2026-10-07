@@ -10,6 +10,7 @@ import Searchpage from './pages/Searchpage.jsx'
 import Homepage from './pages/Homepage.jsx'
 import Localhub from './pages/Localhub.jsx'
 import Localpage from './pages/Localpage.jsx'
+import Aboutus from './pages/Aboutus.jsx'
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
         <Route path="/Searchpage" element={<Searchpage />} />
         <Route path="/Localhub" element={<Localhub />} />
         <Route path="/Localhub/:slug" element={<Localpage />} />
+        <Route path='/Aboutus' element={<Aboutus />} />
       </Routes> 
     </main>
   )
