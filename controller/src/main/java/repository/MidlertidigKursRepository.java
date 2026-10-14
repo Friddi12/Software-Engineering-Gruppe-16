@@ -84,4 +84,10 @@ public class MidlertidigKursRepository implements KursRepository {
     public boolean login(String brukernavn, String passord) {
         return false;
     }
+
+    @Override
+    public ArrayList<Kurs> getAllKurs() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAllKurs'");
+    }
 }

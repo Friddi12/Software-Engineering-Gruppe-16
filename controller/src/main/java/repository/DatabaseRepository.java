@@ -11,16 +11,14 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class DatabaseRepository implements KursRepository {
-    private static final String url="jdbc:mysql://localhost:3306/softwareEngineering";
+    private static final String url="jdbc:mysql://localhost:3306/set_schema";
     private static final String user="admin";
     private static final String password="1234";
     Connection connection;
-    Statement statement;
 
     public DatabaseRepository() {
         try {
             this.connection = DriverManager.getConnection(url, user, password);
-            this.statement = connection.createStatement();
         }
 
         catch(Exception e) {
@@ -28,85 +26,88 @@ public class DatabaseRepository implements KursRepository {
         }
 
     }
-
+    @Override
     public ArrayList<Kurs> getAllKurs() {
-        ArrayList<Kurs> alleKurs = new ArrayList<>();
-        String query = "SELECT p.id AS personid, k.kursnavn AS kursnavn, k.starttid AS starttid, "
-                + "k.sluttTid AS sluttTid, k.beskrivelse AS beskrivelse, k.kategori AS kategori, "
-                + "ka.telefonnr AS telefonnr, p.navn AS kursansvarig_navn, p.epost AS epost "
-                + "FROM kurs AS k "
-                + "INNER JOIN kursansvarig AS ka ON k.kursansvarig_id = ka.id "
-                + "INNER JOIN person AS p ON ka.person_id = p.id";
+    ArrayList<Kurs> alleKurs = new ArrayList<>();
+    String query = "SELECT p.id AS personid, k.kursnavn AS kursnavn, k.starttid AS starttid, "
+            + "k.sluttTid AS sluttTid, k.beskrivelse AS beskrivelse, k.kategori AS kategori, "
+            + "ka.telefonnr AS telefonnr, p.navn AS kursansvarig_navn, p.epost AS epost "
+            + "FROM kurs AS k "
+            + "INNER JOIN kursansvarig AS ka ON k.kursansvarig_id = ka.id "
+            + "INNER JOIN person AS p ON ka.person_id = p.id";
 
-        try (ResultSet resultSet = statement.executeQuery(query)) {
-            while (resultSet.next()) {
-                String kursnavn = resultSet.getString("kursnavn");
+    // Create statement locally using connection
+    try (Statement localStatement = connection.createStatement();
+         ResultSet resultSet = localStatement.executeQuery(query)) {
+        
+        while (resultSet.next()) {
+            String kursnavn = resultSet.getString("kursnavn");
+            LocalDateTime startTid = resultSet.getObject("starttid", LocalDateTime.class);
+            LocalDateTime sluttTid = resultSet.getObject("sluttTid", LocalDateTime.class);
+            String beskrivelse = resultSet.getString("beskrivelse");
+            String databaseResultatKategori = resultSet.getString("kategori");
+            Kategori kategori1 = Kategori.valueOf(databaseResultatKategori.toUpperCase());
 
-                LocalDateTime startTid = resultSet.getObject("starttid", LocalDateTime.class);
-                LocalDateTime sluttTid = resultSet.getObject("sluttTid", LocalDateTime.class);
+            String telefonnr = resultSet.getString("telefonnr");
+            String kursansvarigNavn = resultSet.getString("kursansvarig_navn");
+            String kursansvarigEpost = resultSet.getString("epost");
+            int person_id = resultSet.getInt("personid");
 
-                String beskrivelse = resultSet.getString("beskrivelse");
-                String databaseResultatKategori = resultSet.getString("kategori");
-
-                Kategori kategori1 = Kategori.valueOf(databaseResultatKategori.toUpperCase());
-
-                String telefonnr = resultSet.getString("telefonnr");
-                String kursansvarigNavn = resultSet.getString("kursansvarig_navn");
-                String kursansvarigEpost = resultSet.getString("epost");
-
-                int person_id = resultSet.getInt("personid");
-
-                // Safe split to avoid ArrayIndexOutOfBoundsException if a person has only one name
-                String fornavn = "";
-                String etternavn = "";
-                if (kursansvarigNavn != null && !kursansvarigNavn.trim().isEmpty()) {
-                    String[] nameParts = kursansvarigNavn.trim().split("\\s+", 2);
-                    fornavn = nameParts[0];
-                    etternavn = nameParts.length > 1 ? nameParts[1] : "";
-                }
-
-                Kursansvarlig kursansvarlig = new Kursansvarlig(person_id, fornavn, etternavn, kursansvarigEpost, telefonnr);
-
-                // Note: If you have a kurs ID column (e.g. k.id), fetch it instead of hardcoding '1'
-                Kurs currentKurs = new Kurs(1, kursnavn, startTid, sluttTid, beskrivelse, kategori1, "Halden");
-                alleKurs.add(currentKurs);
+            String fornavn = "";
+            String etternavn = "";
+            if (kursansvarigNavn != null && !kursansvarigNavn.trim().isEmpty()) {
+                String[] nameParts = kursansvarigNavn.trim().split("\\s+", 2);
+                fornavn = nameParts[0];
+                etternavn = nameParts.length > 1 ? nameParts[1] : "";
             }
-        } catch (Exception e) {
-            System.err.println("Something went wrong: " + e.getMessage());
-        }
 
-        return alleKurs;
+            Kursansvarlig kursansvarlig = new Kursansvarlig(person_id, fornavn, etternavn, kursansvarigEpost, telefonnr);
+            Kurs currentKurs = new Kurs(1, kursnavn, startTid, sluttTid, beskrivelse, kategori1, "Halden");
+            alleKurs.add(currentKurs);
+        }
+    } catch (Exception e) {
+        System.err.println("Something went wrong: " + e.getMessage());
+        e.printStackTrace();
     }
+
+    return alleKurs;
+}
 
     @Override
     public ArrayList<Kurs> searchKurs(String navn, Kategori kategori, String sted) {
         ArrayList<Kurs> alleKurs = new ArrayList<>();
         String kategoriString = kategori.toString();
-        String query = "SELECT p.id AS personid, k.kursnavn AS kursnavn, k.starttid AS starttid, k.sluttTid AS sluttTid, k.beskrivelse AS beskrivelse, k.kategori AS kategori, ka.telefonnr AS telefonnr, p.navn AS kursansvarig_navn, p.epost AS epost FROM kurs AS k INNER JOIN kursansvarig AS ka ON k.kursansvarig_id = ka.id INNER JOIN person AS p ON ka.person_id = p.id WHERE kursnavn = \"" + navn + "\" AND kategori = \"" + kategoriString + "\"";
-        try (ResultSet resultSet = statement.executeQuery(query)) {
-            while(resultSet.next()) {
-                String kursnavn = resultSet.getString("kursnavn");
+        String query = "SELECT p.id AS personid, k.kursnavn AS kursnavn, k.starttid AS starttid, k.sluttTid AS sluttTid, k.beskrivelse AS beskrivelse, k.kategori AS kategori, ka.telefonnr AS telefonnr, p.navn AS kursansvarig_navn, p.epost AS epost FROM kurs AS k INNER JOIN kursansvarig AS ka ON k.kursansvarig_id = ka.id INNER JOIN person AS p ON ka.person_id = p.id WHERE kursnavn = ? AND kategori = ?";
 
-                LocalDateTime startTid = resultSet.getObject("starttid", LocalDateTime.class);
-                LocalDateTime sluttTid = resultSet.getObject("sluttTid", LocalDateTime.class);
+        // Use PreparedStatement to prevent SQL injection and avoid null statement errors
+        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+            pstmt.setString(1, navn);
+            pstmt.setString(2, kategoriString);
 
-                String beskrivelse = resultSet.getString("beskrivelse");
-                String databaseResultatKategori = resultSet.getString("kategori");
+            try (ResultSet resultSet = pstmt.executeQuery()) {
+                while(resultSet.next()) {
+                    String kursnavn = resultSet.getString("kursnavn");
+                    LocalDateTime startTid = resultSet.getObject("starttid", LocalDateTime.class);
+                    LocalDateTime sluttTid = resultSet.getObject("sluttTid", LocalDateTime.class);
+                    String beskrivelse = resultSet.getString("beskrivelse");
+                    String databaseResultatKategori = resultSet.getString("kategori");
 
-                Kategori kategori1 = Kategori.valueOf(databaseResultatKategori.toUpperCase());
+                    Kategori kategori1 = Kategori.valueOf(databaseResultatKategori.toUpperCase());
 
-                String telefonnr = resultSet.getString("telefonnr");
-                String kursasnvarigNavn = resultSet.getString("kursansvarig_navn");
-                String kursansvarigEpost = resultSet.getString("epost");
+                    String telefonnr = resultSet.getString("telefonnr");
+                    String kursasnvarigNavn = resultSet.getString("kursansvarig_navn");
+                    String kursansvarigEpost = resultSet.getString("epost");
 
-                int person_id = resultSet.getInt("personid");
-                String[] name = kursasnvarigNavn.split(" ");
-                Kursansvarlig kursansvarlig = new Kursansvarlig(person_id, name[0], name[1], kursansvarigEpost, telefonnr);
-                Kurs currentKurs = new Kurs(1, kursnavn, startTid, sluttTid, beskrivelse, kategori1, "Halden");
-                alleKurs.add(currentKurs);
+                    int person_id = resultSet.getInt("personid");
+                    String[] name = kursasnvarigNavn.split(" ");
+                    Kursansvarlig kursansvarlig = new Kursansvarlig(person_id, name[0], name[1], kursansvarigEpost, telefonnr);
+                    Kurs currentKurs = new Kurs(1, kursnavn, startTid, sluttTid, beskrivelse, kategori1, "Halden");
+                    alleKurs.add(currentKurs);
+                }
             }
         } catch (Exception e) {
-            System.err.println("Something went wrong" + e.getMessage());
+            System.err.println("Something went wrong in searchKurs: " + e.getMessage());
+            e.printStackTrace();
         }
         return alleKurs;
     }
