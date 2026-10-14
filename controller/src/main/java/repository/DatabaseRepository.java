@@ -17,7 +17,7 @@ public class DatabaseRepository implements KursRepository {
     Connection connection;
     Statement statement;
 
-    public DatabaseRepository(String url, String user, String password) {
+    public DatabaseRepository() {
         try {
             this.connection = DriverManager.getConnection(url, user, password);
             this.statement = connection.createStatement();
