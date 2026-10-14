@@ -10,7 +10,7 @@ export default function Homepage(){
     fetch('http://localhost:8080/api/kurs/search')
       .then(response => {
         if (response.ok) {
-          setConnectionStatus("Connected successfully to Javalin backend! 🎉");
+          setConnectionStatus("Connected successfully to Javalin backend!");
           return response.json();
         } else {
           setConnectionStatus("Connected, but received an error status: " + response.status);
