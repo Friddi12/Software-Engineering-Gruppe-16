@@ -28,6 +28,56 @@ public class DatabaseRepository implements KursRepository {
         }
 
     }
+
+    public ArrayList<Kurs> getAllKurs() {
+        ArrayList<Kurs> alleKurs = new ArrayList<>();
+        String query = "SELECT p.id AS personid, k.kursnavn AS kursnavn, k.starttid AS starttid, "
+                + "k.sluttTid AS sluttTid, k.beskrivelse AS beskrivelse, k.kategori AS kategori, "
+                + "ka.telefonnr AS telefonnr, p.navn AS kursansvarig_navn, p.epost AS epost "
+                + "FROM kurs AS k "
+                + "INNER JOIN kursansvarig AS ka ON k.kursansvarig_id = ka.id "
+                + "INNER JOIN person AS p ON ka.person_id = p.id";
+
+        try (ResultSet resultSet = statement.executeQuery(query)) {
+            while (resultSet.next()) {
+                String kursnavn = resultSet.getString("kursnavn");
+
+                LocalDateTime startTid = resultSet.getObject("starttid", LocalDateTime.class);
+                LocalDateTime sluttTid = resultSet.getObject("sluttTid", LocalDateTime.class);
+
+                String beskrivelse = resultSet.getString("beskrivelse");
+                String databaseResultatKategori = resultSet.getString("kategori");
+
+                Kategori kategori1 = Kategori.valueOf(databaseResultatKategori.toUpperCase());
+
+                String telefonnr = resultSet.getString("telefonnr");
+                String kursansvarigNavn = resultSet.getString("kursansvarig_navn");
+                String kursansvarigEpost = resultSet.getString("epost");
+
+                int person_id = resultSet.getInt("personid");
+
+                // Safe split to avoid ArrayIndexOutOfBoundsException if a person has only one name
+                String fornavn = "";
+                String etternavn = "";
+                if (kursansvarigNavn != null && !kursansvarigNavn.trim().isEmpty()) {
+                    String[] nameParts = kursansvarigNavn.trim().split("\\s+", 2);
+                    fornavn = nameParts[0];
+                    etternavn = nameParts.length > 1 ? nameParts[1] : "";
+                }
+
+                Kursansvarlig kursansvarlig = new Kursansvarlig(person_id, fornavn, etternavn, kursansvarigEpost, telefonnr);
+
+                // Note: If you have a kurs ID column (e.g. k.id), fetch it instead of hardcoding '1'
+                Kurs currentKurs = new Kurs(1, kursnavn, startTid, sluttTid, beskrivelse, kategori1, "Halden");
+                alleKurs.add(currentKurs);
+            }
+        } catch (Exception e) {
+            System.err.println("Something went wrong: " + e.getMessage());
+        }
+
+        return alleKurs;
+    }
+
     @Override
     public ArrayList<Kurs> searchKurs(String navn, Kategori kategori, String sted) {
         ArrayList<Kurs> alleKurs = new ArrayList<>();
