@@ -11,5 +11,6 @@ public interface KursRepository {
     void removeKurs(int id);
     void addDeltaker(String navn, String ePost);
     boolean login(String brukernavn, String passord);
+    ArrayList<Kurs> getAllKurs();
 
 }

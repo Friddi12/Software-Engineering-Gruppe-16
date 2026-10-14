@@ -1,7 +1,6 @@
 import io.javalin.Javalin;
 
 import controllers.*;
-import repository.DatabaseRepository;
 import repository.*;
 
 
@@ -22,8 +21,9 @@ public class App {
         }).start(8080);
 
         // --- API-ruter
+        app.get("/api/kurs", kursController::getAllKurs);
         app.get("/api/kurs/search", kursController::search);
-        app.post("/api/kurs", kursController::addKurs);
+        app.post("/api/kurs/add", kursController::addKurs);
         app.delete("/api/kurs/{id}", kursController::remove);
         app.post("/api/deltaker", kursController::addDeltaker);
     }

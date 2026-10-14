@@ -33,6 +33,17 @@ public class KursController {
         }
     }
 
+    public void getAllKurs(Context ctx) {
+        try {
+            // Assumes your repository has a method to get all courses. 
+            // (If your repository method is named differently, like findAll() or getAll(), adjust it here)
+            ctx.json(kursRepository.getAllKurs()); 
+        } catch (Exception e) {
+            e.printStackTrace();
+            ctx.status(500).result("Could not fetch courses: " + e.getMessage());
+        }
+    }
+
     // POST /api/kurs (mottar JSON i body)
     public void addKurs(Context ctx) {
         try {
