@@ -29,6 +29,7 @@ public class DatabaseRepository implements KursRepository {
     @Override
     public ArrayList<Kurs> getAllKurs() {
     ArrayList<Kurs> alleKurs = new ArrayList<>();
+
     String query = "SELECT k.id AS kursId, p.id AS personid, k.kursnavn AS kursnavn, k.starttid AS starttid, "
             + "k.sluttTid AS sluttTid, k.beskrivelse AS beskrivelse, k.kategori AS kategori, "
             + "ka.telefonnr AS telefonnr, p.navn AS kursansvarlig_navn, p.epost AS epost, s.navn AS sted, s.adresse AS adresse "
