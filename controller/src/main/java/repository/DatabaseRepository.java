@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class DatabaseRepository implements KursRepository {
-    private static final String url="jdbc:mysql://localhost:3306/set_schema";
+    private static final String url="jdbc:mysql://localhost:3306/softwareEngineering";
     private static final String user="admin";
     private static final String password="1234";
     Connection connection;
@@ -29,18 +29,20 @@ public class DatabaseRepository implements KursRepository {
     @Override
     public ArrayList<Kurs> getAllKurs() {
     ArrayList<Kurs> alleKurs = new ArrayList<>();
-    String query = "SELECT p.id AS personid, k.kursnavn AS kursnavn, k.starttid AS starttid, "
+    String query = "SELECT k.id AS kursId, p.id AS personid, k.kursnavn AS kursnavn, k.starttid AS starttid, "
             + "k.sluttTid AS sluttTid, k.beskrivelse AS beskrivelse, k.kategori AS kategori, "
-            + "ka.telefonnr AS telefonnr, p.navn AS kursansvarig_navn, p.epost AS epost "
+            + "ka.telefonnr AS telefonnr, p.navn AS kursansvarlig_navn, p.epost AS epost, s.navn AS sted, s.adresse AS adresse "
             + "FROM kurs AS k "
-            + "INNER JOIN kursansvarig AS ka ON k.kursansvarig_id = ka.id "
-            + "INNER JOIN person AS p ON ka.person_id = p.id";
+            + "INNER JOIN kursansvarlig AS ka ON k.kursansvarig_id = ka.id "
+            + "INNER JOIN person AS p ON ka.person_id = p.id"
+            + "INNER JOIN sted AS s ON k.sted_id = s.id";
 
     // Create statement locally using connection
     try (Statement localStatement = connection.createStatement();
          ResultSet resultSet = localStatement.executeQuery(query)) {
         
         while (resultSet.next()) {
+            int kursId = resultSet.getInt("kursId");
             String kursnavn = resultSet.getString("kursnavn");
             LocalDateTime startTid = resultSet.getObject("starttid", LocalDateTime.class);
             LocalDateTime sluttTid = resultSet.getObject("sluttTid", LocalDateTime.class);
@@ -49,20 +51,21 @@ public class DatabaseRepository implements KursRepository {
             Kategori kategori1 = Kategori.valueOf(databaseResultatKategori.toUpperCase());
 
             String telefonnr = resultSet.getString("telefonnr");
-            String kursansvarigNavn = resultSet.getString("kursansvarig_navn");
-            String kursansvarigEpost = resultSet.getString("epost");
+            String kursansvarligNavn = resultSet.getString("kursansvarlig_navn");
+            String kursansvarligEpost = resultSet.getString("epost");
             int person_id = resultSet.getInt("personid");
+            String sted = resultSet.getString("sted");
 
             String fornavn = "";
             String etternavn = "";
-            if (kursansvarigNavn != null && !kursansvarigNavn.trim().isEmpty()) {
-                String[] nameParts = kursansvarigNavn.trim().split("\\s+", 2);
+            if (kursansvarligNavn != null && !kursansvarligNavn.trim().isEmpty()) {
+                String[] nameParts = kursansvarligNavn.trim().split("\\s+", 2);
                 fornavn = nameParts[0];
                 etternavn = nameParts.length > 1 ? nameParts[1] : "";
             }
 
-            Kursansvarlig kursansvarlig = new Kursansvarlig(person_id, fornavn, etternavn, kursansvarigEpost, telefonnr);
-            Kurs currentKurs = new Kurs(1, kursnavn, startTid, sluttTid, beskrivelse, kategori1, "Halden");
+            Kursansvarlig kursansvarlig = new Kursansvarlig(person_id, fornavn, etternavn, kursansvarligEpost, telefonnr);
+            Kurs currentKurs = new Kurs(kursId, kursnavn, startTid, sluttTid, beskrivelse, kategori1, sted);
             alleKurs.add(currentKurs);
         }
     } catch (Exception e) {
