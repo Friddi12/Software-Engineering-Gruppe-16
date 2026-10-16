@@ -34,8 +34,8 @@ public class DatabaseRepository implements KursRepository {
             + "k.sluttTid AS sluttTid, k.beskrivelse AS beskrivelse, k.kategori AS kategori, "
             + "ka.telefonnr AS telefonnr, p.navn AS kursansvarlig_navn, p.epost AS epost, s.navn AS sted, s.adresse AS adresse "
             + "FROM kurs AS k "
-            + "INNER JOIN kursansvarlig AS ka ON k.kursansvarig_id = ka.id "
-            + "INNER JOIN person AS p ON ka.person_id = p.id"
+            + "INNER JOIN kursansvarlig AS ka ON k.kursansvarlig_id = ka.id "
+            + "INNER JOIN person AS p ON ka.person_id = p.id "
             + "INNER JOIN sted AS s ON k.sted_id = s.id";
 
     // Create statement locally using connection
