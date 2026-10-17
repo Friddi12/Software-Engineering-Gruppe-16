@@ -11,7 +11,7 @@ export default function Homepage(){
     fetch('http://localhost:8080/api/kurs')
       .then(response => {
         if (response.ok) {
-          setConnectionStatus("Connected successfully to Javalin backend!");
+          setConnectionStatus("Kobling opprettet med backend");
           return response.json();
         } else {
           setConnectionStatus("Connected, but received an error status: " + response.status);
@@ -25,7 +25,7 @@ export default function Homepage(){
       })
       .catch(error => {
         console.error("Connection failed:", error);
-        setConnectionStatus("Failed to connect to backend. Is Java running?");
+        setConnectionStatus("Ingen kobling til backend");
       });
   }, []);
 
@@ -48,7 +48,7 @@ export default function Homepage(){
         ) : (
           <div className="kurs-grid">
             {kursList.map((kurs) => (
-              <div key={kurs.id || kurs.navn} className="kurs-card" style={{ border: '1px solid #ccc', margin: '10px', padding: '15px', borderRadius: '8px' }}>
+              <div key={kurs.id} className="kurs-card" style={{ border: '1px solid #ccc', margin: '10px', padding: '15px', borderRadius: '8px' }}>
                 <h3>{kurs.navn}</h3>
                 <p><strong>Beskrivelse:</strong> {kurs.beskrivelse}</p>
                 <p><strong>Sted:</strong> {kurs.sted}</p>

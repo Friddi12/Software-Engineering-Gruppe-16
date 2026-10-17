@@ -18,6 +18,8 @@ public class DatabaseRepository implements KursRepository {
 
     public DatabaseRepository() {
         try {
+            // Force driver registration explicitly
+            Class.forName("com.mysql.cj.jdbc.Driver");
             this.connection = DriverManager.getConnection(url, user, password);
         }
 
