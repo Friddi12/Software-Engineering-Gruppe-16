@@ -32,11 +32,12 @@ public class DatabaseRepository implements KursRepository {
 
     String query = "SELECT k.id AS kursId, p.id AS personid, k.kursnavn AS kursnavn, k.starttid AS starttid, "
             + "k.sluttTid AS sluttTid, k.beskrivelse AS beskrivelse, k.kategori AS kategori, "
-            + "ka.telefonnr AS telefonnr, p.navn AS kursansvarlig_navn, p.epost AS epost, s.navn AS sted, s.adresse AS adresse "
+            + "ka.telefonnr AS telefonnr, p.navn AS kursansvarlig_navn, p.epost AS epost, s.navn AS sted, s.adresse AS adresse, ko.navn AS kommune "
             + "FROM kurs AS k "
             + "INNER JOIN kursansvarlig AS ka ON k.kursansvarlig_id = ka.id "
             + "INNER JOIN person AS p ON ka.person_id = p.id "
-            + "INNER JOIN sted AS s ON k.sted_id = s.id";
+            + "INNER JOIN sted AS s ON k.sted_id = s.id "
+            + "INNER JOIN kommune AS ko ON s.kommune_id = ko.id";
 
     // Create statement locally using connection
     try (Statement localStatement = connection.createStatement();
@@ -55,7 +56,8 @@ public class DatabaseRepository implements KursRepository {
             String kursansvarligNavn = resultSet.getString("kursansvarlig_navn");
             String kursansvarligEpost = resultSet.getString("epost");
             int person_id = resultSet.getInt("personid");
-            String sted = resultSet.getString("sted");
+            String adresse = resultSet.getString("adresse");
+            String kommune = resultSet.getString("kommune");
 
             String fornavn = "";
             String etternavn = "";
@@ -66,7 +68,7 @@ public class DatabaseRepository implements KursRepository {
             }
 
             Kursansvarlig kursansvarlig = new Kursansvarlig(person_id, fornavn, etternavn, kursansvarligEpost, telefonnr);
-            Kurs currentKurs = new Kurs(kursId, kursnavn, startTid, sluttTid, beskrivelse, kategori1, sted);
+            Kurs currentKurs = new Kurs(kursId, kursnavn, startTid, sluttTid, beskrivelse, kategori1, kommune, adresse);
             alleKurs.add(currentKurs);
         }
     } catch (Exception e) {
