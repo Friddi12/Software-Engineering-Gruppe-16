@@ -117,6 +117,48 @@ public class DatabaseRepository implements KursRepository {
     }
 
     @Override
+    public ArrayList<Kurs> filtrerKurs(String sted, Kategori kategori) {
+        ArrayList<Kurs> alleKurs = new ArrayList<>();
+
+        String query = "SELECT k.id AS kursId, k.kursnavn AS kursnavn, " +
+                "k.startTid AS startTid, k.sluttTid AS sluttTid, " +
+                "k.beskrivelse AS beskrivelse, k.kategori AS kategori, " +
+                "s.navn AS sted " +
+                "FROM kurs AS k " +
+                "INNER JOIN sted AS s ON k.sted_id = s.id " +
+                "WHERE s.navn = ? AND k.kategori = ?";
+
+        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+            pstmt.setString(1, sted);
+            pstmt.setString(2, kategori.toString());
+
+            try (ResultSet resultSet = pstmt.executeQuery()) {
+                while (resultSet.next()) {
+                    int kursId = resultSet.getInt("kursId");
+                    String kursnavn = resultSet.getString("kursnavn");
+                    LocalDateTime startTid = resultSet.getObject("startTid", LocalDateTime.class);
+                    LocalDateTime sluttTid = resultSet.getObject("sluttTid", LocalDateTime.class);
+                    String beskrivelse = resultSet.getString("beskrivelse");
+
+                    String databaseKategori = resultSet.getString("kategori");
+                    Kategori kursKategori = Kategori.valueOf(databaseKategori.toUpperCase());
+
+                    String kursSted = resultSet.getString("sted");
+
+                    Kurs kurs = new Kurs(kursId, kursnavn, startTid, sluttTid, beskrivelse, kursKategori, kursSted);
+
+                    alleKurs.add(kurs);
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Noe gikk galt med filtreringen: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return alleKurs;
+    }
+
+    @Override
     public void addKurs(Kurs kurs) {
         String kategori = kurs.getKategori().toString();
         String query = "INSERT INTO kurs('kursnavn', 'starttid', 'sluttTid', 'beskrivelse', 'kategori') VALUES('" + kurs.getNavn() + "', '" + kurs.getStartTid() + "', '" + kurs.getSluttTid() + "', '" + kurs.getBeskrivelse() + "', '" + kategori + "');";
