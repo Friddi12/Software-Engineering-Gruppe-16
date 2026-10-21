@@ -12,5 +12,4 @@ public interface KursRepository {
     void addDeltaker(String navn, String ePost);
     boolean login(String brukernavn, String passord);
     ArrayList<Kurs> getAllKurs();
-    ArrayList<Kurs> filtrerKurs(String sted, Kategori kategori);
 }
