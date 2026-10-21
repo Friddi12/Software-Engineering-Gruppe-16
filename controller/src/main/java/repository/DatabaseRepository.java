@@ -32,9 +32,11 @@ public class DatabaseRepository implements KursRepository {
         ArrayList<Kurs> alleKurs = new ArrayList<>();
         String query = "SELECT p.id AS personid, k.kursnavn AS kursnavn, k.starttid AS starttid, "
                 + "k.sluttTid AS sluttTid, k.beskrivelse AS beskrivelse, k.kategori AS kategori, "
+                + "s.adresse AS adresse, "
                 + "ka.telefonnr AS telefonnr, p.navn AS kursansvarig_navn, p.epost AS epost "
                 + "FROM kurs AS k "
-                + "INNER JOIN kursansvarig AS ka ON k.kursansvarig_id = ka.id "
+                + "INNER JOIN sted AS s ON k.sted_id = s.id "
+                + "INNER JOIN kursansvarlig AS ka ON k.kursansvarlig_id = ka.id "
                 + "INNER JOIN person AS p ON ka.person_id = p.id";
 
         // Create statement locally using connection
@@ -48,6 +50,7 @@ public class DatabaseRepository implements KursRepository {
                 String beskrivelse = resultSet.getString("beskrivelse");
                 String databaseResultatKategori = resultSet.getString("kategori");
                 Kategori kategori1 = Kategori.valueOf(databaseResultatKategori.toUpperCase());
+                String adresse =  resultSet.getString("adresse");
 
                 String telefonnr = resultSet.getString("telefonnr");
                 String kursansvarigNavn = resultSet.getString("kursansvarig_navn");
@@ -63,7 +66,7 @@ public class DatabaseRepository implements KursRepository {
                 }
 
                 Kursansvarlig kursansvarlig = new Kursansvarlig(person_id, fornavn, etternavn, kursansvarigEpost, telefonnr);
-                Kurs currentKurs = new Kurs(1, kursnavn, startTid, sluttTid, beskrivelse, kategori1, "Halden");
+                Kurs currentKurs = new Kurs(1, kursnavn, startTid, sluttTid, beskrivelse, kategori1, "Halden",adresse);
                 alleKurs.add(currentKurs);
             }
         } catch (Exception e) {
@@ -78,7 +81,10 @@ public class DatabaseRepository implements KursRepository {
     public ArrayList<Kurs> searchKurs(String navn, Kategori kategori, String sted) {
         ArrayList<Kurs> alleKurs = new ArrayList<>();
         String kategoriString = kategori.toString();
-        String query = "SELECT p.id AS personid, k.kursnavn AS kursnavn, k.starttid AS starttid, k.sluttTid AS sluttTid, k.beskrivelse AS beskrivelse, k.kategori AS kategori, ka.telefonnr AS telefonnr, p.navn AS kursansvarig_navn, p.epost AS epost FROM kurs AS k INNER JOIN kursansvarig AS ka ON k.kursansvarig_id = ka.id INNER JOIN person AS p ON ka.person_id = p.id WHERE kursnavn = ? AND kategori = ?";
+        String query = "SELECT p.id AS personid, k.kursnavn AS kursnavn, k.starttid AS starttid, k.sluttTid AS sluttTid, " +
+                "k.beskrivelse AS beskrivelse, k.kategori AS kategori, ka.telefonnr AS telefonnr, p.navn AS kursansvarig_navn, " +
+                "p.epost AS epost FROM kurs AS k INNER JOIN kursansvarlig AS ka ON k.kursansvarlig_id = ka.id INNER JOIN person AS p " +
+                "ON ka.person_id = p.id WHERE kursnavn = ? AND kategori = ?";
 
         // Use PreparedStatement to prevent SQL injection and avoid null statement errors
         try (PreparedStatement pstmt = connection.prepareStatement(query)) {
@@ -92,7 +98,7 @@ public class DatabaseRepository implements KursRepository {
                     LocalDateTime sluttTid = resultSet.getObject("sluttTid", LocalDateTime.class);
                     String beskrivelse = resultSet.getString("beskrivelse");
                     String databaseResultatKategori = resultSet.getString("kategori");
-
+                    String adresse =  resultSet.getString("adresse");
                     Kategori kategori1 = Kategori.valueOf(databaseResultatKategori.toUpperCase());
 
                     String telefonnr = resultSet.getString("telefonnr");
@@ -102,7 +108,7 @@ public class DatabaseRepository implements KursRepository {
                     int person_id = resultSet.getInt("personid");
                     String[] name = kursasnvarigNavn.split(" ");
                     Kursansvarlig kursansvarlig = new Kursansvarlig(person_id, name[0], name[1], kursansvarigEpost, telefonnr);
-                    Kurs currentKurs = new Kurs(1, kursnavn, startTid, sluttTid, beskrivelse, kategori1, "Halden");
+                    Kurs currentKurs = new Kurs(1, kursnavn, startTid, sluttTid, beskrivelse, kategori1, "Halden", adresse);
                     alleKurs.add(currentKurs);
                 }
             }
@@ -116,7 +122,7 @@ public class DatabaseRepository implements KursRepository {
     @Override
     public void addKurs(Kurs kurs) {
         String kategori = kurs.getKategori().toString();
-        String query = "INSERT INTO kurs('kursnavn', 'starttid', 'sluttTid', 'beskrivelse', 'kategori') VALUES('" + kurs.getNavn() + "', '" + kurs.getStartTid() + "', '" + kurs.getSluttTid() + "', '" + kurs.getBeskrivelse() + "', '" + kategori + "');";
+        String query = "INSERT INTO kurs (kursnavn, starttid, sluttTid, beskrivelse, kategori) VALUES (?, ?, ?, ?, ?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, kurs.getNavn());
@@ -124,15 +130,14 @@ public class DatabaseRepository implements KursRepository {
             preparedStatement.setObject(3, kurs.getSluttTid());
             preparedStatement.setString(4, kurs.getBeskrivelse());
             preparedStatement.setString(5, kategori);
-            int rowsInserted = preparedStatement.executeUpdate();
 
-            if (rowsInserted>0) {
+            int rowsInserted = preparedStatement.executeUpdate();
+            if (rowsInserted > 0) {
                 System.out.println("Rows successfully inserted!");
             }
-        }
-
-        catch (Exception e) {
+        } catch (Exception e) {
             System.err.println("An error occured: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -148,7 +153,6 @@ public class DatabaseRepository implements KursRepository {
 
     @Override
     public boolean login(String brukernavn, String passord) {
-
         return false;
     }
 }

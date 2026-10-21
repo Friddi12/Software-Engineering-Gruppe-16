@@ -1,13 +1,13 @@
 package modules;
 
 public class Kursansvarlig extends Person{
-    private int telefonnummer;
+    private String telefonnummer;
 
-    public Kursansvarlig(int personId, String fornavn, String etternavn, String epost, int telefonnummer) {
+    public Kursansvarlig(int personId, String fornavn, String etternavn, String epost, String telefonnummer) {
         super(personId, fornavn, etternavn, epost);
         setTelefonnummer(telefonnummer);
     }
 
-    public int getTelefonnummer() {return telefonnummer;}
-    public void setTelefonnummer(int telefonnummer) {this.telefonnummer = telefonnummer;}
+    public String getTelefonnummer() {return telefonnummer;}
+    public void setTelefonnummer(String telefonnummer) {this.telefonnummer = telefonnummer;}
 }
