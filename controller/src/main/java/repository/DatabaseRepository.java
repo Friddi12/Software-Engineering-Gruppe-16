@@ -53,19 +53,19 @@ public class DatabaseRepository implements KursRepository {
                 String adresse =  resultSet.getString("adresse");
 
                 String telefonnr = resultSet.getString("telefonnr");
-                String kursansvarigNavn = resultSet.getString("kursansvarig_navn");
-                String kursansvarigEpost = resultSet.getString("epost");
+                String kursansvarligNavn = resultSet.getString("kursansvarig_navn");
+                String kursansvarligEpost = resultSet.getString("epost");
                 int person_id = resultSet.getInt("personid");
 
                 String fornavn = "";
                 String etternavn = "";
-                if (kursansvarigNavn != null && !kursansvarigNavn.trim().isEmpty()) {
-                    String[] nameParts = kursansvarigNavn.trim().split("\\s+", 2);
+                if (kursansvarligNavn != null && !kursansvarligNavn.trim().isEmpty()) {
+                    String[] nameParts = kursansvarligNavn.trim().split("\\s+", 2);
                     fornavn = nameParts[0];
                     etternavn = nameParts.length > 1 ? nameParts[1] : "";
                 }
 
-                Kursansvarlig kursansvarlig = new Kursansvarlig(person_id, fornavn, etternavn, kursansvarigEpost, telefonnr);
+                Kursansvarlig kursansvarlig = new Kursansvarlig(person_id, fornavn, etternavn, kursansvarligEpost, telefonnr);
                 Kurs currentKurs = new Kurs(1, kursnavn, startTid, sluttTid, beskrivelse, kategori1, "Halden",adresse);
                 alleKurs.add(currentKurs);
             }
@@ -102,12 +102,12 @@ public class DatabaseRepository implements KursRepository {
                     Kategori kategori1 = Kategori.valueOf(databaseResultatKategori.toUpperCase());
 
                     String telefonnr = resultSet.getString("telefonnr");
-                    String kursasnvarigNavn = resultSet.getString("kursansvarig_navn");
-                    String kursansvarigEpost = resultSet.getString("epost");
+                    String kursasnvarligNavn = resultSet.getString("kursansvarig_navn");
+                    String kursansvarligEpost = resultSet.getString("epost");
 
                     int person_id = resultSet.getInt("personid");
-                    String[] name = kursasnvarigNavn.split(" ");
-                    Kursansvarlig kursansvarlig = new Kursansvarlig(person_id, name[0], name[1], kursansvarigEpost, telefonnr);
+                    String[] name = kursasnvarligNavn.split(" ");
+                    Kursansvarlig kursansvarlig = new Kursansvarlig(person_id, name[0], name[1], kursansvarligEpost, telefonnr);
                     Kurs currentKurs = new Kurs(1, kursnavn, startTid, sluttTid, beskrivelse, kategori1, "Halden", adresse);
                     alleKurs.add(currentKurs);
                 }
