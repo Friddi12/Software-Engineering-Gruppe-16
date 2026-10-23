@@ -10,9 +10,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class DatabaseRepository implements KursRepository {
-    private static final String url="jdbc:mysql://localhost:3306/softwareengineering";
-    private static final String user="root";
-    private static final String password="";
+    private static final String url="jdbc:mysql://localhost:3306/softwareEngineering";
+    private static final String user="admin";
+    private static final String password="1234";
     Connection connection;
 
     public DatabaseRepository() {
@@ -37,7 +37,7 @@ public class DatabaseRepository implements KursRepository {
                 + "FROM kurs AS k "
                 + "INNER JOIN sted AS s ON k.sted_id = s.id "
                 + "INNER JOIN kursansvarlig AS ka ON k.kursansvarlig_id = ka.id "
-                + "INNER JOIN person AS p ON ka.person_id = p.id"
+                + "INNER JOIN person AS p ON ka.person_id = p.id "
                 + "INNER JOIN kommune AS ko ON ko.id=s.kommune_id";
 
         // Create statement locally using connection
