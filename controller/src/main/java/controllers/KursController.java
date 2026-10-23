@@ -35,9 +35,9 @@ public class KursController {
 
     public void getAllKurs(Context ctx) {
         try {
-            // Assumes your repository has a method to get all courses. 
+            // Assumes your repository has a method to get all courses.
             // (If your repository method is named differently, like findAll() or getAll(), adjust it here)
-            ctx.json(kursRepository.getAllKurs()); 
+            ctx.json(kursRepository.getAllKurs());
         } catch (Exception e) {
             e.printStackTrace();
             ctx.status(500).result("Could not fetch courses: " + e.getMessage());
@@ -50,7 +50,8 @@ public class KursController {
             // Javalin mapper JSON fra React direkte til et DTO/Objekt
             KursDTO dto = ctx.bodyAsClass(KursDTO.class);
 
-            Kurs kurs = new Kurs(dto.getNavn(),dto.getStartTid(), dto.getSluttTid(), dto.getBeskrivelse(), dto.getKategori(), dto.getSted());
+            Kurs kurs = new Kurs(dto.getNavn(),dto.getStartTid(), dto.getSluttTid(), dto.getBeskrivelse(),
+                    dto.getKategori(), dto.getSted(), dto.getAdresse());
 
             kursRepository.addKurs(kurs);
             ctx.status(201).json(kurs); // 201 Created

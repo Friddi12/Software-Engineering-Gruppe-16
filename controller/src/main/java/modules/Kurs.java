@@ -13,20 +13,22 @@ public class Kurs {
     private String beskrivelse;
     private Kategori kategori;
     private String sted;
+    private String adresse;
     private static final DateTimeFormatter correctFormat = DateTimeFormatter.ofPattern("HH:mm dd.MM.yyyy");
 
 
-    public Kurs (String navn, LocalDateTime startTid, LocalDateTime sluttTid, String beskrivelse, Kategori kategori, String sted) {
+    public Kurs (String navn, LocalDateTime startTid, LocalDateTime sluttTid, String beskrivelse, Kategori kategori, String sted,  String adresse) {
         setNavn(navn);
         setStartTid(startTid);
         setSluttTid(sluttTid);
         setBeskrivelse(beskrivelse);
         setKategori(kategori);
         setSted(sted);
+        setAdresse(adresse);
     }
 
-    public Kurs (int id, String navn, LocalDateTime startTid, LocalDateTime sluttTid, String beskrivelse, Kategori kategori, String sted){
-        this(navn, startTid, sluttTid, beskrivelse, kategori, sted);
+    public Kurs (int id, String navn, LocalDateTime startTid, LocalDateTime sluttTid, String beskrivelse, Kategori kategori, String sted, String adresse) {
+        this(navn, startTid, sluttTid, beskrivelse, kategori, sted, adresse);
         setId(id);
     }
 
@@ -53,4 +55,7 @@ public class Kurs {
 
     public String getSted() {return sted;}
     public void setSted(String sted) {this.sted = sted;}
+
+    public String getAdresse() {return adresse;}
+    public void setAdresse(String adresse) {this.adresse = adresse;}
 }
