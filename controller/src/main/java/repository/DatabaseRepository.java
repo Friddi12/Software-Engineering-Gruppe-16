@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class DatabaseRepository implements KursRepository {
     private static final String url="jdbc:mysql://localhost:3306/softwareEngineering";
-    private static final String user="admin";
+    private static final String user="root";
     private static final String password="1234";
     Connection connection;
 
