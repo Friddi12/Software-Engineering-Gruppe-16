@@ -64,7 +64,7 @@ CREATE TABLE kurs (
                       kategori VARCHAR(45),
                       kursansvarlig_id INT NOT NULL,
                       sted_id INT NOT NULL,
-                      PRIMARY KEY(id, kursansvarlig_id),
+                      PRIMARY KEY(id, kursansvarlig_id, sted_id),
                       FOREIGN KEY (kursansvarlig_id) REFERENCES kursansvarlig(id),
                       FOREIGN KEY (sted_id) REFERENCES sted(id)
 );

@@ -10,22 +10,34 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class DatabaseRepository implements KursRepository {
-    private static final String url="jdbc:mysql://localhost:3306/softwareEngineering";
-    private static final String user="admin";
-    private static final String password="1234";
     Connection connection;
 
     public DatabaseRepository() {
-        try {
-            // Force driver registration explicitly
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            this.connection = DriverManager.getConnection(url, user, password);
+        String url = System.getenv().getOrDefault(
+                "DB_URL",
+                "jdbc:mysql://localhost:3306/softwareEngineering?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC"
+        );
+        String user = System.getenv().getOrDefault("DB_USER", "admin");
+        String pass = System.getenv().getOrDefault("DB_PASSWORD", "1234");
+
+        int retries = 10;
+        while (retries > 0) {
+            try {
+                this.connection = DriverManager.getConnection(url, user, pass);
+                System.out.println("Vellykket tilkobling til database!");
+                break;
+            } catch (SQLException e) {
+                retries--;
+                System.err.println("Venter på at MySQL skal bli klar... Forsøk igjen om 2 sekunder (" + retries + " gjenstår)");
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException ignored) {}
+            }
         }
 
-        catch(Exception e) {
-            System.err.println("An error has occured: " + e);
+        if (this.connection == null) {
+            throw new RuntimeException("Kunne ikke koble til databasen etter flere forsøk.");
         }
-
     }
     @Override
     public ArrayList<Kurs> getAllKurs() {
