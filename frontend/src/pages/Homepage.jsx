@@ -32,7 +32,7 @@ export default function Homepage(){
     return(
     <>
       <Hero />
-      <Carousel />
+      <Carousel kursList={kursList}/>
       <p>INFORMASJON/LINKS TIL LOKALE LAG KOMMER!</p>
       <h1>UNDER ARBEID</h1>
       <img src="mainlogolys.jpg" alt="" />

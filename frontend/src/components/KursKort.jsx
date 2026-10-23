@@ -4,8 +4,9 @@ export default function KursKort({kurs}){
     return(
         <article className="kurskort">
             <div className="kurskortPanel">
-                <h3 className="kurskortTitle">{kurs.title}</h3>
-                <p>Dato: {kurs.date}</p>
+                <h3 className="kurskortTitle">{kurs.navn}</h3>
+                <p>Startdato: {kurs.startTid}</p>
+                <p>Sluttdato: {kurs.sluttTid}</p>
                     {/* inkludere tid her etter hvert*/}
                 
                 
@@ -13,11 +14,11 @@ export default function KursKort({kurs}){
                 
                 <div className="kurskortInfo">
                     <p className="kurskortLabel">Informasjon:</p>
-                    <p>{kurs.information}</p>  
+                    <p>{kurs.beskrivelse}</p>  
                 </div>
                 
                 <div className="kurskortFooter">
-                    <p>Pris: {kurs.price} kr</p>
+                    <p>Kategori: {kurs.kategori}</p>
                     <p>Ledige plasser: {kurs.plasser}</p>
                 </div>
             </div>
