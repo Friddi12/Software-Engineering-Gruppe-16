@@ -323,3 +323,34 @@ nav{
     position: absolute;
     inset: 0;
 }
+
+/* footer */
+.footer{
+    background-color: #545561;
+    color: white;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: center;
+}
+
+.footerKolonner{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    gap: 2rem;
+
+    max-width: 75rem;
+    margin: 0 auto;
+
+
+}
+
+a{
+    color:white;
+    font-weight: bold;
+
+}
+
+ul{
+list-style-type: none;
+padding: 0;
+padding: 0;
+    }
