@@ -4,30 +4,30 @@ import Hero from "../components/Hero"
 import { useEffect, useState } from 'react'
 
 export default function Homepage(){
-  const [connectionStatus, setConnectionStatus] = useState("Testing connection...");
-  const [kursList, setKursList] = useState([]);
+  const [connectionStatus, setConnectionStatus] = useState("Testing connection...")
+  const [kursList, setKursList] = useState([])
 
   useEffect(() => {
     fetch('http://localhost:8080/api/kurs')
       .then(response => {
         if (response.ok) {
-          setConnectionStatus("Kobling opprettet med backend");
+          setConnectionStatus("Kobling opprettet med backend")
           return response.json();
         } else {
-          setConnectionStatus("Connected, but received an error status: " + response.status);
+          setConnectionStatus("Connected, but received an error status: " + response.status)
         }
       })
       .then(data => {
-        console.log("Data from backend:", data);
+        console.log("Data from backend:", data)
         if (data) {
-          setKursList(data); 
+          setKursList(data);
         }
       })
       .catch(error => {
-        console.error("Connection failed:", error);
-        setConnectionStatus("Ingen kobling til backend");
-      });
-  }, []);
+        console.error("Connection failed:", error)
+        setConnectionStatus("Ingen kobling til backend")
+      })
+  }, [])
 
     return(
     <>
