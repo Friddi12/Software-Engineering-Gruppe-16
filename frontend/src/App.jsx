@@ -11,6 +11,7 @@ import Homepage from './pages/Homepage.jsx'
 import Localhub from './pages/Localhub.jsx'
 import Localpage from './pages/Localpage.jsx'
 import Aboutus from './pages/Aboutus.jsx'
+import Coursepage from './pages/Coursepage.jsx'
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
         <Route path="/Localhub" element={<Localhub />} />
         <Route path="/Localhub/:slug" element={<Localpage />} />
         <Route path='/Aboutus' element={<Aboutus />} />
+        <Route path='/kurs/:id' element={<Coursepage />} />
       </Routes> 
     </main>
   )

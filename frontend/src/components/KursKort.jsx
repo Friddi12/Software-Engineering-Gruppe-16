@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 
 export default function KursKort({kurs}){
     return(
+        <Link to={`/kurs/${kurs.id}`}>
         <article className="kurskort">
             <div className="kurskortPanel">
                 <h3 className="kurskortTitle">{kurs.navn}</h3>
@@ -23,5 +24,6 @@ export default function KursKort({kurs}){
                 </div>
             </div>
         </article>
+        </Link>
     )
 }
