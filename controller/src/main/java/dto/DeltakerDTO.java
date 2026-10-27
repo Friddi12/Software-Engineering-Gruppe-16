@@ -5,12 +5,16 @@ import java.time.LocalDate;
 public class DeltakerDTO {
     private String fornavn;
     private String etternavn;
-    private LocalDate dato;
+    private String epost;
+    private LocalDate registreringsdato;
 
-    public DeltakerDTO(String fornavn, String etternavn, LocalDate dato) {
+    public DeltakerDTO(){}
+
+    public DeltakerDTO(String fornavn, String etternavn, String epost, LocalDate registreringsdato) {
         setFornavn(fornavn);
         setEtternavn(etternavn);
-        setDato(dato);
+        setRegistreringsdato(registreringsdato);
+        setEpost(epost);
     }
 
     public String getFornavn() {return fornavn;}
@@ -19,6 +23,9 @@ public class DeltakerDTO {
     public String getEtternavn() {return etternavn;}
     public void setEtternavn(String etternavn) {this.etternavn = etternavn;}
 
-    public LocalDate getDato() {return dato;}
-    public void setDato(LocalDate dato) {this.dato = dato;}
+    public LocalDate getRegistreringsdato() {return registreringsdato;}
+    public void setRegistreringsdato(LocalDate registreringsdato) {this.registreringsdato = registreringsdato;}
+
+    public String getEpost() {return epost;}
+    public void setEpost(String epost) {this.epost = epost;}
 }

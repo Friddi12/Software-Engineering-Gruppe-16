@@ -6,7 +6,11 @@ public class Deltaker extends Person{
     private LocalDate registreringsdato;
 
     public Deltaker(int personId, String fornavn, String etternavn, String epost, LocalDate registreringsdato) {
-        super(personId, fornavn, etternavn, epost);
+        this(fornavn, etternavn, epost, registreringsdato);
+        super.setPersonId(personId);
+    }
+    public Deltaker(String fornavn, String etternavn, String epost, LocalDate registreringsdato) {
+        super(fornavn, etternavn, epost);
         setRegistreringsdato(registreringsdato);
     }
 

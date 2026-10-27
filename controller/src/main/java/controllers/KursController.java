@@ -73,17 +73,6 @@ public class KursController {
         }
     }
 
-    public void login(Context ctx){
-        /*try {
-            String brukernavn = ctx.pathParam("brukernavn");
-            String password = ctx.pathParam("password");
-            verifyUser(brukernavn, password);
-
-        }catch (Exception e){
-            ctx.status(400).result("Invalid input: " + e.getMessage());
-        }*/
-    }
-
     public void addDeltaker(Context ctx) {
 
     }

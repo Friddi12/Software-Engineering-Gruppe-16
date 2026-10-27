@@ -1,15 +1,13 @@
 package repository;
 
-import modules.Kategori;
-import modules.Kurs;
-import modules.Kursansvarlig;
+import modules.*;
 
 import java.sql.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class DatabaseRepository implements KursRepository {
+public class DatabaseRepository implements KursRepository, BrukerRepository, DeltakerRepository {
     private static final String url="jdbc:mysql://localhost:3306/softwareengineering";
     private static final String user="root";
     private static final String password="";
@@ -147,12 +145,22 @@ public class DatabaseRepository implements KursRepository {
     }
 
     @Override
-    public void addDeltaker(String navn, String ePost) {
+    public boolean login(String brukernavn, String passord) {
+        return false;
+    }
+
+    @Override
+    public void signUp(Bruker bruker) {
 
     }
 
     @Override
-    public boolean login(String brukernavn, String passord) {
-        return false;
+    public void createDeltaker(Deltaker deltaker) {
+
+    }
+
+    @Override
+    public void addDeltaker(Deltaker deltaker) {
+
     }
 }

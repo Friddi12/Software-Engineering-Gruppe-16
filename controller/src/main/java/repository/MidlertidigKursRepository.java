@@ -1,5 +1,5 @@
 package repository;
-
+/*
 import modules.*;
 
 import java.time.LocalDateTime;
@@ -11,7 +11,7 @@ public class MidlertidigKursRepository implements KursRepository {
 
     public MidlertidigKursRepository() {
 
-        /*addKurs(new Kurs(
+        addKurs(new Kurs(
                 1,
                 "Strikkekurs",
                 LocalDateTime.of(2026, 10, 10, 17, 0),
@@ -39,7 +39,7 @@ public class MidlertidigKursRepository implements KursRepository {
                 "Sykurs for nybegynnere",
                 Kategori.SYING,
                 "Sarpsborg"
-        ));*/
+        ));
     }
 
     @Override
@@ -90,3 +90,4 @@ public class MidlertidigKursRepository implements KursRepository {
         return false;
     }
 }
+*/

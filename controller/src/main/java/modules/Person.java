@@ -8,11 +8,15 @@ public abstract class Person {
     private String etternavn;
     private String epost;
 
-    public Person(int personId, String fornavn, String etternavn, String epost) {
-        setPersonId(personId);
+    public Person(String fornavn, String etternavn, String epost) {
         setFornavn(fornavn);
         setEtternavn(etternavn);
         setEpost(epost);
+    }
+
+    public Person(int personId, String fornavn, String etternavn, String epost) {
+        this(fornavn, etternavn, epost);
+        setPersonId(personId);
     }
 
     public int getPersonId() {return personId;}

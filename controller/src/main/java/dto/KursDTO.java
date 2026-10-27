@@ -1,7 +1,6 @@
 package dto;
 
 import modules.Kategori;
-
 import java.time.LocalDateTime;
 
 public class KursDTO {
