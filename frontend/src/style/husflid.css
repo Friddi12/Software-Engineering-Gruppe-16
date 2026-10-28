@@ -323,3 +323,17 @@ nav{
     position: absolute;
     inset: 0;
 }
+
+
+#footer{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  
+    p{
+        font-weight: bold;
+        width: 100%;
+    }
+
+}
