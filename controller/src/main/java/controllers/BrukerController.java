@@ -1,5 +1,7 @@
 package controllers;
 
+import dto.BrukerDTO;
+import dto.DeltakerDTO;
 import io.javalin.http.Context;
 import service.BrukerService;
 
@@ -13,10 +15,10 @@ public class BrukerController {
     public void login(Context ctx) {
         try {
             // Henter innloggingsinfo trygt fra request body (JSON)
-            LoginDto loginDto = ctx.bodyAsClass(LoginDto.class);
+            BrukerDTO brukerDTO = ctx.bodyAsClass(BrukerDTO.class);
 
             // Sender til service-laget for sjekk
-            boolean isAuthenticated = brukerService.login(loginDto);
+            boolean isAuthenticated = brukerService.login(brukerDTO);
 
             if (isAuthenticated) {
                 ctx.status(200).result("Innlogging vellykket!");
@@ -32,10 +34,11 @@ public class BrukerController {
     public void signUp(Context ctx) {
         try {
             // Henter registreringsdata fra JSON-body
-            BrukerRegistreringDto registreringDto = ctx.bodyAsClass(BrukerRegistreringDto.class);
+            BrukerDTO brukerDTO = ctx.bodyAsClass(BrukerDTO.class);
+            DeltakerDTO deltakerDTO = ctx.bodyAsClass(DeltakerDTO.class);
 
             // Sender til service-laget (her skjer hashingen!)
-            brukerService.createBruker(registreringDto);
+            brukerService.signUp(deltakerDTO, brukerDTO);
 
             ctx.status(201).result("Bruker opprettet!");
 

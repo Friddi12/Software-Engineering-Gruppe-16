@@ -155,6 +155,11 @@ public class DatabaseRepository implements KursRepository, BrukerRepository, Del
     }
 
     @Override
+    public Bruker getBruker(String brukernavn) {
+        return null;
+    }
+
+    @Override
     public void createDeltaker(Deltaker deltaker) {
 
     }

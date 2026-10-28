@@ -1,7 +1,7 @@
 package controllers;
 
 import modules.*;
-import dto.*;
+import dto.KursDTO;
 
 import io.javalin.http.Context;
 import repository.KursRepository;

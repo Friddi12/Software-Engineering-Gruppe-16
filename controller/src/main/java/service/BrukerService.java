@@ -15,7 +15,21 @@ public class BrukerService {
         this.databaseRepository = databaseRepository;
     }
 
-    public void createBruker(DeltakerDTO deltakerDTO, BrukerDTO brukerDTO) {
+    public boolean login(BrukerDTO brukerDTO) {
+        // 1. Hent brukeren fra databasen basert på brukernavn
+        Bruker bruker = databaseRepository.getBruker(brukerDTO.getEpost());
+        if (bruker == null) {
+            return false; // Brukeren finnes ikke
+        }
+
+        // 2. Verifiser passordet i klartekst mot hashen som allerede ligger i databasen
+        BCrypt.Result result = BCrypt.verifyer().verify(brukerDTO.getPassord().toCharArray(), bruker.getHashPassord());
+
+        // 3. Returnerer true hvis passordet er korrekt, ellers false
+        return result.verified;
+    }
+
+    public void signUp(DeltakerDTO deltakerDTO, BrukerDTO brukerDTO) {
         // 1. Hashe passordet fra BrukerDTO med BCrypt
         String hashedPassword = BCrypt.withDefaults().hashToString(12, brukerDTO.getPassord().toCharArray());
 
@@ -28,7 +42,7 @@ public class BrukerService {
         );
 
         // 3. Opprett Bruker med den hashede versjonen av passordet
-        Bruker nyBruker = new Bruker(brukerDTO.getBrukernavn(),  hashedPassword, nyDeltaker /*Bruker har en relasjon til Deltaker*/);
+        Bruker nyBruker = new Bruker(brukerDTO.getEpost(),  hashedPassword, nyDeltaker /*Bruker har en relasjon til Deltaker*/);
 
         // 4. Lagre i databasen via repository
         databaseRepository.createDeltaker(nyDeltaker);
