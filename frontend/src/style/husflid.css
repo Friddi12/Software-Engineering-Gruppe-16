@@ -73,7 +73,7 @@ nav{
     height: 300px;
     margin: 0.2rem auto;
 
-    background-image: url('./stockbg1.jpg');
+    background-image: url('/stockbg1.jpg');
     background-position: center;
     background-size: cover;
 

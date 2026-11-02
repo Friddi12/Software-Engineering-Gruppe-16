@@ -9,7 +9,7 @@ export default function Header (){
     <header>
         <h1>
             <Link to="/">
-                <img src="mainlogo.png" alt="LOGO" />
+                <img src="/mainlogo.png" alt="LOGO" />
             </Link>
         </h1>
         <Nav />

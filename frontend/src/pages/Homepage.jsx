@@ -35,30 +35,10 @@ export default function Homepage(){
       <Carousel kursList={kursList}/>
       <p>INFORMASJON/LINKS TIL LOKALE LAG KOMMER!</p>
       <h1>UNDER ARBEID</h1>
-      <img src="mainlogolys.jpg" alt="" />
+      <img src="/mainlogolys.jpg" alt="" />
       <div>
         <h2>API Connection Test</h2>
         <p>{connectionStatus}</p>
-      </div>
-
-      <div className="kurs-section">
-        <h2>Alle Kurs</h2>
-        {kursList.length === 0 ? (
-          <p>Ingen kurs funnet i databasen.</p>
-        ) : (
-          <div className="kurs-grid">
-            {kursList.map((kurs) => (
-              <div key={kurs.id} className="kurs-card" style={{ border: '1px solid #ccc', margin: '10px', padding: '15px', borderRadius: '8px' }}>
-                <h3>{kurs.navn}</h3>
-                <p><strong>Beskrivelse:</strong> {kurs.beskrivelse}</p>
-                <p><strong>Sted:</strong> {kurs.sted}</p>
-                <p><strong>Kategori:</strong> {kurs.kategori}</p>
-                <p><strong>Start:</strong> {kurs.startTid}</p>
-                <p><strong>Slutt:</strong> {kurs.sluttTid}</p>
-              </div>
-            ))}
-          </div>
-        )}
       </div>
     </>
 
