@@ -231,7 +231,7 @@ nav{
     font-size: 1rem;
     font-weight: 600;
     color: white;
-    background-color: #4a6d8c; /* mørk nok til at hvit tekst er lesbar */
+    background-color: #4a6d8c; 
     border: 2px solid #4a6d8c;
     border-radius: 0 0.5rem 0.5rem 0;
     cursor: pointer;
