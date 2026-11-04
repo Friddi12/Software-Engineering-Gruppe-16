@@ -8,9 +8,13 @@ public class Bruker {
     public Bruker() {}
 
     public Bruker(String brukernavn, String hashPassord, Deltaker deltaker) {
+        this(brukernavn, hashPassord);
+        setDeltaker(deltaker);
+    }
+
+    public Bruker(String brukernavn, String hashPassord) {
         setBrukernavn(brukernavn);
         setHashPassord(hashPassord);
-        setDeltaker(deltaker);
     }
 
     public String getBrukernavn() {return brukernavn;}

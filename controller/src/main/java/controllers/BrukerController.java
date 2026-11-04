@@ -6,11 +6,9 @@ import io.javalin.http.Context;
 import service.BrukerService;
 
 public class BrukerController {
-    private final BrukerService brukerService;
+    private BrukerService brukerService;
 
-    public BrukerController(BrukerService brukerService) {
-        this.brukerService = brukerService;
-    }
+    public BrukerController(BrukerService brukerService) {setBrukerService(brukerService);}
 
     public void login(Context ctx) {
         try {
@@ -46,4 +44,7 @@ public class BrukerController {
             ctx.status(400).result("Kunne ikke opprette bruker: " + e.getMessage());
         }
     }
+
+    public BrukerService getBrukerService() {return brukerService;}
+    public void setBrukerService(BrukerService brukerService) {this.brukerService = brukerService;}
 }

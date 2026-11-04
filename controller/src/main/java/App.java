@@ -3,13 +3,15 @@ import io.javalin.Javalin;
 import controllers.*;
 import repository.DatabaseRepository;
 import repository.*;
+import service.BrukerService;
 
 
 public class App {
     public static void main(String[] args) {
-        KursRepository kursRepository = new DatabaseRepository();
-        KursController kursController = new KursController(kursRepository);
-        BrukerController brukerController = new BrukerController(BrukerRepository);
+        DatabaseRepository databaseRepository = new DatabaseRepository();
+        BrukerService brukerService = new BrukerService(databaseRepository, databaseRepository);
+        BrukerController brukerController = new BrukerController(brukerService);
+        KursController kursController = new KursController(databaseRepository);
 
         Javalin app = Javalin.create(config -> {
             // Tillater at kilde-apper (som React på port 5173/3000) får kalle API-et under utvikling
@@ -29,6 +31,7 @@ public class App {
         app.delete("/api/kurs/{id}", kursController::remove);
         app.post("/api/deltaker", kursController::addDeltaker);
         app.get("/api/bruker/login", brukerController::login); // login gjelder både deltakere og kursansvarlig
-        app.post("/api/bruker/signup", brukerController::signUp); // registrering av bruker tenker jeg gjelder bare deltakere, mens kursansvarlig kan lages direkte i databasen
+        app.post("/api/bruker/signup", brukerController::signUp);  // registrering av bruker tenker jeg gjelder bare deltakere, 
+                                                                        // mens kursansvarlig kan lages direkte i databasen
     }
 }

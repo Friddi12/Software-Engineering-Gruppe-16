@@ -145,18 +145,32 @@ public class DatabaseRepository implements KursRepository, BrukerRepository, Del
     }
 
     @Override
-    public boolean login(String brukernavn, String passord) {
-        return false;
-    }
-
-    @Override
     public void signUp(Bruker bruker) {
 
     }
 
     @Override
-    public Bruker getBruker(String brukernavn) {
-        return null;
+    public Bruker login(String brukernavn) {
+        String query = "SELECT a.username, p.password_hash FROM auth AS a INNER JOIN password AS p ON a.password_id=p.id WHERE a.username='" + brukernavn + "';";
+        Bruker bruker = null;
+
+        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+            pstmt.setString(1, brukernavn);
+
+            try (ResultSet resultSet = pstmt.executeQuery()) {
+                while (resultSet.next()) {
+                    String username = resultSet.getString("a.username");
+                    String password_hash = resultSet.getString("p.password_hash");
+                    bruker = new Bruker(username, password_hash);
+                }
+            }
+        }
+
+        catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return bruker;
     }
 
     @Override
