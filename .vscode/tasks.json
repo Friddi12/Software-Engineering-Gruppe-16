@@ -1,0 +1,35 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "🚀 Start alt (Bygg og kjør)",
+      "type": "shell",
+      "command": "docker compose up --build",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "🛑 Stopp alt",
+      "type": "shell",
+      "command": "docker compose down",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "🧹 Nullstill database (Fersk start)",
+      "type": "shell",
+      "command": "docker compose down -v && docker compose up --build",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    }
+  ]
+}
