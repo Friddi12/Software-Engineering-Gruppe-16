@@ -324,11 +324,12 @@ nav{
     inset: 0;
 }
 
+
 /* footer */
 .footer{
     background-color: #545561;
     color: white;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: "Breuer Text", Arial, sans-serif;
     text-align: center;
 }
 
