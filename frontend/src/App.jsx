@@ -12,6 +12,7 @@ import Localhub from './pages/Localhub.jsx'
 import Localpage from './pages/Localpage.jsx'
 import Aboutus from './pages/Aboutus.jsx'
 import Footer from './components/Footer.jsx'
+import Coursepage from './pages/Coursepage.jsx'
 
 function App() {
 
