@@ -6,7 +6,7 @@ export default function Aboutus(){
     return(
         <div className="omOssSide">
             <section>
-                <h2>OM OSS</h2>
+                <h2 className="omOss-overskrift">OM OSS</h2>
                 <p>Norges Husflidslag arbeider for å fremme tradisjonelt håndverk. 
                 Siden 1910 har organisasjonen arbeidet for å styrke tradisjonelle håndverkstradisjoner, 
                 videreføre håndverkskunnskap og spre skaperglede.</p>
@@ -14,6 +14,7 @@ export default function Aboutus(){
 
                 {/*bilde */}
             </section>
+            <img src="./fargede-garn-16-9-jpg.webp" alt="fargedeGarn" className="fargedeGarnBilde"/>
             <section>
                 <h2>Organisasjonen</h2>
                 <p>Norges Husflidslag er en frivillig, ideell organisasjon med 19 fylkeslag og over 350 lokallag over hele landet. 
@@ -22,6 +23,7 @@ export default function Aboutus(){
                 <p>Organisasjonen ledes av en sentraladministrasjon i Oslo og har 18 husflidskonsulenter som arbeider i sine respektive regioner. 
                     De fremmer lokale håndverksinitiativ og støtter de regionale håndverkslaugene og lokallagene.</p>
             </section>
+
 
 
 
