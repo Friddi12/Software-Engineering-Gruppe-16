@@ -24,11 +24,12 @@ function App() {
   }
 
   return (
+    <div>
     
     <main>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} /> 
+        <Route path="/" element={<Homepage />} /> 
         <Route path="/Searchpage" element={<Searchpage />} />
         <Route path="/Localhub" element={<Localhub />} />
         <Route path="/Localhub/:slug" element={<Localpage />} />
@@ -38,7 +39,7 @@ function App() {
       <Footer />
       
     </main>
-    
+    </div>
   )
 
   
