@@ -4,17 +4,19 @@ public class Bruker {
     private String brukernavn;
     private String hashPassord;
     private Deltaker deltaker;
+    private String rolle;
 
     public Bruker() {}
 
-    public Bruker(String brukernavn, String hashPassord, Deltaker deltaker) {
-        this(brukernavn, hashPassord);
+    public Bruker(String brukernavn, String hashPassord,String rolle, Deltaker deltaker) {
+        this(brukernavn, hashPassord, rolle);
         setDeltaker(deltaker);
     }
 
-    public Bruker(String brukernavn, String hashPassord) {
+    public Bruker(String brukernavn, String hashPassord, String rolle) {
         setBrukernavn(brukernavn);
         setHashPassord(hashPassord);
+        setRolle(rolle);
     }
 
     public String getBrukernavn() {return brukernavn;}
@@ -25,4 +27,7 @@ public class Bruker {
 
     public Deltaker getDeltaker() {return deltaker;}
     public void setDeltaker(Deltaker deltaker) {this.deltaker = deltaker;}
+
+    public String getRolle() {return rolle;}
+    public void setRolle(String rolle) {this.rolle = rolle;}
 }

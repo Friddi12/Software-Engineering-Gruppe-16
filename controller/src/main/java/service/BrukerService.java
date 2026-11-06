@@ -5,6 +5,8 @@ import dto.BrukerDTO;
 import modules.Deltaker;
 import modules.Bruker;
 import java.time.LocalDate;
+import java.util.Objects;
+
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import repository.BrukerRepository;
 import repository.DeltakerRepository; // Importer grensesnittet her
@@ -19,17 +21,21 @@ public class BrukerService {
         this.deltakerRepository = deltakerRepository;
     }
 
-    public boolean login(BrukerDTO brukerDTO) {
+    public String login(BrukerDTO brukerDTO) {
         Bruker bruker = brukerRepository.login(brukerDTO.getEpost());
         if (bruker == null) {
-            return false;
+            return null;
         }
 
         BCrypt.Result result = BCrypt.verifyer().verify(
                 brukerDTO.getPassord().toCharArray(),
                 bruker.getHashPassord()
         );
-        return result.verified;
+
+        if (result.verified) {
+            return bruker.getRolle();
+        }
+        return null;
     }
 
     public void signUp(DeltakerDTO deltakerDTO, BrukerDTO brukerDTO) {
@@ -45,6 +51,7 @@ public class BrukerService {
         Bruker nyBruker = new Bruker(
                 brukerDTO.getEpost(),
                 hashedPassword,
+                "deltaker",
                 nyDeltaker
         );
 

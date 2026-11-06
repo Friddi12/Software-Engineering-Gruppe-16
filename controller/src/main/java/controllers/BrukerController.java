@@ -4,6 +4,7 @@ import dto.BrukerDTO;
 import dto.DeltakerDTO;
 import io.javalin.http.Context;
 import service.BrukerService;
+import java.util.Map;
 
 public class BrukerController {
     private BrukerService brukerService;
@@ -16,10 +17,13 @@ public class BrukerController {
             BrukerDTO brukerDTO = ctx.bodyAsClass(BrukerDTO.class);
 
             // Sender til service-laget for sjekk
-            boolean isAuthenticated = brukerService.login(brukerDTO);
+            String isAuthenticated = brukerService.login(brukerDTO);
 
-            if (isAuthenticated) {
-                ctx.status(200).result("Innlogging vellykket!");
+            if (isAuthenticated != null) {
+                ctx.status(200).json(Map.of(
+                        "message", "Innlogging vellykket!",
+                        "rolle", isAuthenticated
+                ));
             } else {
                 ctx.status(401).result("Feil brukernavn eller passord.");
             }

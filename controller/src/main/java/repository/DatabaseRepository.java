@@ -151,7 +151,7 @@ public class DatabaseRepository implements KursRepository, BrukerRepository, Del
 
     @Override
     public Bruker login(String brukernavn) {
-        String query = "SELECT a.username, p.password_hash FROM auth AS a INNER JOIN password AS p ON a.password_id=p.id WHERE a.username='" + brukernavn + "';";
+        String query = "SELECT a.username, p.password_hash, r.rollenavn FROM auth AS a INNER JOIN password AS p ON a.password_id=p.id INNER JOIN rolle AS r ON a.rolle_id=r.id WHERE a.username='" + brukernavn + "';";
         Bruker bruker = null;
 
         try (PreparedStatement pstmt = connection.prepareStatement(query)) {
@@ -161,7 +161,8 @@ public class DatabaseRepository implements KursRepository, BrukerRepository, Del
                 while (resultSet.next()) {
                     String username = resultSet.getString("a.username");
                     String password_hash = resultSet.getString("p.password_hash");
-                    bruker = new Bruker(username, password_hash);
+                    String rolle = resultSet.getString("r.rollenavn");
+                    bruker = new Bruker(username, password_hash, rolle);
                 }
             }
         }
