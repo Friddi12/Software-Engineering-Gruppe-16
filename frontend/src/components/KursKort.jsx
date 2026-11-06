@@ -31,10 +31,10 @@ export default function KursKort({kurs}){
                 
                 <p className="kurskortLag">Arrangert av: {kurs.lag}</p>
                 
-                <div className="kurskortInfo">
+                {/* <div className="kurskortInfo">
                     <p className="kurskortLabel">Informasjon:</p>
                     <p>{kurs.beskrivelse}</p>  
-                </div>
+                </div> */}
                 
                 <div className="kurskortFooter">
                     <p>Kategori: {kurs.kategori}</p>
