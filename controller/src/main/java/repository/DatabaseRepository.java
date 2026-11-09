@@ -206,55 +206,113 @@ public class DatabaseRepository implements KursRepository {
     }
 
     @Override
-    public boolean addDeltaker(int kursId, String navn, String epost) {
+    public boolean addDeltaker(int kursId, String navn, String epost) throws Exception {
+
+        if (kursId <= 0) {
+            throw new Exception("Ugyldig kurs-ID.");
+        }
+        if (navn == null || navn.isBlank()) {
+            throw new Exception("Navn kan ikke være tomt.");
+        }
+        if (epost == null || !epost.contains("@") || !epost.contains(".")) {
+            throw new Exception("Ugyldig e-postadresse.");
+        }
+
+        navn = navn.trim();
+        epost = epost.trim().toLowerCase();
+
         try {
-            int personId = 0;
-
-            String finnPerson = "SELECT id FROM person WHERE epost = ?";
-
-            try (PreparedStatement pstmt = connection.prepareStatement(finnPerson)) {
-                pstmt.setString(1, epost);
-
-                try (ResultSet resultSet = pstmt.executeQuery()) {
-                    if (resultSet.next()) {
-                        personId = resultSet.getInt("id");
-                    }
-                }
+            if (!finnesKurs(kursId)) {
+                throw new Exception("Kurset finnes ikke.");
             }
+            int personId = finnPersonId(epost);
 
             if (personId == 0) {
-                String opprettPerson = "INSERT INTO person (navn, epost) VALUES (?, ?)";
+                String sql = "INSERT INTO person (navn, epost) VALUES (?, ?)";
 
-                try (PreparedStatement pstmt = connection.prepareStatement(opprettPerson, Statement.RETURN_GENERATED_KEYS)) {
+                try (PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
                     pstmt.setString(1, navn);
                     pstmt.setString(2, epost);
                     pstmt.executeUpdate();
 
-                    try (ResultSet resultSet = pstmt.getGeneratedKeys()) {
-                        if (resultSet.next()) {
-                            personId = resultSet.getInt(1);
+                    try (ResultSet rs = pstmt.getGeneratedKeys()) {
+                        if (rs.next()) {
+                            personId = rs.getInt(1);
+                        } else {
+                            throw new SQLException("Kunne ikke opprette person.");
                         }
                     }
                 }
             }
 
-            String query = "INSERT INTO kurs_deltagere (kurs_id, id, registreringsdato, person_id) " +
-                    "VALUES (?, (SELECT MAX(id) + 1 FROM kurs_deltagere), CURDATE(), ?)";
-
-            try (PreparedStatement pstmt = connection.prepareStatement(query)) {
-                pstmt.setInt(1, kursId);
-                pstmt.setInt(2, personId);
-
-                pstmt.executeUpdate();
-                return true;
+            if (erAlleredePaameldt(kursId, personId)) {
+                throw new Exception("Du er allerede påmeldt dette kurset.");
             }
 
-        } catch (Exception e) {
-            System.err.println("Noe gikk galt med påmeldingen: " + e.getMessage());
-            e.printStackTrace();
-        }
+            String finnId = "SELECT COALESCE(MAX(id), 0) + 1 FROM kurs_deltagere";
+            int nesteId;
 
-        return false;
+            try (Statement stmt = connection.createStatement();
+                 ResultSet rs = stmt.executeQuery(finnId)) {
+
+                rs.next();
+                nesteId = rs.getInt(1);
+            }
+
+            String sql = "INSERT INTO kurs_deltagere " + "(kurs_id, id, registreringsdato, person_id) " + "VALUES (?, ?, CURDATE(), ?)";
+
+            try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+                pstmt.setInt(1, kursId);
+                pstmt.setInt(2, nesteId);
+                pstmt.setInt(3, personId);
+                pstmt.executeUpdate();
+            }
+
+            return true;
+
+        } catch (SQLException e) {
+            throw new Exception("Databasefeil ved påmelding.", e);
+        }
+    }
+
+    private boolean finnesKurs(int kursId) throws SQLException {
+        String sql = "SELECT * FROM kurs WHERE id = ?";
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, kursId);
+
+            ResultSet rs = pstmt.executeQuery();
+            return rs.next();
+        }
+    }
+
+    private int finnPersonId(String epost) throws SQLException {
+        String sql = "SELECT id FROM person WHERE epost = ?";
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, epost);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("id");
+            }
+
+            return 0;
+        }
+    }
+
+    private boolean erAlleredePaameldt(int kursId, int personId) throws SQLException {
+        String sql = "SELECT * FROM kurs_deltagere WHERE kurs_id = ? AND person_id = ?";
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, kursId);
+            pstmt.setInt(2, personId);
+
+            ResultSet rs = pstmt.executeQuery();
+            return rs.next();
+        }
     }
 
     @Override

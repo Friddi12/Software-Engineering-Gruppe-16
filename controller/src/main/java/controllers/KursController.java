@@ -88,22 +88,16 @@ public class KursController {
         try {
             PaameldingDTO dto = ctx.bodyAsClass(PaameldingDTO.class);
 
-            boolean resultat = kursRepository.addDeltaker(
-                    dto.getKursId(),
-                    dto.getNavn(),
-                    dto.getEpost()
-            );
-
-            if (resultat) {
-                ctx.status(201).result("Påmelding registrert");
-            } else {
-                ctx.status(400).result("Kunne ikke registrere påmelding");
+            if (dto == null) {
+                throw new Exception("Påmeldingsdata mangler.");
             }
 
+            kursRepository.addDeltaker(dto.getKursId(), dto.getNavn(), dto.getEpost());
+
+            ctx.status(201).result("Påmelding registrert!");
+
         } catch (Exception e) {
-            System.err.println("Noe gikk galt med påmeldingen: " + e.getMessage());
-            e.printStackTrace();
-            ctx.status(400).result("Ugyldig påmelding");
+            ctx.status(400).result(e.getMessage());
         }
     }
 
