@@ -85,7 +85,26 @@ public class KursController {
     }
 
     public void addDeltaker(Context ctx) {
+        try {
+            PaameldingDTO dto = ctx.bodyAsClass(PaameldingDTO.class);
 
+            boolean resultat = kursRepository.addDeltaker(
+                    dto.getKursId(),
+                    dto.getNavn(),
+                    dto.getEpost()
+            );
+
+            if (resultat) {
+                ctx.status(201).result("Påmelding registrert");
+            } else {
+                ctx.status(400).result("Kunne ikke registrere påmelding");
+            }
+
+        } catch (Exception e) {
+            System.err.println("Noe gikk galt med påmeldingen: " + e.getMessage());
+            e.printStackTrace();
+            ctx.status(400).result("Ugyldig påmelding");
+        }
     }
 
     public KursRepository getKursRepository() {return kursRepository;}

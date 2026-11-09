@@ -206,8 +206,55 @@ public class DatabaseRepository implements KursRepository {
     }
 
     @Override
-    public void addDeltaker(String navn, String ePost) {
+    public boolean addDeltaker(int kursId, String navn, String epost) {
+        try {
+            int personId = 0;
 
+            String finnPerson = "SELECT id FROM person WHERE epost = ?";
+
+            try (PreparedStatement pstmt = connection.prepareStatement(finnPerson)) {
+                pstmt.setString(1, epost);
+
+                try (ResultSet resultSet = pstmt.executeQuery()) {
+                    if (resultSet.next()) {
+                        personId = resultSet.getInt("id");
+                    }
+                }
+            }
+
+            if (personId == 0) {
+                String opprettPerson = "INSERT INTO person (navn, epost) VALUES (?, ?)";
+
+                try (PreparedStatement pstmt = connection.prepareStatement(opprettPerson, Statement.RETURN_GENERATED_KEYS)) {
+                    pstmt.setString(1, navn);
+                    pstmt.setString(2, epost);
+                    pstmt.executeUpdate();
+
+                    try (ResultSet resultSet = pstmt.getGeneratedKeys()) {
+                        if (resultSet.next()) {
+                            personId = resultSet.getInt(1);
+                        }
+                    }
+                }
+            }
+
+            String query = "INSERT INTO kurs_deltagere (kurs_id, id, registreringsdato, person_id) " +
+                    "VALUES (?, (SELECT MAX(id) + 1 FROM kurs_deltagere), CURDATE(), ?)";
+
+            try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+                pstmt.setInt(1, kursId);
+                pstmt.setInt(2, personId);
+
+                pstmt.executeUpdate();
+                return true;
+            }
+
+        } catch (Exception e) {
+            System.err.println("Noe gikk galt med påmeldingen: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
     @Override

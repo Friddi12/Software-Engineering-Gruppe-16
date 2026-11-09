@@ -5,7 +5,8 @@ public class PaameldingDTO {
     private String navn;
     private String epost;
 
-    public PaameldingDTO() {}
+    public PaameldingDTO() {
+    }
 
     public int getKursId() {
         return kursId;
