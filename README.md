@@ -14,17 +14,17 @@ Vi er 5 studenter fra Høgskolen i Østfold med erfaring fra to forskjellige lin
 
 ## STEG 1
 
-Lorem Ipsum
-hei du der
+Last ned prosjekt på maskin
 
 ## STEG 2
 
-Lorem Ipsum
+Bruk SQL filer til å sette opp SQL server i din lokale SQLWorkbench, bruk også insert fil til å fylle database med data
 
 ## STEG 3
 
-Lorem Ipsum
+Høyreklikk på frontend filen og velg "Open in integrated terminal" og skriv "NPM run dev"
+
 
 ## STEG 4
 
-Lorem Ipsum
+Kjør opp java backenden
