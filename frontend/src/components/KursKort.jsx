@@ -29,7 +29,7 @@ export default function KursKort({kurs}){
                     {/* inkludere tid her etter hvert*/}
                 
                 
-                <p className="kurskortLag">Arrangert av: {kurs.lag}</p>
+                {/* <p className="kurskortLag">Arrangert av: {kurs.lag}</p> */}
                 
                 {/* <div className="kurskortInfo">
                     <p className="kurskortLabel">Informasjon:</p>
@@ -38,7 +38,7 @@ export default function KursKort({kurs}){
                 
                 <div className="kurskortFooter">
                     <p>Kategori: {kurs.kategori}</p>
-                    <p>Ledige plasser: {kurs.plasser}</p>
+                    {/* <p>Ledige plasser: {kurs.plasser}</p> */}
                 </div>
             </div>
         </article>

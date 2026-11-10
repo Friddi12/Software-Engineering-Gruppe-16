@@ -4,9 +4,11 @@ import Hero from "../components/Hero"
 import { useEffect, useState } from 'react'
 
 export default function Homepage(){
+  //State som holder styr over kobling til databasen
   const [connectionStatus, setConnectionStatus] = useState("Testing connection...")
-  const [kursList, setKursList] = useState([])
+  const [kursList, setKursList] = useState([]) //Array til å holde data fra database
 
+  //API-kall sjekker om data blir hentet fra databasen, og henter alle kursene og lagrer de i en array
   useEffect(() => {
     fetch('http://localhost:8080/api/kurs')
       .then(response => {

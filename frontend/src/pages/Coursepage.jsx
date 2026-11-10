@@ -63,8 +63,8 @@ function correctDate(dateStr) {
             <p><strong>Kategori:</strong> {kurs.kategori}</p>
             <p><strong>Start:</strong> {correctDate(kurs.startTid)}</p>
             <p><strong>Slutt:</strong> {correctDate(kurs.sluttTid)}</p>
-            <p><strong>Arrangert av:</strong> {kurs.lag}</p>
-            <p><strong>Ledige plasser:</strong> {kurs.plasser}</p>
+            {/* <p><strong>Arrangert av:</strong> {kurs.lag}</p>
+            <p><strong>Ledige plasser:</strong> {kurs.plasser}</p> */}
             <button onClick={() => setShowSignUp(true)}>BLI MED</button>
             {showSignUp && (
                 <SignUp 
