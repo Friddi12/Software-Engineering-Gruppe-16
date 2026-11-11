@@ -7,7 +7,7 @@ export default function Nav(){
             <Link to="/Localhub">Finn Et Lag</Link>
             <Link to="/Searchpage">Se Alle Kurs</Link>
             <Link to="/Aboutus">Om Oss</Link>
-            <Link>Kontakt Oss</Link>
+            <Link to="/ContactUs">Kontakt Oss</Link>
             <Link>Test</Link>
         </nav>
     )

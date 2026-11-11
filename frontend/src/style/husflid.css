@@ -406,3 +406,37 @@ form {
     cursor: pointer;
     border-radius: 4px;
 }
+/*om oss side */
+.omOssSide{
+    text-align: center;
+}
+.omOss-overskrift{
+    text-align: center;
+    font-size: 35px;
+    
+}
+
+
+.fargedeGarnBilde{
+    width: 500px;
+    height: 300px;
+    object-fit:cover;
+    border-radius: 15px;
+}
+
+
+/* kontakt oss side*/ 
+
+.hovedkontaktSeksjon a{
+    color: black;
+}
+
+.hovedkontaktSeksjon h2{
+  font-size: 27px;
+  color: #355c75;
+  margin-bottom: 25px;
+}
+
+.kontaktkort a{
+    color:black
+}

@@ -71,7 +71,9 @@ export default function Footer(){
                 </div>
 
                 <div className="footerBunn">
-                    <img src="NH-logo-hvit.svg" alt="bunnLOGO" />
+                    <a href="#">
+                        <img src="NH-logo-hvit.svg" alt="bunnLOGO" />
+                    </a>
                 </div>
             </footer>
         )
