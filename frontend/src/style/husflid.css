@@ -56,6 +56,12 @@ nav{
 
 }
 
+.navLenker:hover{
+    text-decoration: underline;
+    text-decoration-color: #a2004f;
+    
+}
+
 .searchbutton{
     all: unset;
 
@@ -201,6 +207,11 @@ nav{
         
     }
 
+}
+
+.lokallagLenke:hover{
+    text-decoration: underline;
+    text-decoration-color: #a2004f;
 }
 
 /*searchpage */
@@ -527,6 +538,7 @@ padding: 0;
 .kontaktinfo a:hover{
     text-decoration: underline;
     color:#315b75;
+    text-decoration-color: #a2004f;
 }
 
 
@@ -596,6 +608,7 @@ padding: 0;
 
 .kontaktkort .kontaktinfo a:hover{
     text-decoration: underline;
+    text-decoration-color: #a2004f;
 }
 
 .kontaktkort .kontaktinfo a + a {

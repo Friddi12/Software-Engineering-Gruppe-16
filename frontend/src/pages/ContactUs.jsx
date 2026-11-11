@@ -41,7 +41,7 @@ export default function ContactUs(){
                 <span>VI HØRER GJERNE FRA DEG</span>
                 <h2>Kontakt oss</h2>
                 <p className="underTitteltekst">Har du spørsmål om husflid, kurs, medlemsskap eller våre aktiviteter? 
-                Vi hjelper deg gjerne!</p>
+                <br /> Vi hjelper deg gjerne!</p>
             </section>
             
             {/* hovedkontakt*/}
