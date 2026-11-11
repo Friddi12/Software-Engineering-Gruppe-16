@@ -378,15 +378,93 @@ padding: 0;
 
 /* kontakt oss side*/ 
 
-.hovedkontaktSeksjon a{
-    color: black;
+.kontaktSide{
+    background-color: #f4f9fc;
+    min-height: 100vh;
+    padding: 50px 8%;
+    color:#30495a;
 }
 
-.hovedkontaktSeksjon h2{
+/* overskrift */
+.kontaktheader {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 65px
+}
+
+.underTitteltekst{
+    color:#60879c; 
+    font-size: 15px;
+    letter-spacing: 1.5px;
+    font-weight: bold;
+}
+
+.kontaktheader h1{
+    font-size: 42px;
+    color: #355c75;
+    margin: 15px 0;
+}
+
+.kontaktheader p{
+    font-size: 17px;
+    line-height: 1.7;
+    color: #718795
+}
+
+/*hovedkontakt */
+
+.hovedkontaktSeksjon a{
+    color: black;
+    max-width: 0px;
+    margin: 0 auto 75px;
+}
+
+.hovedkontaktSeksjon h2, 
+.andrekontakter h2{
   font-size: 27px;
   color: #355c75;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
+
+.hovedkontakt-kort{
+    background-color: #d5eaf5;
+    border: 1px solid #c2deed;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 18px rgba(65, 110, 140, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 0.1px;
+}
+
+.hovedkontakt-kort h3{
+    font-size: 27px;
+    color: #315b75;
+    margin: 0;
+}
+
+.hovedkontakt-kort p{
+    color: #202c32;
+    line-height: 1.7;
+    font-weight: bold;
+}
+
+.hovedkontakt-kort a{
+    color: #426f89;
+    text-decoration: none;
+    width: fit-content;
+}
+
+.hovedkontakt-kort a:hover{
+    text-decoration: underline;
+}
+
+
+
+
+/* andre kontakter */
+
+
 
 .kontaktkort a{
     color:black

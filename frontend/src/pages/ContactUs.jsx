@@ -40,13 +40,14 @@ export default function ContactUs(){
             <section className="kontaktheader">
                 <span>VI HØRER GJERNE FRA DEG</span>
                 <h2>Kontakt oss</h2>
-                <p>Har du spørsmål om huslid, kurs, medlemsskap eller våre aktiviteter? 
+                <p className="underTitteltekst">Har du spørsmål om husflid, kurs, medlemsskap eller våre aktiviteter? 
                 Vi hjelper deg gjerne!</p>
             </section>
-
+            
+            {/* hovedkontakt*/}
             <section className="hovedkontaktSeksjon">
                 <h2>Hovedkontakt for Østfold Husflidslag</h2>
-                <article>
+                <article className="hovedkontakt-kort">
                     <p className="hovedkontakt-rolle">
                         {hovedkontakt.rolle}</p>
                     <h3>{hovedkontakt.navn}</h3>
@@ -56,6 +57,7 @@ export default function ContactUs(){
                 </article>
             </section>
 
+            {/* andre kontakter*/}
             <section className="andrekontakter">
                 <h2>Andre kontaktpersoner</h2>
 
