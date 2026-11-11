@@ -52,8 +52,10 @@ export default function ContactUs(){
                         {hovedkontakt.rolle}</p>
                     <h3>{hovedkontakt.navn}</h3>
                     <p>Ta kontakt på mail eller telefon:</p>
-                    <a href={`mailto:${hovedkontakt.email}`}>{hovedkontakt.email}</a>
-                    <p>{hovedkontakt.telefon}</p>
+                    <div className="kontaktinfo">
+                        <a href={`mailto:${hovedkontakt.email}`}>{hovedkontakt.email}</a>
+                        <a href={`tel:${hovedkontakt.telefon}`}>{hovedkontakt.telefon}</a>
+                    </div>
                 </article>
             </section>
 
@@ -71,10 +73,12 @@ export default function ContactUs(){
                             <p className="kontaktrolle">
                                 {kontakt.rolle}
                             </p>
-                            <a href={`mailto:${kontakt.email}`}>
-                                {kontakt.email}
-                            </a>
-                            <p>{kontakt.telefon}</p>
+                            <div className="kontaktinfo">
+                                <a href={`mailto:${kontakt.email}`}>
+                                    {kontakt.email}
+                                </a>
+                                <a href={`tel:${kontakt.telefon}`}>{kontakt.telefon}</a>
+                            </div>
                         </article>
                     ))}
                 </section>
