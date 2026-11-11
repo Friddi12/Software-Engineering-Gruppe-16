@@ -1,8 +1,9 @@
 package repository;
 
 import modules.Bruker;
+import modules.Deltaker;
 
 public interface BrukerRepository {
-    void signUp(Bruker bruker);
+    boolean signUp(Bruker bruker, Deltaker deltaker);
     Bruker login(String brukernavn);
 }

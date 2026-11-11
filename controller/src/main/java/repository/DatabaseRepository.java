@@ -7,7 +7,7 @@ import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class DatabaseRepository implements KursRepository, BrukerRepository, DeltakerRepository {
+public class DatabaseRepository implements KursRepository, BrukerRepository, DeltakerRepository, PersonRepository {
     private static final String url="jdbc:mysql://localhost:3306/softwareengineering";
     private static final String user="root";
     private static final String password="";
@@ -25,6 +25,7 @@ public class DatabaseRepository implements KursRepository, BrukerRepository, Del
         }
 
     }
+
     @Override
     public ArrayList<Kurs> getAllKurs() {
         ArrayList<Kurs> alleKurs = new ArrayList<>();
@@ -144,9 +145,53 @@ public class DatabaseRepository implements KursRepository, BrukerRepository, Del
 
     }
 
-    @Override
-    public void signUp(Bruker bruker) {
+    // Denne koden kjøres bare gjennom metoden under.
+    private int createPassord(String passord) {
+        String query = "INSERT INTO password(password_hash) VALUES(?)";
+        ArrayList<Integer> results = new ArrayList<>();
+        try (PreparedStatement pstmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+            pstmt.setString(1, passord);
 
+            pstmt.executeUpdate();
+
+            try (ResultSet resultSet = pstmt.getGeneratedKeys()) {
+                if(resultSet.next()) {
+                    return resultSet.getInt(1);
+                }
+            }
+
+        } catch (Exception e) {
+            System.err.println("Noe gikk galt med filtreringen: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    @Override
+    public boolean signUp(Bruker bruker, Deltaker deltaker) {
+        int passordId = createPassord(bruker.getHashPassord());
+        if(passordId==0) {
+            return false;
+        }
+        int roleId = 3;
+        String query2 = "INSERT INTO auth(username, password_id, person_id, role_id) VALUES(?,?,?,?)";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query2)) {
+            preparedStatement.setString(1, bruker.getBrukernavn());
+            preparedStatement.setInt(2, passordId);
+            preparedStatement.setInt(3, deltaker.getPersonId());
+            preparedStatement.setInt(4, roleId);
+
+            int rowsInserted = preparedStatement.executeUpdate();
+            if (rowsInserted > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.err.println("An error occured: " + e.getMessage());
+            e.printStackTrace();
+        }
+        // Hvis den ikke klarte å legge til radene i try blokken
+        return false;
     }
 
     @Override
@@ -180,7 +225,61 @@ public class DatabaseRepository implements KursRepository, BrukerRepository, Del
     }
 
     @Override
-    public void addDeltaker(Deltaker deltaker) {
+    public boolean addDeltaker(Kurs kurs, Deltaker deltaker) {
+        int personId = addPerson(deltaker.getFornavn() + " " + deltaker.getEtternavn(), deltaker.getEpost());
+        if (personId == -1){
+            return false;
+        }
+        else {
+            String query = "INSERT INTO kurs_deltagere(id, registreringsdato, person_id) VALUES(?,?,?)";
 
+            try(PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setInt(1, kurs.getId());
+                preparedStatement.setObject(2, deltaker.getRegistreringsdato());
+                preparedStatement.setInt(3, personId);
+
+                int insertedRows = preparedStatement.executeUpdate();
+
+                if(insertedRows>0) {
+                    System.out.println("Added row/s successfully!");
+                    return true;
+                }
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int addPerson(String navn, String epost) {
+        String query = "INSERT INTO person(navn, epost) VALUES(?,?)";
+
+        // Legger til ny rad for den nye personen
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+            preparedStatement.setString(1, navn);
+            preparedStatement.setString(2, epost);
+
+            int insertedRows = preparedStatement.executeUpdate();
+
+            if(insertedRows > 0) {
+                System.out.println("Added row successfully!");
+            }
+
+            try (ResultSet resultSet = preparedStatement.getGeneratedKeys()) {
+                if(resultSet.next()) {
+                    return resultSet.getInt(1);
+                }
+                else {
+                    return -1;
+                }
+            }
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+        // Henter ut id-en til denne personen som vi nettop lagt til
+        return -1;
     }
 }

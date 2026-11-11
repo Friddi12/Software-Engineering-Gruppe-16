@@ -1,5 +1,6 @@
 package controllers;
 
+import dto.DeltakerDTO;
 import modules.*;
 import dto.KursDTO;
 
@@ -74,7 +75,13 @@ public class KursController {
     }
 
     public void addDeltaker(Context ctx) {
+        KursDTO kurs_dto = ctx.bodyAsClass(KursDTO.class);
+        DeltakerDTO  deltaker_dto = ctx.bodyAsClass(DeltakerDTO.class);
 
+
+
+        ctx.status(201).json(kurs_dto);
+        ctx.status(201).json(deltaker_dto);
     }
 
     public KursRepository getKursRepository() {return kursRepository;}

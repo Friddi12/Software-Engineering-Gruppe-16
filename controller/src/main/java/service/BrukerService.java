@@ -59,6 +59,6 @@ public class BrukerService {
         deltakerRepository.createDeltaker(nyDeltaker);
 
         // Bruker BrukerRepository her for å lagre brukeren
-        brukerRepository.signUp(nyBruker);
+        brukerRepository.signUp(nyBruker, nyDeltaker);
     }
 }

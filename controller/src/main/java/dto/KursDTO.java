@@ -4,6 +4,7 @@ import modules.Kategori;
 import java.time.LocalDateTime;
 
 public class KursDTO {
+    private int id;
     private String navn;
     private LocalDateTime startTid;
     private LocalDateTime sluttTid;
@@ -15,7 +16,8 @@ public class KursDTO {
     // Nødvendig for at Jackson/Javalin skal kunne opprette DTO-en fra JSON:
     public KursDTO() {}
 
-    public KursDTO(String navn, LocalDateTime startTid, LocalDateTime sluttTid, String beskrivelse, Kategori kategori, String sted, String adresse) {
+    public KursDTO(int id, String navn, LocalDateTime startTid, LocalDateTime sluttTid, String beskrivelse, Kategori kategori, String sted, String adresse) {
+        setId(id);
         setNavn(navn);
         setStartTid(startTid);
         setSluttTid(sluttTid);
@@ -45,4 +47,7 @@ public class KursDTO {
 
     public String getAdresse() { return adresse; }
     public void setAdresse(String adresse) { this.adresse = adresse; }
+
+    public int getId() {return id;}
+    public void setId(int id) {this.id = id;}
 }
