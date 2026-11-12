@@ -6,6 +6,7 @@ export default function Aboutus(){
     return(
         <div className="omOssSide">
             <section>
+                <h2>hei</h2>
                 <h2 className="omOss-overskrift">Om Oss</h2>
                 <p>Norges Husflidslag arbeider for å fremme tradisjonelt håndverk. 
                 Siden 1910 har organisasjonen arbeidet for å styrke tradisjonelle håndverkstradisjoner, 
