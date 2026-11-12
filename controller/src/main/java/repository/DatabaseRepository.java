@@ -7,7 +7,7 @@ import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class DatabaseRepository implements KursRepository, BrukerRepository, DeltakerRepository, PersonRepository {
+public class DatabaseRepository implements KursRepository, BrukerRepository, DeltakerRepository{
     private static final String url="jdbc:mysql://localhost:3306/softwareengineering";
     private static final String user="root";
     private static final String password="";
@@ -262,11 +262,6 @@ public class DatabaseRepository implements KursRepository, BrukerRepository, Del
         return bruker;
     }
 
-    @Override
-    public void createDeltaker(Deltaker deltaker) {
-
-    }
-
     /*@Override
     public boolean addDeltaker(Kurs kurs, Deltaker deltaker) {
         int personId = addPerson(deltaker.getFornavn() + " " + deltaker.getEtternavn(), deltaker.getEpost());
@@ -402,10 +397,5 @@ public class DatabaseRepository implements KursRepository, BrukerRepository, Del
             ResultSet rs = pstmt.executeQuery();
             return rs.next();
         }
-    }
-
-    @Override
-    public int addPerson(String navn, String epost) {
-        return 0;
     }
 }
