@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class DatabaseRepository implements KursRepository, BrukerRepository, DeltakerRepository{
     private static final String url="jdbc:mysql://localhost:3306/softwareengineering";
     private static final String user="root";
-    private static final String password="";
+    private static final String password="1234";
     Connection connection;
 
     public DatabaseRepository() {
