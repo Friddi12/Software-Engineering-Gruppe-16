@@ -1,0 +1,52 @@
+services:
+  database:
+    image: mysql:8.0
+    container_name: prosjekt-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "${DB_PORT}:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./database/CREATE-TABLES.sql:/docker-entrypoint-initdb.d/01_CREATE-TABLES.sql:ro
+      - ./database/INSTERT-INTO.sql:/docker-entrypoint-initdb.d/02_INSTERT-INTO.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u$$MYSQL_USER -p$$MYSQL_PASSWORD || exit 1"]
+      interval: 3s
+      timeout: 3s
+      retries: 15
+      start_period: 10s
+
+  backend:
+    build:
+      context: ./controller
+      dockerfile: Dockerfile
+    container_name: prosjekt-backend
+    restart: always
+    environment:
+      # Sender verdiene videre som miljøvariabler inn til Java-prosessen:
+      DB_URL: jdbc:mysql://${DB_HOST}:3306/${DB_NAME}?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "8080:8080"
+    depends_on:
+      database:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: prosjekt-frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+volumes:
+  db_data:

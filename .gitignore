@@ -214,3 +214,6 @@ thumb
 sketch
 
 # End of https://www.toptal.com/developers/gitignore/api/react,python,java
+.idea/dataSources.local.xml
+.idea/dataSources/data_sources_history.xml
+.idea/workspace.xml

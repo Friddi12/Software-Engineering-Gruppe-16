@@ -21,6 +21,7 @@ header{
 .kursliste {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 26rem), 1fr));
+    justify-content: center;
     gap: 2rem;
 
     /* Fjerner standard punktmerking og innrykk fra <ul> */
@@ -31,29 +32,36 @@ header{
 
 nav{
     display: flex;
+    flex: 1;
     flex-direction: row;
     align-items: center;
-    gap: 1rem;
-    justify-content: space-between;
-    width: 100%;
-    height: 100%;
+    gap: 0.25rem;
+    justify-content: flex-end;
     padding-left: 1rem;
 
     a{
-        color: black;
-        border: 3px solid black;
+        position: relative;
+        padding: 0.6rem 1rem;
+
+        color: #1d1d1e;
+        font-size: 1.1rem;
+        font-weight: 500;
         text-decoration: none;
-        background-color: rgb(211, 215, 214);
+        letter-spacing: 0.02rem;
         height: 70%;
 
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
+        border-radius: 2px;
     }
 
 }
+
+.navLenker:hover{
+    text-decoration: underline;
+    color: #a2004f;
+    font-weight: bold;    
+}
+
+
 
 .searchbutton{
     all: unset;
@@ -73,7 +81,7 @@ nav{
     height: 300px;
     margin: 0.2rem auto;
 
-    background-image: url('./stockbg1.jpg');
+    background-image: url('/stockbg1.jpg');
     background-position: center;
     background-size: cover;
 
@@ -108,66 +116,94 @@ nav{
 }
 
 /* Karusell CSS */
-#caro-wraper{
+#caro-wraper {
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    width: 100%;
 }
 
-.carousel{
-  position: relative;
-  overflow: hidden;
-
-  width: 99%;
-  padding: 1rem 0; 
-  
-  background-color: #f4f4f4;
-  border: black solid 2px;
+.carousel-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 99%;
 }
 
-.carousel-track{
+.carousel {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding: 1rem 0; 
+    background-color: #f4f4f4;
+    border: black solid 2px;
+}
+
+.carousel-track {
     display: flex;
     gap: 1.5rem;
-
     width: max-content;
-
     list-style: none;
-    padding: 0;
+    /*padding-right = gap sånn at -50% i animasjonen blir én runde (ingen hakk) */
+    padding: 0 1.5rem 0 0;
+    margin: 0;
 
 }
 
-
-/* Midlertidige animasjoner til karusellen */
-.marquee {
-    animation: scroll 60s linear infinite;
+.carousel-track::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
 }
 
-.marquee:hover {
-    animation-play-state: paused;
+/* Carousel Navigation Buttons */
+.carousel-btn {
+    position: absolute;
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid black;
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-weight: bold;
 }
 
-@keyframes scroll {
-    0% {
-        transform: translateX(0);
+.carousel-btn:hover {
+    background-color: white;
+}
+
+.prev-btn {
+    left: -10px;
+}
+
+.next-btn {
+    right: -10px;
+}
+/* Local box på forside */
+#local-box{
+    ul{
+        display: flex;
+        flex-direction: column;
+        border: solid black 3px;
+        width: max-content;
+        li{
+            border: solid grey 2px;
+            width: 100%;
+        }
     }
-    100% {
-        transform: translateX(-50%);
-    }
+
 }
-/* Slutt på animasjoner */
+
 
 /* Start på lokalhub og sider */
-
 #local-container{
     list-style: none;
 
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    gap: 25px;
 
-    margin: 1rem;
-    padding: 1rem;    
+
+    margin: 0 auto;
+    padding: 0;    
 
 }
 
@@ -175,15 +211,68 @@ nav{
     margin: 2rem;
     padding: 1rem;
 
-    min-width: 260px;
+    /* fast bredde, lik str uansett */
+    width:18rem;
+    box-sizing: border-box;
 
-    border: black solid 2px;
-    background-color: #e0d7d7;
+    display:flex; 
+    flex-direction: column;
+    overflow: hidden;
 
+    background-color: #d5eaf5;
+    border: 1px solid #dceaf1;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(65,110,140,0.05);
     a{
         text-decoration: none;
         color: black;
     }
+}
+
+.local-card:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 8px 22px rgba(65, 110, 140, 0.12);
+}
+
+.local-card-bilde{
+    display: block;
+    width: 100%;
+    height: 11rem;
+    object-fit: cover;
+    margin-bottom: 0.75rem;
+}
+
+.lokallagLenke{
+    margin-top: auto;
+    padding: 5px 2px;
+
+    background-color: #d5eaf5;
+    
+    color: #315b75;
+
+    font-weight: 600;
+    text-decoration: none;
+
+}
+
+.lokallagLenke:hover{
+    text-decoration: underline;
+    color: #a2004f;
+
+}
+
+.lokalhub-side{
+    background-color: #f4f9fc;
+    min-height:100vh;
+    padding: 50px 8%;
+    color: #30495a;
+}
+
+.lokalhub-header{
+    font-size: 23px;
+    color: #355c75;
+    margin: 15px 0;
+    
 }
 
 #local-page{
@@ -199,6 +288,18 @@ nav{
     }
 
 }
+
+@media (max-width: 650px){
+    .lokalhubSide{
+        padding: 35px 5%;
+    }
+
+    .lokalhubHeader h2{
+        font-size: 32px;
+    }
+}
+
+
 
 /*searchpage */
 .searchgruppe{
@@ -231,7 +332,7 @@ nav{
     font-size: 1rem;
     font-weight: 600;
     color: white;
-    background-color: #4a6d8c; /* mørk nok til at hvit tekst er lesbar */
+    background-color: #4a6d8c; 
     border: 2px solid #4a6d8c;
     border-radius: 0 0.5rem 0.5rem 0;
     cursor: pointer;
@@ -250,16 +351,20 @@ nav{
     white-space: nowrap;
 }
 
-/* Kurskort
-*/
+/* Kurskort */
 
 .kurskort{
     position: relative;
     isolation: isolate;
     display: flex;
 
+    min-width: 28rem; 
+    width: 28rem;
+
     min-height: 20rem;
     height: 100%;
+    width: 100%;
+    box-sizing: border-box;
     border-radius: 0.75rem;
     overflow: hidden;
 
@@ -280,28 +385,54 @@ nav{
 /* Panelet med tekst, innrykket fra kanten slik at bildet synes rundt */
 .kurskortPanel {
     flex: 1;
+    min-width: 0;
+    min-height: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.5rem;
 
-    margin: 1.5rem;
+    margin: 1.25rem;
     padding: 1rem;
 
     background-color: rgba(255, 255, 255, 0.45);
     color: #1a1a1a;
 }
 
+.kurskortPanel p{
+    margin: 0;
+}
+
 .kurskortTitle {
     margin: 0;
     font-size: 1.25rem;
+    line-height: 1.3;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .kurskortLag {
     margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.kurskortInfo p {
-    margin: 0;
+.kurskortInfo {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.kurskortBeskrivelse{
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .kurskortLabel {
@@ -311,6 +442,7 @@ nav{
 /* margin-top: auto skyver bunnteksten helt ned, uansett hvor lang beskrivelsen er */
 .kurskortFooter {
     margin-top: auto;
+    flex-shrink: 0;
 }
 
 .kurskortFooter p {
@@ -318,8 +450,342 @@ nav{
 }
 
 /* Strekker lenken over hele kortet slik at hele kortet er klikkbart */
-.kurskortLink::after {
-    content: "";
-    position: absolute;
-    inset: 0;
+
+
+.kurskortLenke{
+    display: block;
+    flex: 0 0 auto;
+    width: var(- -kort-bredde);
+    height: var(- -kort-hoyde);
+
+    text-decoration: none;
+    font-weight: normal;
+}
+
+
+/* footer */
+.footer{
+    background-color: #545561;
+    color: white;
+    font-family: "Breuer Text", Arial, sans-serif;
+    text-align: center;
+}
+
+.footerKolonner{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    gap: 2rem;
+
+    max-width: 75rem;
+    margin: 0 auto;
+
+
+}
+
+a{
+    color:white;
+    font-weight: bold;
+
+}
+
+ul{
+list-style-type: none;
+padding: 0;
+padding: 0;
+    }
+
+
+/* pop-up boks */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background-color: white;
+    padding: 25px;
+    border-radius: 8px;
+    width: 350px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.popup-input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+    box-sizing: border-box;
+}
+
+.popup-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btn-submit {
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+/*om oss side */
+.omOssSide{
+    text-align: center;
+}
+.omOss-overskrift{
+    text-align: center;
+    font-size: 42px;
+    color:#355c75;
+    margin: 50px 0;
+}
+.omOss-deloverskrift{
+    color: #355c75;
+    
+}
+
+.fargedeGarnBilde{
+    width: 500px;
+    height: 300px;
+    object-fit:cover;
+    border-radius: 15px;
+}
+
+
+/* kontakt oss side*/ 
+
+.kontaktSide{
+    background-color: #ffffff;
+    min-height: 100vh;
+    padding: 50px 8%;
+    color:#30495a;
+}
+
+/* overskrift */
+.kontaktheader {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 50px
+}
+
+.kontaktheader span{
+    color: #0876b1;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+}
+
+.underTitteltekst{
+    color:#196994; 
+    font-size: 15px;
+    letter-spacing: 1.5px;
+    font-weight: bold;
+}
+
+.kontaktheader h2{
+    font-size: 42px;
+    color: #355c75;
+    margin: 15px 0;
+}
+
+
+
+/*hovedkontakt */
+
+.hovedkontaktSeksjon h2, 
+.andrekontakter h2{
+  font-size: 27px;
+  color: #355c75;
+  margin-bottom: 20px;
+}
+
+.hovedkontakt-kort{
+    max-width: 700px;
+    margin: 0 auto;
+    background-color: #d5eaf5;
+    border: 1px solid #c2deed;
+    border-radius: 15px;
+    padding: 25px 30px;
+    box-shadow: 0 5px 18px rgba(65, 110, 140, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.hovedkontakt-kort h3{
+    font-size: 25px;
+    color: #315b75;
+    margin: 0;
+}
+
+.hovedkontakt-kort p{
+    color: #202c32;
+    line-height: 1.7;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.hovedkontakt-kort a{
+    color: #426f89;
+    text-decoration: none;
+    width: fit-content;
+}
+
+.hovedkontakt-kort a:hover{
+    text-decoration: underline;
+}
+
+/* kontaktinfo-del for både hovedkontakt og andre kontakter */
+
+.kontaktinfo{
+    background-color: white;
+    border: 1px solid #e0edf3;
+    border-radius: 12px;
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 5px;
+}
+
+.hovedkontakt-kort .kontaktinfo a+a{
+    border-top: 1px solid #dceaf1;
+    padding-top: 12px;
+    width:100%;
+}
+
+
+.kontaktinfo a{
+    color: #426f89;
+    text-decoration: none;
+    font-size: 15px;
+    width: fit-content;
+    margin: 0;
+}
+.kontaktinfo a:hover{
+    text-decoration: underline;
+    color:#315b75;
+    text-decoration-color: #a2004f;
+}
+
+
+
+/* andre kontakter */
+
+.andrekontakter{
+    max-width: 1100px;
+    margin: 0 auto 75px
+}
+
+.andrekontakter-beskrivelse{
+    color: #718795;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.kontaktGrid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap:25px;
+}
+
+.kontaktkort {
+    background-color: #eaf4f9;
+    border: 1px solid #dceaf1;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(65, 110, 140, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.kontaktkort:hover{
+    transform: translateY(-4px);
+}
+
+.kontaktkort h3{
+    font-size: 21px;
+    color: #355c75;
+    margin: 0;
+}
+
+.kontaktrolle{
+    color: #729db5;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.kontaktkort .kontaktinfo {
+    background-color: #d5eaf5;
+    border: 1px solid #c2deed;
+    border-radius: 10px;
+    padding: 15px 18px;
+    margin-top: 5px;
+}
+
+.kontaktkort .kontaktinfo a{
+    color: #315b75;
+    text-decoration: none;
+    font-size: 14px;
+    width: 100%;
+    margin: 0;
+}
+
+.kontaktkort .kontaktinfo a:hover{
+    text-decoration: underline;
+    text-decoration-color: #a2004f;
+}
+
+.kontaktkort .kontaktinfo a + a {
+    border-top: 1px solid white;
+    padding-top: 11px;
+}
+
+.hovedkontaktSeksjon,
+.andrekontakter{
+    max-width: 1100px;
+    margin: 0 auto 60px
+}
+
+
+
+/*mobiltilpasning*/
+@media (max-width: 650px){
+    .kontaktSide{
+        padding: 35px 5%;
+    }
+
+    .kontaktheader h2{
+        font-size: 32px;
+    }
+
+    .hovedkontakt-kort{
+        padding: 25px;
+    }
+
+    .kontaktGrid{
+        grid-template-columns: 1fr;
+    }
+
+    .hovedkontaktSeksjon h2, 
+    .andrekontakter h2{
+        font-size: 23px;
+    }
 }

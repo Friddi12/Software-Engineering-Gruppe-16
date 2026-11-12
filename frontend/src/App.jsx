@@ -11,6 +11,9 @@ import Homepage from './pages/Homepage.jsx'
 import Localhub from './pages/Localhub.jsx'
 import Localpage from './pages/Localpage.jsx'
 import Aboutus from './pages/Aboutus.jsx'
+import Footer from './components/Footer.jsx'
+import Coursepage from './pages/Coursepage.jsx'
+import ContactUs from './pages/ContactUs.jsx'
 
 function App() {
 
@@ -21,20 +24,26 @@ function App() {
   }
 
   return (
+    <div>
     
     <main>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} /> 
+        <Route path="/" element={<Homepage />} /> 
         <Route path="/Searchpage" element={<Searchpage />} />
         <Route path="/Localhub" element={<Localhub />} />
         <Route path="/Localhub/:slug" element={<Localpage />} />
         <Route path='/Aboutus' element={<Aboutus />} />
+        <Route path='/kurs/:id' element={<Coursepage />} />
+        <Route path='/ContactUs' element={<ContactUs />}/>
       </Routes> 
+      <Footer />
+      
     </main>
+    </div>
   )
 
-  //burde ha homepage istedenfor home?
+  
 }
 
 export default App
