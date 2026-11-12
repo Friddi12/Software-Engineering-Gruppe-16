@@ -1,5 +1,5 @@
 package repository;
-
+/*
 import modules.*;
 
 import java.time.LocalDateTime;
@@ -40,6 +40,11 @@ public class MidlertidigKursRepository implements KursRepository {
                 Kategori.SYING,
                 "Sarpsborg"
         ));
+    }
+
+    @Override
+    public ArrayList<Kurs> getAllKurs() {
+        return null;
     }
 
     @Override
@@ -84,10 +89,5 @@ public class MidlertidigKursRepository implements KursRepository {
     public boolean login(String brukernavn, String passord) {
         return false;
     }
-
-    @Override
-    public ArrayList<Kurs> getAllKurs() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllKurs'");
-    }
 }
+*/

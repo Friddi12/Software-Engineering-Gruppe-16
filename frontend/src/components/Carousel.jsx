@@ -1,6 +1,10 @@
 import KursKort from "./KursKort.jsx"
 import kurs from "../mockData/Courses.jsx"
 
+import { useEffect, useState } from "react"
+
+
+
 
 export default function Carousel(){
 
