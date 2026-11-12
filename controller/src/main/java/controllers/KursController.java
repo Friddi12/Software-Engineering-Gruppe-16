@@ -33,6 +33,30 @@ public class KursController {
         }
     }
 
+    public void filtrerKurs(Context ctx) {
+        String sted = ctx.queryParam("sted");
+        String kategoriParam = ctx.queryParam("kategori");
+
+        try {
+            if (sted == null || sted.isBlank()) {
+                throw new Exception("Sted må oppgis.");
+            }
+
+            if (kategoriParam == null || kategoriParam.isBlank()) {
+                throw new Exception("Kategori må oppgis.");
+            }
+
+            Kategori kategori = Kategori.valueOf(kategoriParam.trim().toUpperCase());
+
+            ctx.json(kursRepository.filtrerKurs(sted.trim(), kategori));
+
+        } catch (IllegalArgumentException e) {
+            ctx.status(400).result("Ugyldig kategori: " + kategoriParam);
+        } catch (Exception e) {
+            ctx.status(400).result(e.getMessage());
+        }
+    }
+
     public void getAllKurs(Context ctx) {
         try {
             // Assumes your repository has a method to get all courses.
@@ -85,7 +109,20 @@ public class KursController {
     }
 
     public void addDeltaker(Context ctx) {
+        try {
+            PaameldingDTO dto = ctx.bodyAsClass(PaameldingDTO.class);
 
+            if (dto == null) {
+                throw new Exception("Påmeldingsdata mangler.");
+            }
+
+            kursRepository.addDeltaker(dto.getKursId(), dto.getNavn(), dto.getEpost());
+
+            ctx.status(201).result("Påmelding registrert!");
+
+        } catch (Exception e) {
+            ctx.status(400).result(e.getMessage());
+        }
     }
 
     public KursRepository getKursRepository() {return kursRepository;}

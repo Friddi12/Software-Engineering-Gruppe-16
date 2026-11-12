@@ -23,6 +23,7 @@ public class App {
         // --- API-ruter
         app.get("/api/kurs", kursController::getAllKurs);
         app.get("/api/kurs/search", kursController::search);
+        app.get("/api/kurs/filter", kursController::filtrerKurs);
         app.post("/api/kurs/add", kursController::addKurs);
         app.delete("/api/kurs/{id}", kursController::remove);
         app.post("/api/deltaker", kursController::addDeltaker);
