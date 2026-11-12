@@ -4,7 +4,6 @@ import './style/husflid.css'
 
 import { Route, Routes } from 'react-router-dom'
 
-
 import Header from './components/Header.jsx'
 import Hero from './components/Hero.jsx'
 import Searchpage from './pages/Searchpage.jsx'
