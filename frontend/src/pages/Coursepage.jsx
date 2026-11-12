@@ -57,6 +57,7 @@ function correctDate(dateStr) {
 
     return (
         <div className="course-page" style={{ padding: '20px' }}>
+            <h2>Kursdetaljer</h2>
             <h1>{kurs.navn}</h1>
             <p><strong>Beskrivelse:</strong> {kurs.beskrivelse}</p>
             <p><strong>Sted:</strong> {kurs.sted}</p>

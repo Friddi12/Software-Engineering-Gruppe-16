@@ -4,10 +4,10 @@ export default function Nav(){
 
     return(
         <nav>
-            <Link to="/Localhub">Finn Et Lag</Link>
-            <Link to="/Searchpage">Se Alle Kurs</Link>
-            <Link to="/Aboutus">Om Oss</Link>
-            <Link to="/ContactUs">Kontakt Oss</Link>
+            <Link to="/Localhub" className="navLenker">Finn Et Lag</Link>
+            <Link to="/Searchpage" className="navLenker">Se Alle Kurs</Link>
+            <Link to="/Aboutus" className="navLenker">Om Oss</Link>
+            <Link to="/ContactUs" className="navLenker">Kontakt Oss</Link>
             <Link>Test</Link>
         </nav>
     )

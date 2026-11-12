@@ -53,6 +53,7 @@ export default function Footer(){
                             <li> <Link to="/">Hjem</Link> </li>
                             <li><Link to="/Searchpage">Se Alle Kurs</Link></li>
                             <li><Link to="/Aboutus">Om Oss</Link></li>
+                            <li><Link to="/ContactUs">Kontakt Oss</Link></li>
                         </ul>
                     </section>
 

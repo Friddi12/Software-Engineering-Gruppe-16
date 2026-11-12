@@ -40,22 +40,26 @@ export default function ContactUs(){
             <section className="kontaktheader">
                 <span>VI HØRER GJERNE FRA DEG</span>
                 <h2>Kontakt oss</h2>
-                <p>Har du spørsmål om huslid, kurs, medlemsskap eller våre aktiviteter? 
-                Vi hjelper deg gjerne!</p>
+                <p className="underTitteltekst">Har du spørsmål om husflid, kurs, medlemsskap eller våre aktiviteter? 
+                <br /> Vi hjelper deg gjerne!</p>
             </section>
-
+            
+            {/* hovedkontakt*/}
             <section className="hovedkontaktSeksjon">
                 <h2>Hovedkontakt for Østfold Husflidslag</h2>
-                <article>
+                <article className="hovedkontakt-kort">
                     <p className="hovedkontakt-rolle">
                         {hovedkontakt.rolle}</p>
                     <h3>{hovedkontakt.navn}</h3>
                     <p>Ta kontakt på mail eller telefon:</p>
-                    <a href={`mailto:${hovedkontakt.email}`}>{hovedkontakt.email}</a>
-                    <p>{hovedkontakt.telefon}</p>
+                    <div className="kontaktinfo">
+                        <a href={`mailto:${hovedkontakt.email}`}>{hovedkontakt.email}</a>
+                        <a href={`tel:${hovedkontakt.telefon}`}>{hovedkontakt.telefon}</a>
+                    </div>
                 </article>
             </section>
 
+            {/* andre kontakter*/}
             <section className="andrekontakter">
                 <h2>Andre kontaktpersoner</h2>
 
@@ -69,10 +73,12 @@ export default function ContactUs(){
                             <p className="kontaktrolle">
                                 {kontakt.rolle}
                             </p>
-                            <a href={`mailto:${kontakt.email}`}>
-                                {kontakt.email}
-                            </a>
-                            <p>{kontakt.telefon}</p>
+                            <div className="kontaktinfo">
+                                <a href={`mailto:${kontakt.email}`}>
+                                    {kontakt.email}
+                                </a>
+                                <a href={`tel:${kontakt.telefon}`}>{kontakt.telefon}</a>
+                            </div>
                         </article>
                     ))}
                 </section>
