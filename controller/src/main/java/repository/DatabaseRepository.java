@@ -184,8 +184,44 @@ public class DatabaseRepository implements KursRepository, BrukerRepository, Del
     }
 
     @Override
-    public void removeKurs(int id) {
+    public void removeKurs(int id) throws Exception {
+        String sql = "SELECT p.epost FROM kurs_deltagere kd " + "INNER JOIN person p ON kd.person_id = p.id " + "WHERE kd.kurs_id = ?";
+        if (id <= 0) {
+            throw new Exception("Ugyldig kurs-ID.");
+        }
 
+        try {
+            ArrayList<String> eposter = new ArrayList<>();
+
+            try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+                pstmt.setInt(1, id);
+
+                try (ResultSet rs = pstmt.executeQuery()) {
+                    while (rs.next()) {
+                        eposter.add(rs.getString("epost"));
+                    }
+                }
+            }
+
+            for (String epost : eposter) {
+                removeDeltaker(id, epost);
+            }
+
+            String slettKurs = "DELETE FROM kurs WHERE id = ?";
+
+            try (PreparedStatement pstmt = connection.prepareStatement(slettKurs)) {
+                pstmt.setInt(1, id);
+
+                int rowsDeleted = pstmt.executeUpdate();
+
+                if (rowsDeleted == 0) {
+                    throw new SQLException("Fant ikke kurset.");
+                }
+            }
+
+        } catch (Exception e) {
+            throw new Exception("Kunne ikke slette kurset.", e);
+        }
     }
 
     // Denne koden kjøres bare gjennom metoden under.
@@ -229,6 +265,7 @@ public class DatabaseRepository implements KursRepository, BrukerRepository, Del
             if (rowsInserted > 0) {
                 return true;
             }
+
         } catch (Exception e) {
             System.err.println("An error occured: " + e.getMessage());
             e.printStackTrace();
@@ -357,6 +394,35 @@ public class DatabaseRepository implements KursRepository, BrukerRepository, Del
 
         } catch (SQLException e) {
             throw new Exception("Databasefeil ved påmelding.", e);
+        }
+    }
+
+    @Override
+    public boolean removeDeltaker(int kursId, String epost) throws Exception {
+        if (kursId <= 0) {
+            throw new Exception("Ugyldig kurs-ID.");
+        }
+
+        if (epost == null || epost.isBlank()) {
+            throw new Exception("E-post kan ikke være tom.");
+        }
+
+        String sql = "DELETE kd FROM kurs_deltagere kd " + "INNER JOIN person p ON kd.person_id = p.id " + "WHERE kd.kurs_id = ? AND LOWER(p.epost) = ?";
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, kursId);
+            pstmt.setString(2, epost.trim().toLowerCase());
+
+            int rowsDeleted = pstmt.executeUpdate();
+
+            if (rowsDeleted == 0) {
+                throw new Exception("Fant ingen påmelding for denne deltakeren.");
+            }
+
+            return true;
+
+        } catch (SQLException e) {
+            throw new Exception("Databasefeil ved avmelding.", e);
         }
     }
 

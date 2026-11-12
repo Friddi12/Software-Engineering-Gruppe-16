@@ -90,12 +90,28 @@ public class KursController {
     public void remove(Context ctx) {
         try {
             int id = Integer.parseInt(ctx.pathParam("id"));
-            kursRepository.removeKurs(id); //?
-            ctx.status(204); // 204 No Content (vellykket sletting uten returdata)
-        } catch (NumberFormatException e) {
-            ctx.status(400).result("Invalid ID format");
+
+            kursRepository.removeKurs(id);
+
+            ctx.status(204);
+
         } catch (Exception e) {
-            ctx.status(400).result("Could not remove course: " + e.getMessage());
+            ctx.status(400).result(e.getMessage());
+        }
+    }
+
+    // DELETE /api/kurs/{kursId}/deltakere
+    public void removeDeltaker(Context ctx) {
+        try {
+            int kursId = Integer.parseInt(ctx.pathParam("kursId"));
+            String epost = ctx.queryParam("epost");
+
+            kursRepository.removeDeltaker(kursId, epost);
+
+            ctx.status(204);
+
+        } catch (Exception e) {
+            ctx.status(400).result(e.getMessage());
         }
     }
 

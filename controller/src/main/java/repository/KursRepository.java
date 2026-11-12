@@ -10,7 +10,8 @@ public interface KursRepository {
     ArrayList<Kurs> getAllKurs();
     ArrayList<Kurs> searchKurs(String navn, Kategori kategori, String sted);
     void addKurs(Kurs kurs);
-    void removeKurs(int id);
+    void removeKurs(int id) throws Exception;
     boolean addDeltaker(int kursId, String navn, String ePost) throws Exception;
+    boolean removeDeltaker(int kursId, String epost) throws Exception;
     ArrayList<Kurs> filtrerKurs(String sted, Kategori kategori);
 }

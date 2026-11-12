@@ -29,8 +29,9 @@ public class App {
         app.get("/api/kurs/search", kursController::search);
         app.get("/api/kurs/filter", kursController::filtrerKurs);
         app.post("/api/kurs/add", kursController::addKurs);
-        app.delete("/api/kurs/delete", kursController::remove);
+        app.delete("/api/kurs/{id}", kursController::remove);
         app.post("/api/deltaker", kursController::addDeltaker);
+        app.delete("/api/kurs/{kursId}/deltakere", kursController::removeDeltaker);
         app.get("/api/bruker/login", brukerController::login); // login gjelder både deltakere, kursansvarlig og admin
         app.post("/api/bruker/signup", brukerController::signUp);  // registrering av bruker tenker jeg gjelder bare deltakere, 
                                                                         // mens kursansvarlig og admin kan lages direkte i databasen
