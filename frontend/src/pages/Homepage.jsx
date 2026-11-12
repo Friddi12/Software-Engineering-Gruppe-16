@@ -2,6 +2,7 @@
 import Carousel from "../components/Carousel"
 import Hero from "../components/Hero"
 import { useEffect, useState } from 'react'
+import LocalBox from "../components/LocalBox"
 
 export default function Homepage(){
   //State som holder styr over kobling til databasen
@@ -35,6 +36,7 @@ export default function Homepage(){
     <>
       <Hero />
       <Carousel kursList={kursList}/>
+      <LocalBox />
       <p>INFORMASJON/LINKS TIL LOKALE LAG KOMMER!</p>
       <h1>UNDER ARBEID</h1>
       <img src="/mainlogolys.jpg" alt="" />

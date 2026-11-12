@@ -108,57 +108,87 @@ nav{
 }
 
 /* Karusell CSS */
-#caro-wraper{
+#caro-wraper {
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    width: 100%;
 }
 
-.carousel{
-  position: relative;
-  overflow: hidden;
-
-  width: 99%;
-  padding: 1rem 0; 
-  
-  background-color: #f4f4f4;
-  border: black solid 2px;
+.carousel-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 99%;
 }
 
-.carousel-track{
+.carousel {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding: 1rem 0; 
+    background-color: #f4f4f4;
+    border: black solid 2px;
+}
+
+.carousel-track {
     display: flex;
     gap: 1.5rem;
-
     width: max-content;
-
     list-style: none;
-    padding: 0;
-
+    padding: 0 1rem;
+    margin: 0;
+    
+    /* Enables smooth scrolling via JS and hides scrollbar */
+    scroll-behavior: smooth;
+    overflow-x: auto;
+    scrollbar-width: none; /* Firefox */
 }
 
-
-/* Midlertidige animasjoner til karusellen */
-.marquee {
-    animation: scroll 60s linear infinite;
+.carousel-track::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
 }
 
-.marquee:hover {
-    animation-play-state: paused;
+/* Carousel Navigation Buttons */
+.carousel-btn {
+    position: absolute;
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid black;
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-weight: bold;
 }
 
-@keyframes scroll {
-    0% {
-        transform: translateX(0);
+.carousel-btn:hover {
+    background-color: white;
+}
+
+.prev-btn {
+    left: -10px;
+}
+
+.next-btn {
+    right: -10px;
+}
+/* Local box på forside */
+#local-box{
+    ul{
+        display: flex;
+        flex-direction: column;
+        border: solid black 3px;
+        width: max-content;
+        li{
+            border: solid grey 2px;
+            width: 100%;
+        }
     }
-    100% {
-        transform: translateX(-50%);
-    }
+
 }
-/* Slutt på animasjoner */
+
 
 /* Start på lokalhub og sider */
-
 #local-container{
     list-style: none;
 
@@ -250,13 +280,15 @@ nav{
     white-space: nowrap;
 }
 
-/* Kurskort
-*/
+/* Kurskort */
 
 .kurskort{
     position: relative;
     isolation: isolate;
     display: flex;
+
+    min-width: 28rem; 
+    width: 28rem;
 
     min-height: 20rem;
     height: 100%;
