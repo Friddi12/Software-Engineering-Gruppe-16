@@ -23,6 +23,7 @@ export default function(){
                             <Link to={`/Localhub/${local.slug}`} className="lokallagLenke">Besøk</Link>
                         </div>
                     </li>
+                    
                 ))}
             </ul>
         

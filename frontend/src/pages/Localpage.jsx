@@ -35,6 +35,12 @@ export default function Localpage(){
             <section id='local-page'>
                 <h2>{local.name}</h2>
                 <img src={local.image} alt={local.name} />
+                <img 
+                    src={`/local/${local.slug}-hsf.png`} 
+                    alt={`Logo for ${local.name}`} 
+                    className="local-logo" 
+                    onError={(e)=>{e.currentTarget.style.display = "none"}}
+                />
                 <p>{local.info}</p>
             </section>
              <Carousel kursList={kursList}/>

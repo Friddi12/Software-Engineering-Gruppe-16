@@ -198,10 +198,7 @@ nav{
     border: 1px solid #dceaf1;
     border-radius: 15px;
     box-shadow: 0 4px 15px rgba(65,110,140,0.05);
-    a{
-        text-decoration: none;
-        color: black;
-    }
+    
 }
 
 .local-card:hover{
@@ -223,7 +220,7 @@ nav{
 
     background-color: #d5eaf5;
     
-    color: #315b75;
+    color: #063a5b;
 
     font-weight: 600;
     text-decoration: none;
@@ -251,14 +248,14 @@ nav{
 }
 
 #local-page{
-    background-color: rgb(216, 210, 210);
-
+    background-color: #f7f7f7;
     h2{
         width: 100%;
     }
 
     img{
         max-width: 500px;
+        
         
     }
 
