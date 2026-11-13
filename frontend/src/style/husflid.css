@@ -133,7 +133,9 @@ nav{
     width: max-content;
 
     list-style: none;
-    padding: 0;
+    /*padding-right = gap sånn at -50% i animasjonen blir én runde (ingen hakk) */
+    padding: 0 1.5rem 0 0;
+    margin: 0; 
 
 }
 
@@ -180,21 +182,68 @@ nav{
     border: black solid 2px;
     background-color: #e0d7d7;
 
-    a{
-        text-decoration: none;
-        color: black;
-    }
+    background-color: #d5eaf5;
+    border: 1px solid #dceaf1;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(65,110,140,0.05);
+    
+}
+
+.local-card:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 8px 22px rgba(65, 110, 140, 0.12);
+}
+
+.local-card-bilde{
+    display: block;
+    width: 100%;
+    height: 11rem;
+    object-fit: cover;
+    margin-bottom: 0.75rem;
+}
+
+.lokallagLenke{
+    margin-top: auto;
+    padding: 5px 2px;
+
+    background-color: #d5eaf5;
+    
+    color: #063a5b;
+
+    font-weight: 600;
+    text-decoration: none;
+
+}
+
+.lokallagLenke:hover{
+    text-decoration: underline;
+    color: #a2004f;
+
+}
+
+.lokalhub-side{
+    background-color: #f4f9fc;
+    min-height:100vh;
+    padding: 50px 8%;
+    color: #30495a;
+}
+
+.lokalhub-header{
+    font-size: 23px;
+    color: #355c75;
+    margin: 15px 0;
+    
 }
 
 #local-page{
-    background-color: rgb(216, 210, 210);
-
+    background-color: #f7f7f7;
     h2{
         width: 100%;
     }
 
     img{
         max-width: 500px;
+        
         
     }
 
@@ -338,11 +387,191 @@ nav{
 
 }
 
-/* pop-up boks */
-.popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
+.fargedeGarnBilde{
+    width: 500px;
+    height: 300px;
+    object-fit:cover;
+    border-radius: 15px;
+}
+
+
+/* kontakt oss side*/ 
+
+.kontaktSide{
+    background-color: #ffffff;
+    min-height: 100vh;
+    padding: 50px 8%;
+    color:#30495a;
+}
+
+/* overskrift */
+.kontaktheader {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 50px
+}
+
+.kontaktheader span{
+    color: #0876b1;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+}
+
+.underTitteltekst{
+    color:#196994; 
+    font-size: 15px;
+    letter-spacing: 1.5px;
+    font-weight: bold;
+}
+
+.kontaktheader h2{
+    font-size: 42px;
+    color: #355c75;
+    margin: 15px 0;
+}
+
+
+
+/*hovedkontakt */
+
+.hovedkontaktSeksjon h2, 
+.andrekontakter h2{
+  font-size: 27px;
+  color: #355c75;
+  margin-bottom: 20px;
+}
+
+.hovedkontakt-kort{
+    max-width: 700px;
+    margin: 0 auto;
+    background-color: #d5eaf5;
+    border: 1px solid #c2deed;
+    border-radius: 15px;
+    padding: 25px 30px;
+    box-shadow: 0 5px 18px rgba(65, 110, 140, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.hovedkontakt-kort h3{
+    font-size: 25px;
+    color: #315b75;
+    margin: 0;
+}
+
+.hovedkontakt-kort p{
+    color: #202c32;
+    line-height: 1.7;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.hovedkontakt-kort a{
+    color: #426f89;
+    text-decoration: none;
+    width: fit-content;
+}
+
+.hovedkontakt-kort a:hover{
+    text-decoration: underline;
+}
+
+/* kontaktinfo-del for både hovedkontakt og andre kontakter */
+
+.kontaktinfo{
+    background-color: white;
+    border: 1px solid #e0edf3;
+    border-radius: 12px;
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 5px;
+}
+
+.hovedkontakt-kort .kontaktinfo a+a{
+    border-top: 1px solid #dceaf1;
+    padding-top: 12px;
+    width:100%;
+}
+
+
+.kontaktinfo a{
+    color: #426f89;
+    text-decoration: none;
+    font-size: 15px;
+    width: fit-content;
+    margin: 0;
+}
+.kontaktinfo a:hover{
+    text-decoration: underline;
+    color:#a2004f;
+    
+}
+
+
+
+/* andre kontakter */
+
+.andrekontakter{
+    max-width: 1100px;
+    margin: 0 auto 75px
+}
+
+.andrekontakter-beskrivelse{
+    color: #718795;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.kontaktGrid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap:25px;
+}
+
+.kontaktkort {
+    background-color: #eaf4f9;
+    border: 1px solid #dceaf1;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(65, 110, 140, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.kontaktkort:hover{
+    transform: translateY(-4px);
+}
+
+.kontaktkort h3{
+    font-size: 21px;
+    color: #355c75;
+    margin: 0;
+}
+
+.kontaktrolle{
+    color: #729db5;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.kontaktkort .kontaktinfo {
+    background-color: #d5eaf5;
+    border: 1px solid #c2deed;
+    border-radius: 10px;
+    padding: 15px 18px;
+    margin-top: 5px;
+}
+
+.kontaktkort .kontaktinfo a{
+    color: #315b75;
+    text-decoration: none;
+    font-size: 14px;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
@@ -352,12 +581,9 @@ nav{
     z-index: 1000;
 }
 
-.popup-content {
-    background-color: white;
-    padding: 25px;
-    border-radius: 8px;
-    width: 350px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.kontaktkort .kontaktinfo a:hover{
+    text-decoration: underline;
+    color: #a2004f;
 }
 
 form {

@@ -12,7 +12,7 @@ export default function(){
                     {LocalData.map((local) => (
                         <li key={local.slug} className="local-card">
                             <h3>{local.name}</h3>
-                            <Link to={`/Localhub/${local.slug}`}>Besøk</Link>
+                            <Link to={`/Localhub/${local.slug}`} className="lokallagLenke">Besøk</Link>
                         </li>
                     ))}
                 </ul>
