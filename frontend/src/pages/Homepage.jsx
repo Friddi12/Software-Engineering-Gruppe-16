@@ -35,9 +35,6 @@ export default function Homepage(){
     <>
       <Hero />
       <Carousel kursList={kursList}/>
-      <p>INFORMASJON/LINKS TIL LOKALE LAG KOMMER!</p>
-      <h1>UNDER ARBEID</h1>
-      <img src="/mainlogolys.jpg" alt="" />
       <div>
         <h2>API Connection Test</h2>
         <p>{connectionStatus}</p>
