@@ -13,6 +13,7 @@ import Localpage from './pages/Localpage.jsx'
 import Aboutus from './pages/Aboutus.jsx'
 import Coursepage from './pages/Coursepage.jsx'
 import Footer from './components/Footer.jsx'
+import ContactUs from './pages/ContactUs.jsx'
 
 function App() {
 
@@ -33,7 +34,7 @@ function App() {
         <Route path="/Localhub/:slug" element={<Localpage />} />
         <Route path='/Aboutus' element={<Aboutus />} />
         <Route path='/kurs/:id' element={<Coursepage />} />
-        {/* <Route path='/ContactUs' element={<ContactUs />}/> */}
+        <Route path='/ContactUs' element={<ContactUs />}/>
       </Routes> 
       <Footer />
     </main>
