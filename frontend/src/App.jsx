@@ -33,6 +33,7 @@ function App() {
         <Route path="/Localhub/:slug" element={<Localpage />} />
         <Route path='/Aboutus' element={<Aboutus />} />
         <Route path='/kurs/:id' element={<Coursepage />} />
+        {/* <Route path='/ContactUs' element={<ContactUs />}/> */}
       </Routes> 
       <Footer />
     </main>
