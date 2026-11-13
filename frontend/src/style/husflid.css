@@ -21,6 +21,7 @@ header{
 .kursliste {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 26rem), 1fr));
+    justify-content: center;
     gap: 2rem;
 
     /* Fjerner standard punktmerking og innrykk fra <ul> */
@@ -31,29 +32,36 @@ header{
 
 nav{
     display: flex;
+    flex: 1;
     flex-direction: row;
     align-items: center;
-    gap: 1rem;
-    justify-content: space-between;
-    width: 100%;
-    height: 100%;
+    gap: 0.25rem;
+    justify-content: flex-end;
     padding-left: 1rem;
 
     a{
-        color: black;
-        border: 3px solid black;
+        position: relative;
+        padding: 0.6rem 1rem;
+
+        color: #1d1d1e;
+        font-size: 1.1rem;
+        font-weight: 500;
         text-decoration: none;
-        background-color: rgb(211, 215, 214);
+        letter-spacing: 0.02rem;
         height: 70%;
 
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
+        border-radius: 2px;
     }
 
 }
+
+.navLenker:hover{
+    text-decoration: underline;
+    color: #a2004f;
+    font-weight: bold;    
+}
+
+
 
 .searchbutton{
     all: unset;
@@ -164,12 +172,13 @@ nav{
 #local-container{
     list-style: none;
 
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    gap: 25px;
 
-    margin: 1rem;
-    padding: 1rem;    
+
+    margin: 0 auto;
+    padding: 0;    
 
 }
 
@@ -177,10 +186,13 @@ nav{
     margin: 2rem;
     padding: 1rem;
 
-    min-width: 260px;
+    /* fast bredde, lik str uansett */
+    width:18rem;
+    box-sizing: border-box;
 
-    border: black solid 2px;
-    background-color: #e0d7d7;
+    display:flex; 
+    flex-direction: column;
+    overflow: hidden;
 
     background-color: #d5eaf5;
     border: 1px solid #dceaf1;
@@ -249,6 +261,18 @@ nav{
 
 }
 
+@media (max-width: 650px){
+    .lokalhubSide{
+        padding: 35px 5%;
+    }
+
+    .lokalhubHeader h2{
+        font-size: 32px;
+    }
+}
+
+
+
 /*searchpage */
 .searchgruppe{
     padding: 1.5rem;
@@ -280,7 +304,7 @@ nav{
     font-size: 1rem;
     font-weight: 600;
     color: white;
-    background-color: #4a6d8c; /* mørk nok til at hvit tekst er lesbar */
+    background-color: #4a6d8c; 
     border: 2px solid #4a6d8c;
     border-radius: 0 0.5rem 0.5rem 0;
     cursor: pointer;
@@ -309,6 +333,8 @@ nav{
 
     min-height: 20rem;
     height: 100%;
+    width: 100%;
+    box-sizing: border-box;
     border-radius: 0.75rem;
     overflow: hidden;
 
@@ -329,28 +355,54 @@ nav{
 /* Panelet med tekst, innrykket fra kanten slik at bildet synes rundt */
 .kurskortPanel {
     flex: 1;
+    min-width: 0;
+    min-height: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.5rem;
 
-    margin: 1.5rem;
+    margin: 1.25rem;
     padding: 1rem;
 
     background-color: rgba(255, 255, 255, 0.45);
     color: #1a1a1a;
 }
 
+.kurskortPanel p{
+    margin: 0;
+}
+
 .kurskortTitle {
     margin: 0;
     font-size: 1.25rem;
+    line-height: 1.3;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .kurskortLag {
     margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.kurskortInfo p {
-    margin: 0;
+.kurskortInfo {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.kurskortBeskrivelse{
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .kurskortLabel {
@@ -360,6 +412,7 @@ nav{
 /* margin-top: auto skyver bunnteksten helt ned, uansett hvor lang beskrivelsen er */
 .kurskortFooter {
     margin-top: auto;
+    flex-shrink: 0;
 }
 
 .kurskortFooter p {
@@ -367,24 +420,64 @@ nav{
 }
 
 /* Strekker lenken over hele kortet slik at hele kortet er klikkbart */
-.kurskortLink::after {
-    content: "";
-    position: absolute;
-    inset: 0;
+
+
+.kurskortLenke{
+    display: block;
+    flex: 0 0 auto;
+    width: var(- -kort-bredde);
+    height: var(- -kort-hoyde);
+
+    text-decoration: none;
+    font-weight: normal;
 }
 
 
-#footer{
+/* footer */
+.footer{
+    background-color: #545561;
+    color: white;
+    font-family: "Breuer Text", Arial, sans-serif;
+    text-align: center;
+}
 
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  
-    p{
-        font-weight: bold;
-        width: 100%;
+.footerKolonner{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    gap: 2rem;
+
+    max-width: 75rem;
+    margin: 0 auto;
+
+
+}
+
+a{
+    color:white;
+    font-weight: bold;
+
+}
+
+ul{
+list-style-type: none;
+padding: 0;
+padding: 0;
     }
 
+
+/*om oss side */
+.omOssSide{
+    text-align: center;
+}
+.omOss-overskrift{
+    text-align: center;
+    font-size: 42px;
+    color:#355c75;
+    margin: 50px 0;
+}
+.omOss-deloverskrift{
+    color: #355c75;
+    
 }
 
 .fargedeGarnBilde{
@@ -573,12 +666,7 @@ nav{
     text-decoration: none;
     font-size: 14px;
     width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+    margin: 0;
 }
 
 .kontaktkort .kontaktinfo a:hover{
@@ -586,30 +674,39 @@ nav{
     color: #a2004f;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.kontaktkort .kontaktinfo a + a {
+    border-top: 1px solid white;
+    padding-top: 11px;
 }
 
-.popup-input {
-    width: 100%;
-    padding: 8px;
-    margin-top: 4px;
-    box-sizing: border-box;
+.hovedkontaktSeksjon,
+.andrekontakter{
+    max-width: 1100px;
+    margin: 0 auto 60px
 }
 
-.popup-buttons {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 10px;
-}
 
-.btn-submit {
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
-    border-radius: 4px;
+
+/*mobiltilpasning*/
+@media (max-width: 650px){
+    .kontaktSide{
+        padding: 35px 5%;
+    }
+
+    .kontaktheader h2{
+        font-size: 32px;
+    }
+
+    .hovedkontakt-kort{
+        padding: 25px;
+    }
+
+    .kontaktGrid{
+        grid-template-columns: 1fr;
+    }
+
+    .hovedkontaktSeksjon h2, 
+    .andrekontakter h2{
+        font-size: 23px;
+    }
 }
