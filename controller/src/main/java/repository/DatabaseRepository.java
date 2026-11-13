@@ -29,14 +29,15 @@ public class DatabaseRepository implements KursRepository, BrukerRepository, Del
     @Override
     public ArrayList<Kurs> getAllKurs() {
         ArrayList<Kurs> alleKurs = new ArrayList<>();
-        String query = "SELECT p.id AS personid, k.kursnavn AS kursnavn, k.starttid AS starttid, "
+        String query = "SELECT k.id AS kursId, p.id AS personid, k.kursnavn AS kursnavn, k.starttid AS starttid, "
                 + "k.sluttTid AS sluttTid, k.beskrivelse AS beskrivelse, k.kategori AS kategori, "
                 + "s.adresse AS adresse, "
-                + "ka.telefonnr AS telefonnr, p.navn AS kursansvarig_navn, p.epost AS epost "
+                + "ka.telefonnr AS telefonnr, p.navn AS kursansvarig_navn, p.epost AS epost, ko.navn AS kommune "
                 + "FROM kurs AS k "
                 + "INNER JOIN sted AS s ON k.sted_id = s.id "
                 + "INNER JOIN kursansvarlig AS ka ON k.kursansvarlig_id = ka.id "
-                + "INNER JOIN person AS p ON ka.person_id = p.id";
+                + "INNER JOIN person AS p ON ka.person_id = p.id "
+                + "INNER JOIN kommune AS ko ON s.kommune_id = ko.id";
 
         // Create statement locally using connection
         try (Statement localStatement = connection.createStatement();
@@ -50,6 +51,8 @@ public class DatabaseRepository implements KursRepository, BrukerRepository, Del
                 String databaseResultatKategori = resultSet.getString("kategori");
                 Kategori kategori1 = Kategori.valueOf(databaseResultatKategori.toUpperCase());
                 String adresse =  resultSet.getString("adresse");
+                int kursId = resultSet.getInt("kursId");
+                String kommune = resultSet.getString("kommune");
 
                 String telefonnr = resultSet.getString("telefonnr");
                 String kursansvarligNavn = resultSet.getString("kursansvarig_navn");
@@ -59,13 +62,13 @@ public class DatabaseRepository implements KursRepository, BrukerRepository, Del
                 String fornavn = "";
                 String etternavn = "";
                 if (kursansvarligNavn != null && !kursansvarligNavn.trim().isEmpty()) {
-                    String[] nameParts = kursansvarligNavn.trim().split("\\s+", 2);
+                    String[] nameParts = kursansvarligNavn.trim().split("\s+", 2);
                     fornavn = nameParts[0];
                     etternavn = nameParts.length > 1 ? nameParts[1] : "";
                 }
 
                 Kursansvarlig kursansvarlig = new Kursansvarlig(person_id, fornavn, etternavn, kursansvarligEpost, telefonnr);
-                Kurs currentKurs = new Kurs(1, kursnavn, startTid, sluttTid, beskrivelse, kategori1, "Halden",adresse);
+                Kurs currentKurs = new Kurs(kursId, kursnavn, startTid, sluttTid, beskrivelse, kategori1, kommune, adresse);
                 alleKurs.add(currentKurs);
             }
         } catch (Exception e) {
