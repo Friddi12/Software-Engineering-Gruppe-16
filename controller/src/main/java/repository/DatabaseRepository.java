@@ -184,6 +184,43 @@ public class DatabaseRepository implements KursRepository, BrukerRepository, Del
     }
 
     @Override
+    public void editKurs(int id, Kurs kurs) throws Exception {
+        try {
+            if (id <= 0) {
+                throw new Exception("Ugyldig kurs-ID.");
+            }
+
+            if (kurs == null) {
+                throw new Exception("Kurset kan ikke være tomt.");
+            }
+
+            String sjekkSql = "SELECT id FROM kurs WHERE id = ?";
+            PreparedStatement sjekkStmt = connection.prepareStatement(sjekkSql);
+            sjekkStmt.setInt(1, id);
+            ResultSet rs = sjekkStmt.executeQuery();
+
+            if (!rs.next()) {
+                throw new Exception("Fant ikke kurset.");
+            }
+
+            String sql = "UPDATE kurs SET kursnavn = ?, starttid = ?, sluttTid = ?, beskrivelse = ?, kategori = ? WHERE id = ?";
+
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, kurs.getNavn());
+            stmt.setObject(2, kurs.getStartTid());
+            stmt.setObject(3, kurs.getSluttTid());
+            stmt.setString(4, kurs.getBeskrivelse());
+            stmt.setString(5, kurs.getKategori().toString());
+            stmt.setInt(6, id);
+
+            stmt.executeUpdate();
+
+        } catch (Exception e) {
+            throw new Exception("Kunne ikke oppdatere kurset.", e);
+        }
+    }
+
+    @Override
     public void removeKurs(int id) throws Exception {
         String sql = "SELECT p.epost FROM kurs_deltagere kd " + "INNER JOIN person p ON kd.person_id = p.id " + "WHERE kd.kurs_id = ?";
         if (id <= 0) {

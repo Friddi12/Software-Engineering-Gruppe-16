@@ -86,6 +86,25 @@ public class KursController {
         }
     }
 
+    public void editKurs(Context ctx) {
+        try {
+            int id = Integer.parseInt(ctx.pathParam("id"));
+
+            KursDTO dto = ctx.bodyAsClass(KursDTO.class);
+
+            Kurs kurs = new Kurs(dto.getNavn(), dto.getStartTid(), dto.getSluttTid(), dto.getBeskrivelse(),
+                    dto.getKategori(), dto.getSted(), dto.getAdresse()
+            );
+
+            kursRepository.editKurs(id, kurs);
+
+            ctx.status(204);
+
+        } catch (Exception e) {
+            ctx.status(400).result(e.getMessage());
+        }
+    }
+
     // DELETE /api/kurs/{id}
     public void remove(Context ctx) {
         try {
