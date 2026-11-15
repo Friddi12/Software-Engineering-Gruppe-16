@@ -5,24 +5,27 @@ import dto.BrukerDTO;
 import modules.Deltaker;
 import modules.Bruker;
 import java.time.LocalDate;
-import java.util.Objects;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import repository.BrukerRepository;
-import repository.DeltakerRepository; // Importer grensesnittet her
+import repository.DeltakerRepository;
 
+// Håndterer innlogging og registrering av brukere.
 public class BrukerService {
-    private final BrukerRepository brukerRepository;
-    private final DeltakerRepository deltakerRepository; // Legg til denne
 
-    // Tar imot begge grensesnittene i konstruktøren (eller én felles, men dette er veldig ryddig)
+    private final BrukerRepository brukerRepository;
+    private final DeltakerRepository deltakerRepository;
+
+    // Tar imot repository-grensesnittene.
     public BrukerService(BrukerRepository brukerRepository, DeltakerRepository deltakerRepository) {
         this.brukerRepository = brukerRepository;
         this.deltakerRepository = deltakerRepository;
     }
 
+    // Logger inn en bruker og returnerer rollen.
     public String login(BrukerDTO brukerDTO) {
         Bruker bruker = brukerRepository.login(brukerDTO.getEpost());
+
         if (bruker == null) {
             return null;
         }
@@ -35,11 +38,16 @@ public class BrukerService {
         if (result.verified) {
             return bruker.getRolle();
         }
+
         return null;
     }
 
+    // Registrerer en ny deltaker og bruker.
     public void signUp(DeltakerDTO deltakerDTO, BrukerDTO brukerDTO) {
-        String hashedPassword = BCrypt.withDefaults().hashToString(12, brukerDTO.getPassord().toCharArray());
+        String hashedPassword = BCrypt.withDefaults().hashToString(
+                12,
+                brukerDTO.getPassord().toCharArray()
+        );
 
         Deltaker nyDeltaker = new Deltaker(
                 deltakerDTO.getFornavn(),
@@ -55,10 +63,6 @@ public class BrukerService {
                 nyDeltaker
         );
 
-        // Bruker DeltakerRepository her for å lagre deltakeren
-        //deltakerRepository.createDeltaker(nyDeltaker);
-
-        // Bruker BrukerRepository her for å lagre brukeren
         brukerRepository.signUp(nyBruker, nyDeltaker);
     }
 }

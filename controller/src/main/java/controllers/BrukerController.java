@@ -4,19 +4,24 @@ import dto.BrukerDTO;
 import dto.DeltakerDTO;
 import io.javalin.http.Context;
 import service.BrukerService;
+
 import java.util.Map;
 
 public class BrukerController {
+
     private BrukerService brukerService;
 
-    public BrukerController(BrukerService brukerService) {setBrukerService(brukerService);}
+    public BrukerController(BrukerService brukerService) {
+        setBrukerService(brukerService);
+    }
 
+    // Logger inn en bruker.
     public void login(Context ctx) {
         try {
-            // Henter innloggingsinfo trygt fra request body (JSON)
+            // Henter innloggingsinformasjon trygt fra forespørselens JSON-body.
             BrukerDTO brukerDTO = ctx.bodyAsClass(BrukerDTO.class);
 
-            // Sender til service-laget for sjekk
+            // Sender informasjonen til service-laget for kontroll.
             String isAuthenticated = brukerService.login(brukerDTO);
 
             if (isAuthenticated != null) {
@@ -33,13 +38,14 @@ public class BrukerController {
         }
     }
 
+    // Registrerer en ny bruker.
     public void signUp(Context ctx) {
         try {
-            // Henter registreringsdata fra JSON-body
+            // Henter registreringsdata fra JSON-body.
             BrukerDTO brukerDTO = ctx.bodyAsClass(BrukerDTO.class);
             DeltakerDTO deltakerDTO = ctx.bodyAsClass(DeltakerDTO.class);
 
-            // Sender til service-laget (her skjer hashingen!)
+            // Sender dataene til service-laget, der passordet hashes.
             brukerService.signUp(deltakerDTO, brukerDTO);
 
             ctx.status(201).result("Bruker opprettet!");
@@ -49,6 +55,11 @@ public class BrukerController {
         }
     }
 
-    public BrukerService getBrukerService() {return brukerService;}
-    public void setBrukerService(BrukerService brukerService) {this.brukerService = brukerService;}
+    public BrukerService getBrukerService() {
+        return brukerService;
+    }
+
+    public void setBrukerService(BrukerService brukerService) {
+        this.brukerService = brukerService;
+    }
 }

@@ -1,16 +1,17 @@
 package repository;
+
 /*
 import modules.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+// Midlertidig repository for lagring av kurs i en ArrayList.
 public class MidlertidigKursRepository implements KursRepository {
 
     private ArrayList<Kurs> kursListe = new ArrayList<>();
 
     public MidlertidigKursRepository() {
-
         addKurs(new Kurs(
                 1,
                 "Strikkekurs",
@@ -49,11 +50,9 @@ public class MidlertidigKursRepository implements KursRepository {
 
     @Override
     public ArrayList<Kurs> searchKurs(String navn, Kategori kategori, String sted) {
-
         ArrayList<Kurs> resultater = new ArrayList<>();
 
         for (Kurs kurs : kursListe) {
-
             if (navn != null && kurs.getNavn().toLowerCase().contains(navn.toLowerCase())) {
                 resultater.add(kurs);
             } else if (kategori != null && kurs.getKategori() == kategori) {
@@ -82,7 +81,6 @@ public class MidlertidigKursRepository implements KursRepository {
 
     @Override
     public void addDeltaker(String navn, String ePost) {
-
     }
 
     @Override

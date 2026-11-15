@@ -7,15 +7,17 @@ public enum Kategori {
     VEVING,
     SYING;
 
-    // Jackson vil kalle denne metoden når den leser JSON
+    // Konverterer tekst fra JSON til en kategori.
     @JsonCreator
     public static Kategori fromString(String value) {
         if (value == null) {
             return null;
         }
+
         try {
-            // Gjør teksten om til STORE bokstaver før den slås opp i enumen
+            // Gjør teksten om til store bokstaver før den slås opp i enumen.
             return Kategori.valueOf(value.trim().toUpperCase());
+
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Ugyldig kategori: " + value +
                     ". Gyldige verdier er: STRIKKING, VEVING, SYING");

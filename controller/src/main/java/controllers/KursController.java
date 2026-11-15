@@ -1,17 +1,21 @@
 package controllers;
 
 import dto.DeltakerDTO;
-import dto.PaameldingDTO;
-import modules.*;
 import dto.KursDTO;
-
+import dto.PaameldingDTO;
 import io.javalin.http.Context;
+import modules.*;
 import repository.KursRepository;
 
 public class KursController {
-    private KursRepository kursRepository;
-    public KursController(KursRepository kursRepository) {setKursRepository(kursRepository);}
 
+    private KursRepository kursRepository;
+
+    public KursController(KursRepository kursRepository) {
+        setKursRepository(kursRepository);
+    }
+
+    // Søker etter kurs basert på navn, kategori og sted.
     // GET /api/kurs/search?navn=...&kategori=...
     public void search(Context ctx) {
         String navn = ctx.queryParam("navn");
@@ -20,32 +24,32 @@ public class KursController {
         String sted = ctx.queryParam("sted");
 
         try {
-            // Sjekk om det er sendt med en kategori (ikke null og ikke tom)
             if (kategoriParam != null && !kategoriParam.isBlank()) {
-                // Konverterer f.eks. "strikking" eller "STRIKKING" trygt til Enum
                 kategori = Kategori.valueOf(kategoriParam.trim().toUpperCase());
             }
 
             ctx.json(kursRepository.searchKurs(navn, kategori, sted));
+
         } catch (IllegalArgumentException e) {
             ctx.status(400).result("Ugyldig kategori: " + kategoriParam);
-        }
-        catch (Exception e) {
-            ctx.status(400).result("Invalid search input: " + e.getMessage());
+
+        } catch (Exception e) {
+            ctx.status(400).result("Ugyldige søkedata: " + e.getMessage());
         }
     }
 
+    // Henter alle tilgjengelige kurs.
     public void getAllKurs(Context ctx) {
         try {
-            // Assumes your repository has a method to get all courses.
-            // (If your repository method is named differently, like findAll() or getAll(), adjust it here)
             ctx.json(kursRepository.getAllKurs());
+
         } catch (Exception e) {
             e.printStackTrace();
-            ctx.status(500).result("Could not fetch courses: " + e.getMessage());
+            ctx.status(500).result("Kunne ikke hente kurs: " + e.getMessage());
         }
     }
 
+    // Filtrerer kurs basert på sted og kategori.
     public void filtrerKurs(Context ctx) {
         String sted = ctx.queryParam("sted");
         String kategoriParam = ctx.queryParam("kategori");
@@ -65,35 +69,52 @@ public class KursController {
 
         } catch (IllegalArgumentException e) {
             ctx.status(400).result("Ugyldig kategori: " + kategoriParam);
+
         } catch (Exception e) {
             ctx.status(400).result(e.getMessage());
         }
     }
 
-    // POST /api/kurs (mottar JSON i body)
+    // Oppretter et nytt kurs.
+    // POST /api/kurs (mottar JSON i forespørselen)
     public void addKurs(Context ctx) {
         try {
-            // Javalin mapper JSON fra React direkte til et DTO/Objekt
             KursDTO dto = ctx.bodyAsClass(KursDTO.class);
 
-            Kurs kurs = new Kurs(dto.getNavn(),dto.getStartTid(), dto.getSluttTid(), dto.getBeskrivelse(),
-                    dto.getKategori(), dto.getSted(), dto.getAdresse());
+            Kurs kurs = new Kurs(
+                    dto.getNavn(),
+                    dto.getStartTid(),
+                    dto.getSluttTid(),
+                    dto.getBeskrivelse(),
+                    dto.getKategori(),
+                    dto.getSted(),
+                    dto.getAdresse()
+            );
 
             kursRepository.addKurs(kurs);
-            ctx.status(201).json(kurs); // 201 Created
+            ctx.status(201).json(kurs);
+
         } catch (Exception e) {
-            ctx.status(400).result("Invalid input: " + e.getMessage());
+            ctx.status(400).result("Ugyldige inndata: " + e.getMessage());
         }
     }
 
+    // Oppdaterer et eksisterende kurs.
+    // PUT /api/kurs/{id}
     public void editKurs(Context ctx) {
         try {
             int id = Integer.parseInt(ctx.pathParam("id"));
 
             KursDTO dto = ctx.bodyAsClass(KursDTO.class);
 
-            Kurs kurs = new Kurs(dto.getNavn(), dto.getStartTid(), dto.getSluttTid(), dto.getBeskrivelse(),
-                    dto.getKategori(), dto.getSted(), dto.getAdresse()
+            Kurs kurs = new Kurs(
+                    dto.getNavn(),
+                    dto.getStartTid(),
+                    dto.getSluttTid(),
+                    dto.getBeskrivelse(),
+                    dto.getKategori(),
+                    dto.getSted(),
+                    dto.getAdresse()
             );
 
             kursRepository.editKurs(id, kurs);
@@ -105,6 +126,7 @@ public class KursController {
         }
     }
 
+    // Sletter et kurs.
     // DELETE /api/kurs/{id}
     public void remove(Context ctx) {
         try {
@@ -119,6 +141,7 @@ public class KursController {
         }
     }
 
+    // Fjerner en deltaker fra et kurs.
     // DELETE /api/kurs/{kursId}/deltakere
     public void removeDeltaker(Context ctx) {
         try {
@@ -134,6 +157,7 @@ public class KursController {
         }
     }
 
+    // Registrerer en deltaker på et kurs.
     public void addDeltaker(Context ctx) {
         try {
             PaameldingDTO dto = ctx.bodyAsClass(PaameldingDTO.class);
@@ -151,6 +175,11 @@ public class KursController {
         }
     }
 
-    public KursRepository getKursRepository() {return kursRepository;}
-    public void setKursRepository(KursRepository kursRepository) {this.kursRepository = kursRepository;}
+    public KursRepository getKursRepository() {
+        return kursRepository;
+    }
+
+    public void setKursRepository(KursRepository kursRepository) {
+        this.kursRepository = kursRepository;
+    }
 }

@@ -3,13 +3,17 @@ package dto;
 import java.time.LocalDate;
 
 public class DeltakerDTO {
+
     private String fornavn;
     private String etternavn;
     private String epost;
     private LocalDate registreringsdato;
 
-    public DeltakerDTO(){}
+    // Oppretter et tomt deltakerobjekt.
+    public DeltakerDTO() {
+    }
 
+    // Oppretter en deltaker med personopplysninger og registreringsdato.
     public DeltakerDTO(String fornavn, String etternavn, String epost, LocalDate registreringsdato) {
         setFornavn(fornavn);
         setEtternavn(etternavn);
@@ -17,15 +21,35 @@ public class DeltakerDTO {
         setEpost(epost);
     }
 
-    public String getFornavn() {return fornavn;}
-    public void setFornavn(String fornavn) {this.fornavn = fornavn;}
+    public String getFornavn() {
+        return fornavn;
+    }
 
-    public String getEtternavn() {return etternavn;}
-    public void setEtternavn(String etternavn) {this.etternavn = etternavn;}
+    public void setFornavn(String fornavn) {
+        this.fornavn = fornavn;
+    }
 
-    public LocalDate getRegistreringsdato() {return registreringsdato;}
-    public void setRegistreringsdato(LocalDate registreringsdato) {this.registreringsdato = registreringsdato;}
+    public String getEtternavn() {
+        return etternavn;
+    }
 
-    public String getEpost() {return epost;}
-    public void setEpost(String epost) {this.epost = epost;}
+    public void setEtternavn(String etternavn) {
+        this.etternavn = etternavn;
+    }
+
+    public LocalDate getRegistreringsdato() {
+        return registreringsdato;
+    }
+
+    public void setRegistreringsdato(LocalDate registreringsdato) {
+        this.registreringsdato = registreringsdato;
+    }
+
+    public String getEpost() {
+        return epost;
+    }
+
+    public void setEpost(String epost) {
+        this.epost = epost;
+    }
 }

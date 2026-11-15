@@ -1,22 +1,24 @@
 import io.javalin.Javalin;
 
 import controllers.*;
-import repository.DatabaseRepository;
 import repository.*;
 import service.BrukerService;
 
-
+// Starter applikasjonen og setter opp API-rutene.
 public class App {
+
     public static void main(String[] args) {
         DatabaseRepository databaseRepository = new DatabaseRepository();
         BrukerService brukerService = new BrukerService(databaseRepository, databaseRepository);
+
         BrukerController brukerController = new BrukerController(brukerService);
         KursController kursController = new KursController(databaseRepository);
 
         Javalin app = Javalin.create(config -> {
-            // Tillater at kilde-apper (som React på port 5173/3000) får kalle API-et under utvikling
+            // Tillater API-kall fra andre domener under utvikling.
             config.bundledPlugins.enableCors(cors -> {
-                cors.addRule(it -> {it.anyHost(); // Tillater alle domener/porter under lokal utvikling
+                cors.addRule(it -> {
+                    it.anyHost();
                 });
             });
 
@@ -24,17 +26,20 @@ public class App {
             config.spaRoot.addFile("/", "/public/index.html");
         }).start(8080);
 
-        // --- API-ruter
+        // API-ruter for kurs.
         app.get("/api/kurs", kursController::getAllKurs);
         app.get("/api/kurs/search", kursController::search);
         app.get("/api/kurs/filter", kursController::filtrerKurs);
         app.post("/api/kurs/add", kursController::addKurs);
         app.put("/api/kurs/{id}", kursController::editKurs);
         app.delete("/api/kurs/{id}", kursController::remove);
+
+        // API-ruter for deltakere.
         app.post("/api/deltaker", kursController::addDeltaker);
         app.delete("/api/kurs/{kursId}/deltakere", kursController::removeDeltaker);
-        app.get("/api/bruker/login", brukerController::login); // login gjelder både deltakere, kursansvarlig og admin
-        app.post("/api/bruker/signup", brukerController::signUp);  // registrering av bruker tenker jeg gjelder bare deltakere, 
-                                                                        // mens kursansvarlig og admin kan lages direkte i databasen
+
+        // API-ruter for brukere.
+        app.get("/api/bruker/login", brukerController::login);
+        app.post("/api/bruker/signup", brukerController::signUp);
     }
 }

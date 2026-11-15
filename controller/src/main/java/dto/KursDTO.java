@@ -4,6 +4,7 @@ import modules.Kategori;
 import java.time.LocalDateTime;
 
 public class KursDTO {
+
     private int id;
     private String navn;
     private LocalDateTime startTid;
@@ -13,10 +14,13 @@ public class KursDTO {
     private String sted;
     private String adresse;
 
-    // Nødvendig for at Jackson/Javalin skal kunne opprette DTO-en fra JSON:
-    public KursDTO() {}
+    // Tom konstruktør som gjør det mulig for Jackson/Javalin å opprette DTO-en fra JSON.
+    public KursDTO() {
+    }
 
-    public KursDTO(int id, String navn, LocalDateTime startTid, LocalDateTime sluttTid, String beskrivelse, Kategori kategori, String sted, String adresse) {
+    // Oppretter et kurs med alle tilhørende opplysninger.
+    public KursDTO(int id, String navn, LocalDateTime startTid, LocalDateTime sluttTid,
+                   String beskrivelse, Kategori kategori, String sted, String adresse) {
         setId(id);
         setNavn(navn);
         setStartTid(startTid);
@@ -27,27 +31,67 @@ public class KursDTO {
         setAdresse(adresse);
     }
 
-    public String getNavn() { return navn; }
-    public void setNavn(String navn) { this.navn = navn; }
+    public String getNavn() {
+        return navn;
+    }
 
-    public LocalDateTime getStartTid() { return startTid; }
-    public void setStartTid(LocalDateTime startTid) { this.startTid = startTid; }
+    public void setNavn(String navn) {
+        this.navn = navn;
+    }
 
-    public LocalDateTime getSluttTid() { return sluttTid; }
-    public void setSluttTid(LocalDateTime sluttTid) { this.sluttTid = sluttTid; }
+    public LocalDateTime getStartTid() {
+        return startTid;
+    }
 
-    public String getBeskrivelse() { return beskrivelse; }
-    public void setBeskrivelse(String beskrivelse) { this.beskrivelse = beskrivelse; }
+    public void setStartTid(LocalDateTime startTid) {
+        this.startTid = startTid;
+    }
 
-    public Kategori getKategori() { return kategori; }
-    public void setKategori(Kategori kategori) { this.kategori = kategori; }
+    public LocalDateTime getSluttTid() {
+        return sluttTid;
+    }
 
-    public String getSted() {return sted;}
-    public void setSted(String sted) {this.sted = sted;}
+    public void setSluttTid(LocalDateTime sluttTid) {
+        this.sluttTid = sluttTid;
+    }
 
-    public String getAdresse() { return adresse; }
-    public void setAdresse(String adresse) { this.adresse = adresse; }
+    public String getBeskrivelse() {
+        return beskrivelse;
+    }
 
-    public int getId() {return id;}
-    public void setId(int id) {this.id = id;}
+    public void setBeskrivelse(String beskrivelse) {
+        this.beskrivelse = beskrivelse;
+    }
+
+    public Kategori getKategori() {
+        return kategori;
+    }
+
+    public void setKategori(Kategori kategori) {
+        this.kategori = kategori;
+    }
+
+    public String getSted() {
+        return sted;
+    }
+
+    public void setSted(String sted) {
+        this.sted = sted;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }
