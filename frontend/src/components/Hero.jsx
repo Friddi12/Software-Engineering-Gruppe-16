@@ -5,9 +5,8 @@ export default function Hero(){
 
     return(
         <section id="herosection">
-            <h2>Velkommen til Østfold Husflidslag!</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <Link to="/searchpage">Finn Kurs Nærme Deg!</Link>
+            <h2>Østfold Husflidslag</h2>
+            <Link to="/searchpage" className="finnKursknapp">Finn Kurs Nærme Deg!</Link>
         </section>
 
     )

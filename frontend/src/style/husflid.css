@@ -17,6 +17,146 @@ header{
 }
 
 
+/* homepage*/
+
+.HPside{
+    background-color: #f4f9fc;
+    padding:30px 8% 60px;
+    color: #30495a;
+}
+
+    /* seksjoner hp */
+.hjemSeksjon{
+    max-width: 1100px;
+    margin: 60px auto 0;
+}
+
+.hjemSeksjonHeader{
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.hjemSeksjonHeader span{
+    color: #0876b1;
+    font-size: 14px;
+    letter-spacing: 1.1px;
+}
+
+.hjemSeksjonHeader h2{
+    margin: 10px 0 0;
+    font-size: 32px;
+    color: #355c75;
+}
+
+.HPLenke{
+    margin: 26px 0 0;
+    text-align: center;
+    padding: 20px
+}
+
+.HPLenke a{
+    color: #426f89;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.HPLenke a:hover{
+    color: #a2004f;
+    text-decoration: underline;
+}
+
+    /* lokallag*/
+.hjemlagListe{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: 15px;
+    margin: 0;
+    padding:0;
+    list-style: none;
+}
+
+.hjemLagKort{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px 10px 10px;
+
+
+    background-color: #eaf4f9;
+    border: 1px solid #dceaf1;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(65, 110, 140, 0.05);
+
+    color:#315b75;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+
+.hjemLagKort:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(65, 110, 140, 0.12);
+}
+
+.hjemLagKort img{
+    flex: 0 0 auto;
+    width: 3rem;
+    height:3rem;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+    /*tall fra om oss*/
+.HPTall{
+    padding: 40px 30px 34px;
+    background-color: #dceaf5;
+    border: 1px solid #c2deed;
+    border-radius: 15px;
+    box-shadow: 0 5px 18px rgba(65, 110, 140, 0.08);
+}
+
+.HPTallListe{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.HPTallListe li{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 20px 10px;
+    text-align: center;
+
+    background-color: white;
+    border: 1px solid #e0edf3;
+}
+
+.HPTallListe span{
+    font-size: 14px;
+    color: #729db5;
+    font-weight: 600;
+}
+
+.mainlogoLys{
+    display: block;
+    width: 100%;
+    max-width: 14rem;
+    height: auto;
+    margin: 0 auto;
+
+    mix-blend-mode: multiply;
+    padding: 15px;
+
+}
+
+/*hero */
+
+
+
     /* Rutenett med kurskort: to kolonner når det er plass, ellers én */
 .kursliste {
     display: grid;
