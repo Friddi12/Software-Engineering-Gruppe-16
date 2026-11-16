@@ -212,47 +212,22 @@ nav{
     }
 }
 
-#herosection{
+.heroSeksjon{
+    max-width: 1100px;
+    min-height: 22rem;
+    margin: 0 auto;
+
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+
+    border-radius: 15px;
+    box-shadow: 0 5px 18px rgba(65, 110, 140, 0.015);
     
-
-    width: 98%;
-    height: 300px;
-    margin: 0.2rem auto;
-
-    background-image: url('/stockbg1.jpg');
-    background-position: center;
-    background-size: cover;
-
-    h2{
-        margin-left: 10px;
-        font-size: 1.5rem;
-        font-weight: 1000;
-        color: white;
-    }
-
-    p{
-        margin-bottom: 50px;
-        margin-left: 10px;
-        padding-bottom: 25px;
-        background-color: rgba(255, 255, 255, 0.5);
-        width: 50%;
-
-    }
-
-    a{
-        text-decoration: none;
-        color: black;
-        border: 3px solid black;
-        background-color: white;
-        width: fit-content;
-        padding: 0.5rem;
-        align-self: flex-end;
-
-        margin-right: 10px;
-    }
-
+    background-color: #d5eaf5;
+    border:1px solid #dceaf1;
+    box-shadow: 0 4px 15px rgba(65, 110, 140, 0.05);
+    
 }
 
 /* Karusell CSS */
