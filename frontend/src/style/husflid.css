@@ -82,7 +82,7 @@ header{
     padding: 10px 16px 10px 10px;
 
 
-    background-color: #eaf4f9;
+    background-color: #d5eaf5;
     border: 1px solid #dceaf1;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(65, 110, 140, 0.05);
@@ -109,7 +109,7 @@ header{
     /*tall fra om oss*/
 .HPTall{
     padding: 40px 30px 34px;
-    background-color: #dceaf5;
+    background-color: #d1e6f0;
     border: 1px solid #c2deed;
     border-radius: 15px;
     box-shadow: 0 5px 18px rgba(65, 110, 140, 0.08);
@@ -138,7 +138,7 @@ header{
 .HPTallListe span{
     font-size: 14px;
     color: #729db5;
-    font-weight: 600;
+    font-weight: 900;
 }
 
 .mainlogoLys{
@@ -149,7 +149,8 @@ header{
     margin: 0 auto;
 
     mix-blend-mode: multiply;
-    padding: 15px;
+    padding: 10px;
+    margin-top: 15px;
 
 }
 
@@ -225,7 +226,7 @@ nav{
     border-radius: 15px;
     box-shadow: 0 5px 18px rgba(65, 110, 140, 0.015);
     
-    background-color: #eaf4f9;
+    background-color: #d5eaf5;
     border:1px solid #dceaf1;
     box-shadow: 0 4px 15px rgba(65, 110, 140, 0.05);
     

@@ -9,7 +9,7 @@ export default function Hero(){
                 <span>Østfold Husflidslag</span>
                 <h2>Velkommen til Østfold Husflidslag!</h2>
                 <p>
-                    Finn kurs, møt andre som er glad i håndverk og opplev skaperglede i ditt eget nærmiljø
+                    Finn kurs, møt andre som er glad i håndverk og opplev skaperglede i ditt eget nærmiljø.
                 </p>
                 <div className="heroKnapper">
                     <Link to="/searchpage" className="heroKnapp heroKnappKurs">Finn Kurs Nærme Deg!</Link>
