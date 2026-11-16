@@ -13,6 +13,7 @@ import Aboutus from './pages/Aboutus.jsx'
 import Coursepage from './pages/Coursepage.jsx'
 import Footer from './components/Footer.jsx'
 import ContactUs from './pages/ContactUs.jsx'
+import Adminpage from './pages/Adminpage.jsx'
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
         <Route path='/Aboutus' element={<Aboutus />} />
         <Route path='/kurs/:id' element={<Coursepage />} />
         <Route path='/ContactUs' element={<ContactUs />}/>
+        <Route path='/Adminpage' element={<Adminpage />} />
       </Routes> 
       <Footer />
     </main>
