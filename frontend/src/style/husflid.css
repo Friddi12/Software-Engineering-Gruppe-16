@@ -230,6 +230,64 @@ nav{
     
 }
 
+.heroInnhold{
+    max-width: 36rem;
+    padding: 40px 45px;
+    color: #30495a;
+}
+.heroInnhold span{
+    color: #0876b1;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+.heroInnhold h2{
+    margin: 12px 0 16px;
+    font-size: 42px;
+    line-height: 1.15;
+    color: #355c75;
+}
+.heroInnhold p{
+    margin: 0 0 26px;
+    font-size: 17px;
+    line-height: 1.7;
+    color: #202c32;
+}
+
+.heroKnapper{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.heroKnapp{
+    padding:12px 24px;
+    border-radius: 10px;
+    border: 1.5px solid transparent;
+
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.heroKnappKurs{
+    background-color: #b5364f;
+    color: white
+}
+.heroKnappKurs:hover{
+    background-color: #9a2c42;
+    transform: translateY(-2px);
+}
+
+.heroKnappLokal{
+    border-color: #355c75;
+    color: #355c75;
+}
+.heroKnappLokal:hover{
+    background-color: rgba(53, 92, 117, 0.1);
+    transform: translateY(-2px);
+}
+
 /* Karusell CSS */
 #caro-wraper{
     display: flex;
