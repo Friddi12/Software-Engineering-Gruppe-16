@@ -153,7 +153,7 @@ header{
 
 }
 
-/*hero */
+
 
 
 
@@ -198,7 +198,7 @@ nav{
 .navLenker:hover{
     text-decoration: underline;
     color: #a2004f;
-    font-weight: bold;    
+    text-shadow: 0 0 0.6px currentColor;  
 }
 
 
@@ -212,48 +212,83 @@ nav{
     }
 }
 
-#herosection{
+/*Hero */
+.heroSeksjon{
+    max-width: 1100px;
+    min-height: 22rem;
+    margin: 0 auto;
+
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+
+    border-radius: 15px;
+    box-shadow: 0 5px 18px rgba(65, 110, 140, 0.015);
     
-
-    width: 98%;
-    height: 300px;
-    margin: 0.2rem auto;
-
-    background-image: url('/stockbg1.jpg');
-    background-position: center;
-    background-size: cover;
-
-    h2{
-        margin-left: 10px;
-        font-size: 1.5rem;
-        font-weight: 1000;
-        color: white;
-    }
-
-    p{
-        margin-bottom: 50px;
-        margin-left: 10px;
-        padding-bottom: 25px;
-        background-color: rgba(255, 255, 255, 0.5);
-        width: 50%;
-
-    }
-
-    a{
-        text-decoration: none;
-        color: black;
-        border: 3px solid black;
-        background-color: white;
-        width: fit-content;
-        padding: 0.5rem;
-        align-self: flex-end;
-
-        margin-right: 10px;
-    }
-
+    background-color: #eaf4f9;
+    border:1px solid #dceaf1;
+    box-shadow: 0 4px 15px rgba(65, 110, 140, 0.05);
+    
 }
+
+.heroInnhold{
+    max-width: 36rem;
+    padding: 40px 45px;
+    color: #30495a;
+}
+.heroInnhold span{
+    color: #0876b1;
+    font-size: 14px;
+    letter-spacing: 1.1px;
+}
+.heroInnhold h2{
+    margin: 12px 0 16px;
+    font-size: 42px;
+    line-height: 1.15;
+    color: #355c75;
+}
+.heroInnhold p{
+    margin: 0 0 26px;
+    font-size: 17px;
+    line-height: 1.7;
+    color: #202c32;
+}
+
+.heroKnapper{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.heroKnapp{
+    padding:12px 24px;
+    border-radius: 10px;
+    border: 1.5px solid transparent;
+
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.heroKnappKurs{
+    background-color: #b5364f;
+    color: white
+}
+.heroKnappKurs:hover{
+    background-color: #9a2c42;
+    transform: translateY(-2px);
+}
+
+.heroKnappLokal{
+    border-color: #355c75;
+    color: #355c75;
+}
+.heroKnappLokal:hover{
+    background-color: rgba(53, 92, 117, 0.1);
+    transform: translateY(-2px);
+}
+
+
 
 /* Karusell CSS */
 #caro-wraper{
@@ -573,8 +608,7 @@ nav{
     white-space: nowrap;
 }
 
-/* Kurskort
-*/
+/* Kurskort*/
 
 .kurskort{
     position: relative;
@@ -670,7 +704,6 @@ nav{
 }
 
 /* Strekker lenken over hele kortet slik at hele kortet er klikkbart */
-
 
 .kurskortLenke{
     display: block;
