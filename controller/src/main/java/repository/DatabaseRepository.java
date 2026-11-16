@@ -6,7 +6,7 @@ import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class DatabaseRepository implements KursRepository, BrukerRepository, DeltakerRepository {
+public class DatabaseRepository implements KursRepository, BrukerRepository {
 
     private static final String url = "jdbc:mysql://localhost:3306/softwareengineering";
     private static final String user = "root";

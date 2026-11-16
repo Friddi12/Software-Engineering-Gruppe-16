@@ -8,18 +8,15 @@ import java.time.LocalDate;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import repository.BrukerRepository;
-import repository.DeltakerRepository;
 
 // Håndterer innlogging og registrering av brukere.
 public class BrukerService {
 
     private final BrukerRepository brukerRepository;
-    private final DeltakerRepository deltakerRepository;
 
     // Tar imot repository-grensesnittene.
-    public BrukerService(BrukerRepository brukerRepository, DeltakerRepository deltakerRepository) {
+    public BrukerService(BrukerRepository brukerRepository) {
         this.brukerRepository = brukerRepository;
-        this.deltakerRepository = deltakerRepository;
     }
 
     // Logger inn en bruker og returnerer rollen.

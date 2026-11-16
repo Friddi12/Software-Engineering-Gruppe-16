@@ -9,7 +9,7 @@ public class App {
 
     public static void main(String[] args) {
         DatabaseRepository databaseRepository = new DatabaseRepository();
-        BrukerService brukerService = new BrukerService(databaseRepository, databaseRepository);
+        BrukerService brukerService = new BrukerService(databaseRepository);
 
         BrukerController brukerController = new BrukerController(brukerService);
         KursController kursController = new KursController(databaseRepository);
