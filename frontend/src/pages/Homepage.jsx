@@ -35,10 +35,7 @@ export default function Homepage(){
     <>
       <Hero />
       <Carousel kursList={kursList}/>
-      <div>
-        <h2>API Connection Test</h2>
-        <p>{connectionStatus}</p>
-      </div>
+
     </>
 
     )
