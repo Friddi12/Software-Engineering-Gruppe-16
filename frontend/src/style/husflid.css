@@ -17,6 +17,146 @@ header{
 }
 
 
+/* homepage*/
+
+.HPside{
+    background-color: #f4f9fc;
+    padding:30px 8% 60px;
+    color: #30495a;
+}
+
+    /* seksjoner hp */
+.hjemSeksjon{
+    max-width: 1100px;
+    margin: 60px auto 0;
+}
+
+.hjemSeksjonHeader{
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.hjemSeksjonHeader span{
+    color: #0876b1;
+    font-size: 14px;
+    letter-spacing: 1.1px;
+}
+
+.hjemSeksjonHeader h2{
+    margin: 10px 0 0;
+    font-size: 32px;
+    color: #355c75;
+}
+
+.HPLenke{
+    margin: 26px 0 0;
+    text-align: center;
+    padding: 20px
+}
+
+.HPLenke a{
+    color: #426f89;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.HPLenke a:hover{
+    color: #a2004f;
+    text-decoration: underline;
+}
+
+    /* lokallag*/
+.hjemlagListe{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: 15px;
+    margin: 0;
+    padding:0;
+    list-style: none;
+}
+
+.hjemLagKort{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px 10px 10px;
+
+
+    background-color: #eaf4f9;
+    border: 1px solid #dceaf1;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(65, 110, 140, 0.05);
+
+    color:#315b75;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+
+.hjemLagKort:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(65, 110, 140, 0.12);
+}
+
+.hjemLagKort img{
+    flex: 0 0 auto;
+    width: 3rem;
+    height:3rem;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+    /*tall fra om oss*/
+.HPTall{
+    padding: 40px 30px 34px;
+    background-color: #dceaf5;
+    border: 1px solid #c2deed;
+    border-radius: 15px;
+    box-shadow: 0 5px 18px rgba(65, 110, 140, 0.08);
+}
+
+.HPTallListe{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.HPTallListe li{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 20px 10px;
+    text-align: center;
+
+    background-color: white;
+    border: 1px solid #e0edf3;
+}
+
+.HPTallListe span{
+    font-size: 14px;
+    color: #729db5;
+    font-weight: 600;
+}
+
+.mainlogoLys{
+    display: block;
+    width: 100%;
+    max-width: 14rem;
+    height: auto;
+    margin: 0 auto;
+
+    mix-blend-mode: multiply;
+    padding: 15px;
+
+}
+
+/*hero */
+
+
+
     /* Rutenett med kurskort: to kolonner når det er plass, ellers én */
 .kursliste {
     display: grid;
@@ -297,19 +437,129 @@ form {
     
 }
 
-#local-page{
-    background-color: #f7f7f7;
-    h2{
-        width: 100%;
-    }
+/*localpage */ 
 
-    img{
-        max-width: 500px;
-        
-        
-    }
+.lokalSide{
+    background-color: #f7f7f7;
+    min-height: 100vh;
+    padding: 40px 8% 60 px;
+    color: #355c75;
+}
+
+.lokalTilbake{
+    display: inline-block;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-top: 5px;
+
+    color: #426f89;
+    font-size: 15px;
+    font-weight: normal;
+    text-decoration: none;
+
+    font-size: large;
+}
+
+.lokalTilbake:hover{
+    color: #a2004f;
+    text-decoration: underline;
+}
+
+    /* lokalpage hero/banner*/
+
+.lokalHero{
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.lokalHeroBilde{
+    display: block;
+    width: 100%;
+    height: 16rem;
+    object-fit: cover;
+
+    border-radius: 15px;
+    box-shadow: 0 5px 18px rgba(65, 110, 140, 0.012);
+}
+
+.local-logoRamme{
+    position: absolute;
+    right: 75px;
+    bottom: -2.30rem;
+
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+
+    background-color: #f7f7f7;
+    border: 1px solid #c2deed;
+    border-radius: 14px;
+    box-shadow: 0 5px 18px rgba(65, 110, 140, 0.18);
+}
+
+.local-logo{
+    display: block;
+    height: 8rem;
+    width: auto;
+    max-width: 40rem;
+    object-fit: contain;
+}
+
+    /* lokalpage overskrift*/
+.lokalHeader{
+    max-width: 1100px;
+    margin: 2rem auto 25px;
+}
+
+.lokalHeaderMedLogo{
+    margin-top: 3.75rem;
+}
+
+.lokalHeader span{
+    color: #0876b1;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    font-weight: bold;
+}
+
+.lokalHeader h2{
+    font-size: 42;
+    line-height: 1.2;
+    color: #355c75;
+    margin: 10px 0 0;
+}
+
+
+    /* lokalpage informasjonskort*/ 
+.lokalInfoKort{
+    max-width: 1100px;
+    margin: 0 auto 50px;
+    padding: 28px 30px;
+    background-color: #eaf4f9;
+    border: 1px solid #dceaf1;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(65, 110, 140, 0.05);
+}
+
+.lokalInfoKort h3{
+    font-size: 24px;
+    color: #355c75;
+    margin: 0 0 14px;
+}
+
+.lokalInfoKort p{
+    margin: 0;
+    color: #202c32;
+    line-height: 1.8;
+    white-space: pre-line;
 
 }
+
+
+
+
+
 
 @media (max-width: 650px){
     .lokalhubSide{
@@ -563,7 +813,7 @@ padding: 0;
 .underTitteltekst{
     color:#196994; 
     font-size: 15px;
-    letter-spacing: 1.5px;
+    letter-spacing: 1.1px;
     font-weight: bold;
 }
 
