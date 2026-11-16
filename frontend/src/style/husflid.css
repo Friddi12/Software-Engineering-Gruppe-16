@@ -39,7 +39,8 @@ header{
 .hjemSeksjonHeader span{
     color: #0876b1;
     font-size: 14px;
-    letter-spacing: 1.1px;
+    letter-spacing: 1px;
+    font-weight: 600;
 }
 
 .hjemSeksjonHeader h2{
@@ -240,7 +241,8 @@ nav{
 .heroInnhold span{
     color: #0876b1;
     font-size: 14px;
-    letter-spacing: 1.1px;
+    letter-spacing: 1px;
+    font-weight: 600;
 }
 .heroInnhold h2{
     margin: 12px 0 16px;
