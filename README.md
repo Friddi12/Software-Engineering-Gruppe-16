@@ -12,13 +12,18 @@ Vi er 5 studenter fra Høgskolen i Østfold med erfaring fra to forskjellige lin
 
 # Installasjon og Kjøring
 
+## FORUTSETNINGER
+Din maskin må ha MySQL workbench og Node Packet Manager klar for enklest mulig oppsett.
+
 ## STEG 1
 
-Last ned prosjekt på maskin
+Last ned prosjekt på maskin, Høyreklikk på frontend filen og velg "Open in integrated terminal" og skriv "NPM install"
 
 ## STEG 2
 
-Bruk SQL filer til å sette opp SQL server i din lokale SQLWorkbench, bruk også insert fil til å fylle database med data
+Bruk SQL filer til å sette opp SQL server i din lokale SQLWorkbench, bruk også insert fil til å fylle database med data. HUSK: Bruk Localhost 3306 og bytt passord til 1234 på SQLworkbench eller bytt passordet i DatabaseRepository.
+ELLER
+Kjør opp Dockeren ved å skrive >run i søkefeltet på VScode
 
 ## STEG 3
 
@@ -27,4 +32,4 @@ Høyreklikk på frontend filen og velg "Open in integrated terminal" og skriv "N
 
 ## STEG 4
 
-Kjør opp java backenden
+Kjør opp java backenden, helst ved 
