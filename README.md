@@ -13,7 +13,7 @@ Vi er 5 studenter fra Høgskolen i Østfold med erfaring fra to forskjellige lin
 # Installasjon og Kjøring
 
 ## FORUTSETNINGER
-Din maskin må ha MySQL workbench og Node Packet Manager klar for enklest mulig oppsett.
+Din maskin må ha MySQL workbench, JDK 25 eller nyere og Node Packet Manager klar for enklest mulig oppsett.
 
 ## STEG 1
 
@@ -32,4 +32,4 @@ Høyreklikk på frontend filen og velg "Open in integrated terminal" og skriv "N
 
 ## STEG 4
 
-Kjør opp java backenden, helst ved 
+Kjør opp java backenden
