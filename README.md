@@ -22,8 +22,7 @@ Last ned prosjekt på maskin, Høyreklikk på frontend filen og velg "Open in in
 ## STEG 2
 
 Bruk SQL filer til å sette opp SQL server i din lokale SQLWorkbench, bruk også insert fil til å fylle database med data. HUSK: Bruk Localhost 3306 og bytt passord til 1234 på SQLworkbench eller bytt passordet i DatabaseRepository.
-ELLER
-Kjør opp Dockeren ved å skrive >run i søkefeltet på VScode
+
 
 ## STEG 3
 
