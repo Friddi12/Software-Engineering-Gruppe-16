@@ -32,4 +32,4 @@ Høyreklikk på frontend filen og velg "Open in integrated terminal" og skriv "N
 
 ## STEG 4
 
-Kjør opp java backenden
+Kjør opp App.java
