@@ -2,7 +2,7 @@
 
 ## Prosjektet:
 
-Velkommen til Gruppe 16 sin utviklingsprosjekt!
+Velkommen til Gruppe 16 sitt utviklingsprosjekt!
 Vi har som mål til å utvikle en ny og bedre løsning til vår kunde Østfold Husflidslag (Nåværende løsning: https://husflid.no/lag/ostfold-husflidslag/#home)
 Løsningen vår skal være en fullstendig nettside, med en front- og backend, påmeldingsfunksjon og administratorverktøy.
 
