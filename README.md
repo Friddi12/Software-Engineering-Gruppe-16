@@ -32,3 +32,6 @@ Høyreklikk på frontend filen og velg "Open in integrated terminal" og skriv "N
 ## STEG 4
 
 Kjør opp App.java
+
+## STEG 5
+Gå inn på http://localhost:5173/ eller URLen som står på frontend terminalen til å se siden
